@@ -1,75 +1,147 @@
 ---
-title: "Codex怎么购买？一篇文章带你看懂"
-description: "从订阅方案、价格、付款方式到注意事项，帮你一次性搞清楚 Codex 的购买流程。"
+title: "Codex怎么购买 | 2026年9月版，一篇文章带你看懂"
+description: "2026 年 9 月版：ChatGPT Plus / Pro 订阅怎么开、Codex 需要什么套餐，一篇文章讲清楚。"
 date: 2026-09-03
-updated: 2026-09-03
 slug: "codex-buy"
-wechat_url: "https://mp.weixin.qq.com/s/example-codex-buy"
 published: true
 ---
 
-最近很多朋友来问我：Codex 到底怎么购买？需要什么条件？国内用户有没有办法用？
+大家好，我是佬刘。
 
-这篇文章，我把自己摸索和实践的过程完整整理出来，尽量写得通俗一点，让你少走弯路。
+最近写了不少 Codex 的教程，然后后台、群里有人问我一个问题：
 
-## 一、什么是 Codex？
+**Codex 怎么购买？**
 
-Codex 是 OpenAI 推出的基于云端的 AI 编程助手，能够理解自然语言，帮你写代码、改代码、跑命令、解释报错，甚至帮你搭起一个完整的项目结构。
+有人以为 Codex 要单独买一个会员。
 
-可以把它理解为：**一个在云端工作的、7x24 小时待命的"AI 程序员"**。
+建议把收藏起来。以后遇到ChatGPT怎么充值、GPT会员怎么开、Plus和Pro怎么选、Codex需要什么套餐，基本都可以按这套思路排查。
 
-### 它能做什么
+## 一、Codex需要单独购买吗？
 
-- 根据一句话描述生成完整功能
-- 读懂你的整个仓库再动手改代码
-- 自动跑测试、修 bug
-- 把重复劳动全部接管
+先说结论：
 
-## 二、购买前准备
+**大部分个人用户，不需要单独购买一个叫“Codex会员”的东西。**
 
-1. 一个可用的 OpenAI 账号（ChatGPT 账号即可）
-2. 绑定支付方式（支持信用卡 / 借记卡）
-3. 科学上网环境
+Codex 是包含在 ChatGPT 订阅里的！
 
-> 注意：购买和使用是两件不同的事。能买到不代表能流畅用，网络环境很关键。
+个人用户常见的是：
 
-## 三、购买步骤
+**ChatGPT Plus**
 
-1. 登录 ChatGPT 账号
-2. 进入 Settings → Billing
-3. 选择 Upgrade to Pro 或其他付费套餐
-4. 完成支付
-5. 在工具列表中找到 Codex，开始使用
+**ChatGPT Pro**
 
-## 四、国内用户常见问题
+开通对应套餐后，用同一个 OpenAI 账号登录 Codex 就可以。
 
-| 问题 | 解决方案 |
-| --- | --- |
-| 支付失败怎么办？ | 换卡、换网络，或使用虚拟信用卡 |
-| 没有看到 Codex？ | 确认是否在支持的地区，或刷新页面 |
-| 订阅后没有权限？ | 退出重新登录，或等待几分钟同步 |
+![image\.png](/images/codex-buy/image-6.png)
 
-下面是一个配置示例：
+## 二、Codex怎么购买？
 
-```json
-{
-  "model": "gpt-5-codex",
-  "approval_mode": "auto",
-  "sandbox": "workspace-write"
-}
-```
+官方购买流程：
 
-也可以在命令行里直接检查状态：
+打开 ChatGPT 官网 ： chatgpt\.com
 
-```bash
-codex --version
-codex auth status
-```
+![image\.png](/images/codex-buy/image-3.png)
 
-## 五、总结
+登录自己的 OpenAI 账号。
 
-Codex 的体验非常惊艳，但目前对国内用户还是有一定门槛。
+点击头像，升级套餐
 
-如果你坚持用它，最好提前把支付和网络环境准备好。后续我也会持续分享 Codex 的使用技巧，敬请期待！
+![image\.png](/images/codex-buy/image-8.png)
 
-![AI 协作开发的基本流程](/images/codex-sample.svg)
+选择需要的套餐。Plus 或 Pro
+
+![image\.png](/images/codex-buy/image.png)
+
+然后进入付款页面。
+
+网页端目前支持的基础付款方式是：**信用卡和借记卡。** 
+
+![image\.png](/images/codex-buy/image-5.png)
+
+但国内用户的问题就出在这里。
+
+## 三、国内银行卡能不能购买Codex？
+
+这个地方不要只看银行卡上有没有 Visa、Mastercard 标志。
+
+OpenAI 当前规则要求：**付款方式需要来自其支持的国家或地区。**
+
+如果付款方式来自不支持的国家或地区，官方说明是无法用于服务付款。
+
+而目前 OpenAI 公布的 ChatGPT 支持地区列表里，没有中国大陆。
+
+所以：
+
+**中国大陆发行的银行卡，即使支持境外消费，不能简单理解成“有 Visa 就一定能付”。**
+
+![image\.png](/images/codex-buy/image-2.png)
+
+**特别注意：**
+
+如果别人说办了visa卡能在国内支付，大概率是套的谷歌支付。
+
+Googlepay绑卡，然后用Googlepay支付
+
+## 四、手机端购买
+
+还有一种方式是手机端订阅。
+
+如果你通过 ChatGPT 的 iOS 或 Android App 购买会员，订阅由：
+
+**Apple App Store **或者 **Google Play **负责处理。
+
+付款也走对应应用商店的支付体系，这个方式和网页端银行卡支付不是一个通道。
+
+![image\.png](/images/codex-buy/image-4.png)
+
+## 五、Plus和Pro买哪个？
+
+如果你只是第一次用 Codex：
+
+**我建议先 Plus。**
+
+目前 Plus 是 20 美元/月，适合日常 Codex 使用。
+
+如果你每天让 Codex 跑大量任务，再考虑 Pro。
+
+![image\.png](/images/codex-buy/image-1.png)
+
+## 六、没有合适的海外付款方式怎么办？
+
+这也是国内用户卡住最多的一步。
+
+注册会了，Codex 也装好了。
+
+最后停在付款页面。
+
+如果你自己有符合要求的支付方式，按照上面的官方流程购买就行。
+
+如果你只是想省掉付款这一步，也可以看一下我的小店。
+
+https://wzyp\.cn/shop/liu
+
+小店里有 ChatGPT对应的会员服务。
+
+![image\.png](/images/codex-buy/image-7.png)
+
+不知道 Plus 和 Pro 怎么选，也可以先看前面的区别。
+
+我自己的建议还是：**普通使用先 Plus。**
+
+## 七、最后说一下
+
+2026年再看 ChatGPT充值，其实没有必要把流程想得太复杂。
+
+记住三个步骤就够了：
+
+确认自己的ChatGPT账号 → 根据使用强度选择Plus或Pro → 完成订阅后检查会员状态。
+
+日常办公、创作、学习、文件处理以及轻中度 Codex 使用，建议先从Plus开始。
+
+如果已经进入每天大量开发、长任务、复杂研究、Codex高频运行的阶段，再考虑Pro。
+
+付款解决之后，后面才是 Codex 怎么装、怎么用、怎么接第三方 API、怎么配 Skill。
+
+这些我都在一篇篇实测。
+
+这里是佬刘，一个研究生的实测笔记。
