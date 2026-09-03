@@ -1,0 +1,60 @@
+---
+import { SITE_CONFIG } from '../site.config';
+import '../styles/global.css';
+
+interface Props {
+  /** 页面 <title> */
+  title: string;
+  /** meta description */
+  description: string;
+  /** canonical 路径，如 /codex-buy；不传则用当前路径 */
+  canonicalPath?: string;
+  /** Open Graph 类型 */
+  ogType?: 'website' | 'article';
+  /** Article JSON-LD 对象（仅文章页传） */
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogType = 'website',
+  jsonLd,
+} = Astro.props;
+
+const canonical = SITE_CONFIG.domain + (canonicalPath ?? Astro.url.pathname);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_CONFIG.name} href="/rss.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content={SITE_CONFIG.name} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="zh_CN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

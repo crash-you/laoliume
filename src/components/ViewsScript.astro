@@ -1,0 +1,54 @@
+---
+/**
+ * 阅读量组件：
+ * - 传入 slug + increment=true（文章详情页）：先尝试 +1（同一浏览器 6 小时内只计一次），再展示数字
+ * - 传入 slug（列表页）：只读取并展示
+ * 接口异常 / D1 未绑定时，静默保持 “— 次阅读”，不影响正文阅读。
+ */
+interface Props {
+  slug: string;
+  increment?: boolean;
+}
+const { slug, increment = false } = Astro.props;
+---
+
+<span class="views" data-views-slug={slug} data-views-increment={increment ? '1' : undefined}>— 次阅读</span>
+
+<script>
+  const VIEW_COOLDOWN_MS = 6 * 60 * 60 * 1000; // 同一浏览器 6 小时内只记一次
+
+  async function handleViews(el: HTMLElement) {
+    const slug = el.dataset.viewsSlug;
+    if (!slug) return;
+    const key = 'viewed:' + slug;
+
+    try {
+      // 文章页：先计数（带防刷冷却）
+      if (el.dataset.viewsIncrement === '1') {
+        const last = Number(localStorage.getItem(key) || 0);
+        if (Date.now() - last > VIEW_COOLDOWN_MS) {
+          const res = await fetch('/api/views/' + encodeURIComponent(slug), { method: 'POST' });
+          if (res.ok) {
+            localStorage.setItem(key, String(Date.now()));
+            const data = await res.json();
+            if (typeof data.views === 'number') {
+              el.textContent = data.views + ' 次阅读';
+              return;
+            }
+          }
+        }
+      }
+      // 列表页或冷却期内：只读取
+      const res = await fetch('/api/views/' + encodeURIComponent(slug));
+      if (!res.ok) return;
+      const data = await res.json();
+      if (typeof data.views === 'number') {
+        el.textContent = data.views + ' 次阅读';
+      }
+    } catch {
+      // 静默失败：保持 “— 次阅读”
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-views-slug]').forEach(handleViews);
+</script>

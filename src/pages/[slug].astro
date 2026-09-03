@@ -1,0 +1,152 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ViewsScript from '../components/ViewsScript.astro';
+import { SITE_CONFIG } from '../site.config';
+import {
+  getPublishedPosts,
+  postSlug,
+  formatDate,
+  isoDate,
+  isSameDay,
+  type Post,
+} from '../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return posts.map((post, i) => ({
+    params: { slug: postSlug(post) },
+    props: {
+      post,
+      allPosts: posts,
+      prev: posts[i + 1] as Post | undefined, // 上一篇（更早发布）
+      next: posts[i - 1] as Post | undefined, // 下一篇（更晚发布）
+    },
+  }));
+}
+
+const { post, allPosts, prev, next } = Astro.props;
+const { Content } = await render(post);
+
+const slug = postSlug(post);
+const url = SITE_CONFIG.domain + '/' + slug + '/';
+const description = post.data.description || post.data.title;
+const hasUpdate = post.data.updated && !isSameDay(post.data.date, post.data.updated);
+const currentSlug = slug;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description,
+  datePublished: isoDate(post.data.date),
+  dateModified: isoDate(post.data.updated ?? post.data.date),
+  author: {
+    '@type': 'Person',
+    name: SITE_CONFIG.author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_CONFIG.name,
+    url: SITE_CONFIG.domain,
+  },
+  url,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': url,
+  },
+};
+
+const year = new Date().getFullYear();
+---
+
+<BaseLayout
+  title={post.data.title + ' - ' + SITE_CONFIG.name}
+  description={description}
+  canonicalPath={'/' + slug + '/'}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <a class="sidebar-title" href="/">{SITE_CONFIG.name}</a>
+        <p class="sidebar-desc">{SITE_CONFIG.description}</p>
+
+        <nav class="sidebar-nav" aria-label="文章列表">
+          <h2>文章</h2>
+          <ul>
+            {allPosts.map((p) => (
+              <li class={postSlug(p) === currentSlug ? 'active' : undefined}>
+                <a href={'/' + postSlug(p)}>{p.data.title}</a>
+                <span class="sidebar-meta">{formatDate(p.data.date)}</span>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+          © {year} {SITE_CONFIG.name}<br />
+          Powered by Astro &amp; Cloudflare
+        </div>
+      </div>
+    </aside>
+
+    <main class="article-main">
+      <div class="article-topbar">
+        <a class="back-home" href="/">{SITE_CONFIG.name}</a>
+        <a class="x-link" href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">
+          X{SITE_CONFIG.xHandle ? ' / ' + SITE_CONFIG.xHandle : ''}
+        </a>
+      </div>
+
+      <article>
+        <h1 class="article-title">{post.data.title}</h1>
+        <p class="article-meta">
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+          {hasUpdate && <span>更新于 {formatDate(post.data.updated!)}</span>}
+          <ViewsScript slug={slug} increment={true} />
+        </p>
+
+        <div class="prose">
+          <Content />
+        </div>
+
+        <div class="post-end">
+          {post.data.wechat_url && (
+            <div class="end-block">
+              <p>
+                本文首发于微信公众号「{SITE_CONFIG.wechatName}」。<br />
+                <a href={post.data.wechat_url} target="_blank" rel="noopener noreferrer">
+                  查看微信原文 →
+                </a>
+              </p>
+            </div>
+          )}
+
+          <div class="end-block">
+            <p>
+              {SITE_CONFIG.authorBio}<br />
+              <a href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">
+                也可以在 X 上找到我 →
+              </a>
+            </p>
+          </div>
+
+          <nav class="post-nav" aria-label="上一篇 / 下一篇">
+            {prev ? (
+              <a href={'/' + postSlug(prev)}>
+                <span class="nav-label">← 上一篇</span>{prev.data.title}
+              </a>
+            ) : <span />}
+            {next ? (
+              <a class="nav-next" href={'/' + postSlug(next)}>
+                <span class="nav-label">下一篇 →</span>{next.data.title}
+              </a>
+            ) : <span />}
+          </nav>
+        </div>
+      </article>
+    </main>
+  </div>
+</BaseLayout>

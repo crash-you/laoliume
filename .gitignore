@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.workbuddy/
+.dev.vars
+.env
+.env.production
+.DS_Store
+*.log

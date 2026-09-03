@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ViewsScript from '../components/ViewsScript.astro';
+import { SITE_CONFIG } from '../site.config';
+import { getPublishedPosts, postSlug, formatDate } from '../lib/posts';
+
+const posts = await getPublishedPosts();
+const year = new Date().getFullYear();
+---
+
+<BaseLayout title={SITE_CONFIG.seoTitle} description={SITE_CONFIG.seoDescription} canonicalPath="/">
+  <div class="home">
+    <header class="home-header">
+      <div>
+        <h1 class="site-title">{SITE_CONFIG.name}</h1>
+        <p class="site-desc">{SITE_CONFIG.description}</p>
+      </div>
+      <a class="x-link" href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">X</a>
+    </header>
+
+    <main class="post-list">
+      {posts.map((post) => (
+        <article class="post-item">
+          <h2 class="post-title">
+            <a href={'/' + postSlug(post)}>{post.data.title}</a>
+          </h2>
+          <p class="post-meta">
+            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+            <ViewsScript slug={postSlug(post)} />
+          </p>
+          {post.data.description && <p class="post-excerpt">{post.data.description}</p>}
+        </article>
+      ))}
+    </main>
+
+    <footer class="home-footer">
+      © {year} {SITE_CONFIG.name} · laoliu.me
+    </footer>
+  </div>
+</BaseLayout>
