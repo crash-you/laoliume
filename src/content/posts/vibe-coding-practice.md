@@ -4,6 +4,7 @@ description: "一次完整的 Vibe Coding 实战：我让 ChatGPT Pro 当产品�
 date: 2026-09-01
 slug: "vibe-coding-practice"
 published: true
+wechat_url: "https://mp.weixin.qq.com/s/WBOpSCIS-kroI-z7wde2HA"
 ---
 
 大家好，我是佬刘。

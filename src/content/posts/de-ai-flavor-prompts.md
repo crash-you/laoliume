@@ -4,6 +4,7 @@ description: "我现在在用的去 AI 味提示词，组会汇报、课程作�
 date: 2026-08-31
 slug: "de-ai-flavor-prompts"
 published: true
+wechat_url: "https://mp.weixin.qq.com/s/0VcO-UTGauRx_3utgL2_1A"
 ---
 
 大家好，我是佬刘。

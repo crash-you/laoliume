@@ -108,6 +108,15 @@ const year = new Date().getFullYear();
           <ViewsScript slug={slug} increment={true} />
         </p>
 
+        {post.data.wechat_url && (
+          <p class="article-wechat">
+            首发于微信公众号「{SITE_CONFIG.wechatName}」 ·
+            <a href={post.data.wechat_url} target="_blank" rel="noopener noreferrer">
+              查看微信原文 ↗
+            </a>
+          </p>
+        )}
+
         <div class="prose">
           <Content />
         </div>

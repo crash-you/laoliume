@@ -4,6 +4,7 @@ description: "换个对话，复杂项目还能接着跑：Codex 长期记忆的
 date: 2026-08-29
 slug: "codex-long-term-memory"
 published: true
+wechat_url: "https://mp.weixin.qq.com/s/lji3zWDmPp8ClY49PLGgfA"
 ---
 
 大家好，我是佬刘。

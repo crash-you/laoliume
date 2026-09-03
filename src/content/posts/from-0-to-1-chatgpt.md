@@ -4,6 +4,7 @@ description: "从注册开始手把手带你用上 ChatGPT，解决「不是不�
 date: 2026-08-26
 slug: "from-0-to-1-chatgpt"
 published: true
+wechat_url: "https://mp.weixin.qq.com/s/-NfXF2ZOZcNfyaQuWUsjgA"
 ---
 
 大家好，我是老刘。

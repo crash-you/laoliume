@@ -4,6 +4,7 @@ description: "Codex 中文界面、中文回复，以及换新对话后仍默认
 date: 2026-08-28
 slug: "codex-chinese-settings"
 published: true
+wechat_url: "https://mp.weixin.qq.com/s/ZjUt4vrU3i31ClKTH3hUjw"
 ---
 
 大家好，我是佬刘。

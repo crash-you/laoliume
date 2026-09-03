@@ -4,6 +4,7 @@ description: "给 Codex 接入第三方模型：DeepSeek V4 Flash、V4 Pro 与 V
 date: 2026-09-02
 slug: "codex-deepseek"
 published: true
+wechat_url: "https://mp.weixin.qq.com/s/jHxDTcyK9Y9Om-A3cCtRvQ"
 ---
 
 Codex接入DeepSeek，本质上就是给Codex接入第三方模型，也可以理解为Codex接入国产模型的一种官方方案。

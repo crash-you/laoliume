@@ -4,6 +4,7 @@ description: "Codex Skill 的安装、配置、调用到自定义 Skill 的完�
 date: 2026-08-27
 slug: "codex-skill-usage"
 published: true
+wechat_url: "https://mp.weixin.qq.com/s/LLv993B_6fuBXjTfAYNPiQ"
 ---
 
 大家好，我是佬刘。

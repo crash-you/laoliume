@@ -103,6 +103,13 @@ a {
   line-height: 1.7;
 }
 
+/* 公众号引流行（首页左栏，极简：无背景无边框无图标） */
+.site-wechat {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
 .x-link {
   display: inline-block;
   margin-top: 20px;
@@ -326,6 +333,21 @@ a {
   content: '·';
   margin-right: 12px;
   color: var(--faint);
+}
+
+/* 微信首发信息行（文章 meta 下方，极简：无背景无边框） */
+.article-wechat {
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.article-wechat a {
+  color: var(--muted);
+}
+
+.article-wechat a:hover {
+  color: var(--accent);
 }
 
 /* ============================================================

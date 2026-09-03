@@ -4,6 +4,7 @@ description: "2026 年 9 月版：ChatGPT Plus / Pro 订阅怎么开、Codex 需
 date: 2026-09-03
 slug: "codex-buy"
 published: true
+wechat_url: "https://mp.weixin.qq.com/s/wdpMlUMfumAYKfPCxqAApg"
 ---
 
 大家好，我是佬刘。
@@ -118,7 +119,7 @@ Googlepay绑卡，然后用Googlepay支付
 
 如果你只是想省掉付款这一步，也可以看一下我的小店。
 
-https://wzyp\.cn/shop/liu
+https://wzyp.cn/shop/liu
 
 小店里有 ChatGPT对应的会员服务。
 
