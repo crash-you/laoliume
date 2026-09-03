@@ -9,15 +9,25 @@ const year = new Date().getFullYear();
 ---
 
 <BaseLayout title={SITE_CONFIG.seoTitle} description={SITE_CONFIG.seoDescription} canonicalPath="/">
-  <div class="home">
-    <header class="home-header">
-      <div>
-        <h1 class="site-title">{SITE_CONFIG.name}</h1>
-        <p class="site-desc">{SITE_CONFIG.description}</p>
+  <div class="home-shell">
+    <!-- 左栏：个人信息（桌面端 sticky，平板/手机变为顶部品牌行） -->
+    <header class="home-brand">
+      <div class="brand-row">
+        <div class="brand-text">
+          <h1 class="site-title"><a href="/">{SITE_CONFIG.name}</a></h1>
+          <p class="site-desc">{SITE_CONFIG.description}</p>
+        </div>
+        <a class="x-link" href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">
+          X{SITE_CONFIG.xHandle ? ' / ' + SITE_CONFIG.xHandle : ''}
+        </a>
       </div>
-      <a class="x-link" href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">X</a>
+      <p class="brand-footer">
+        © {year} {SITE_CONFIG.name}<br />
+        laoliu.me
+      </p>
     </header>
 
+    <!-- 右栏：文章列表 -->
     <main class="post-list">
       {posts.map((post) => (
         <article class="post-item">
@@ -32,9 +42,5 @@ const year = new Date().getFullYear();
         </article>
       ))}
     </main>
-
-    <footer class="home-footer">
-      © {year} {SITE_CONFIG.name} · laoliu.me
-    </footer>
   </div>
 </BaseLayout>
