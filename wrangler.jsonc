@@ -17,7 +17,7 @@
       "database_name": "laoliu-blog",
       // 创建 D1 后把真实 ID 填到这里：
       // npx wrangler d1 create laoliu-blog
-      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+      "database_id": "3f12eb98-50a0-4ed4-af48-625c5463f375"
     }
   ]
 }
