@@ -12,7 +12,7 @@
   --muted: #6b7280;
   --faint: #9ca3af;
   --border: #e8e8e8;
-  --accent: #1a5fd7;
+  --accent: #c9a227;
   --code-bg: #f4f5f6;
   --quote-bg: #fafafa;
 
@@ -55,7 +55,7 @@ a {
 }
 
 ::selection {
-  background: #e8eefb;
+  background: #f2e8c6;
 }
 
 /* ============================================================
@@ -80,10 +80,6 @@ a {
   flex-direction: column;
 }
 
-.brand-row {
-  display: block;
-}
-
 .site-title {
   margin: 0;
   font-size: 32px;
@@ -103,16 +99,51 @@ a {
   line-height: 1.7;
 }
 
+/* 目标宣言：比 description 稍微明确一点，但不做大标题 */
+.site-goal {
+  margin: 6px 0 0;
+  font-size: 15px;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+/* AI会员代充入口：纯文字，靠字重 + 上下间距分层级，无卡片无箭头 */
+.member-link {
+  display: block;
+  margin: 28px 0 0;
+}
+
+.member-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.member-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.member-link:hover .member-title {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
 /* 公众号引流行（首页左栏，极简：无背景无边框无图标） */
 .site-wechat {
-  margin: 6px 0 0;
+  margin: 20px 0 0;
   font-size: 14px;
   color: var(--muted);
 }
 
 .x-link {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 6px;
   font-size: 14px;
   font-weight: 600;
   color: var(--text-soft);
@@ -399,13 +430,14 @@ a {
 }
 
 .prose a {
-  color: var(--accent);
+  color: var(--text);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(26, 95, 215, 0.35);
+  text-decoration-color: rgba(31, 35, 40, 0.3);
 }
 
 .prose a:hover {
+  color: var(--accent);
   text-decoration-color: var(--accent);
 }
 
@@ -541,6 +573,46 @@ a {
   text-decoration: underline;
 }
 
+/* 文章末尾作者信息区：纯文字，无卡片背景 */
+.end-author {
+  margin: 8px 0 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+
+.end-author-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.end-author-bio {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.end-author .member-link {
+  margin: 16px 0 0;
+}
+
+.end-author-contact {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.end-author-contact a {
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.end-author-contact a:hover {
+  color: var(--accent);
+}
+
 .post-nav {
   display: flex;
   justify-content: space-between;
@@ -619,17 +691,8 @@ a {
     display: contents;
   }
 
-  .brand-row {
+  .brand-main {
     order: 0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 24px;
-  }
-
-  .x-link {
-    margin-top: 4px;
-    flex-shrink: 0;
   }
 
   .post-list {

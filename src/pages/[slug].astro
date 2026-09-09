@@ -70,7 +70,7 @@ const year = new Date().getFullYear();
   <div class="layout">
     <aside class="sidebar">
       <div class="sidebar-inner">
-        <a class="sidebar-title" href="/">{SITE_CONFIG.name}</a>
+        <a class="sidebar-title" href="/">{SITE_CONFIG.displayName}</a>
         <p class="sidebar-desc">{SITE_CONFIG.description}</p>
 
         <nav class="sidebar-nav" aria-label="文章列表">
@@ -86,7 +86,7 @@ const year = new Date().getFullYear();
         </nav>
 
         <div class="sidebar-footer">
-          © {year} {SITE_CONFIG.name}<br />
+          © {year} {SITE_CONFIG.displayName}<br />
           Powered by Astro &amp; Cloudflare
         </div>
       </div>
@@ -94,7 +94,7 @@ const year = new Date().getFullYear();
 
     <main class="article-main">
       <div class="article-topbar">
-        <a class="back-home" href="/">{SITE_CONFIG.name}</a>
+        <a class="back-home" href="/">{SITE_CONFIG.displayName}</a>
         <a class="x-link" href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">
           X{SITE_CONFIG.xHandle ? ' / ' + SITE_CONFIG.xHandle : ''}
         </a>
@@ -133,11 +133,25 @@ const year = new Date().getFullYear();
             </div>
           )}
 
-          <div class="end-block">
-            <p>
-              {SITE_CONFIG.authorBio}<br />
+          <div class="end-author">
+            <p class="end-author-name">{SITE_CONFIG.displayName}</p>
+            <p class="end-author-bio">
+              {SITE_CONFIG.description}<br />
+              {SITE_CONFIG.goal}
+            </p>
+            <a
+              class="member-link"
+              href={SITE_CONFIG.membership.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="member-title">{SITE_CONFIG.membership.title}</span>
+              <span class="member-sub">{SITE_CONFIG.membership.subtitle}</span>
+            </a>
+            <p class="end-author-contact">
+              公众号：{SITE_CONFIG.wechatName}<br />
               <a href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">
-                也可以在 X 上找到我 →
+                X{SITE_CONFIG.xHandle ? ' / ' + SITE_CONFIG.xHandle : ''}
               </a>
             </p>
           </div>

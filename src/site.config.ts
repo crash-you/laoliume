@@ -2,12 +2,16 @@
  * 全站基础配置 —— 所有未来可能修改的信息都集中在这里，不要散落在其他文件。
  */
 export const SITE_CONFIG = {
-  /** 网站名称 */
+  /** 网站名称（SEO / publisher / JSON-LD / RSS / og:site_name 用，保持「佬刘AI」不变） */
   name: '佬刘AI',
+  /** 页面展示名（首页左栏、文章页侧栏等 UI 可见处） */
+  displayName: '佬刘',
   /** 作者名（用于 SEO / JSON-LD / 版权） */
   author: '佬刘',
-  /** 网站一句话介绍 */
-  description: '我用 AI 做过的东西，以及踩过的坑。',
+  /** 个人简介（首页左栏 / 文章末尾作者区） */
+  description: '研究生在读，折腾 AI，也折腾怎么赚钱。',
+  /** 目标宣言（首页左栏 / 文章末尾作者区） */
+  goal: '努力赚到第一个100万！',
   /** 首页 SEO title */
   seoTitle: '佬刘AI - AI、Codex 与 Vibe Coding 实操',
   /** 首页 SEO description */
@@ -21,9 +25,12 @@ export const SITE_CONFIG = {
   xHandle: '@laoliuai',
   /** 微信公众号名称 */
   wechatName: '佬刘AI',
-  /** 文章末尾的自我介绍 */
-  authorBio:
-    '我是佬刘，主要分享 AI、Codex、Vibe Coding 和我的实际折腾过程。',
+  /** AI 会员代充入口（首页左栏 / 文章末尾作者区，纯文字链接） */
+  membership: {
+    title: 'AI会员代充',
+    subtitle: 'ChatGPT，Claude等',
+    url: 'https://wzyp.cn/shop/liu',
+  },
 } as const;
 
 export type SiteConfig = typeof SITE_CONFIG;

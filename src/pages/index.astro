@@ -12,18 +12,28 @@ const year = new Date().getFullYear();
   <div class="home-shell">
     <!-- 左栏：个人信息（桌面端 sticky，平板/手机变为顶部品牌行） -->
     <header class="home-brand">
-      <div class="brand-row">
-        <div class="brand-text">
-          <h1 class="site-title"><a href="/">{SITE_CONFIG.name}</a></h1>
-          <p class="site-desc">{SITE_CONFIG.description}</p>
-          <p class="site-wechat">公众号：{SITE_CONFIG.wechatName}</p>
-        </div>
+      <div class="brand-main">
+        <h1 class="site-title"><a href="/">{SITE_CONFIG.displayName}</a></h1>
+        <p class="site-desc">{SITE_CONFIG.description}</p>
+        <p class="site-goal">{SITE_CONFIG.goal}</p>
+
+        <a
+          class="member-link"
+          href={SITE_CONFIG.membership.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="member-title">{SITE_CONFIG.membership.title}</span>
+          <span class="member-sub">{SITE_CONFIG.membership.subtitle}</span>
+        </a>
+
+        <p class="site-wechat">公众号：{SITE_CONFIG.wechatName}</p>
         <a class="x-link" href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">
           X{SITE_CONFIG.xHandle ? ' / ' + SITE_CONFIG.xHandle : ''}
         </a>
       </div>
       <p class="brand-footer">
-        © {year} {SITE_CONFIG.name}<br />
+        © {year} {SITE_CONFIG.displayName}<br />
         laoliu.me
       </p>
     </header>
