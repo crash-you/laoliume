@@ -25,13 +25,13 @@ wechat_url: "https://mp.weixin.qq.com/s/lji3zWDmPp8ClY49PLGgfA"
 
 后来我换了一套思路，真的把问题解决掉了。昨天我还专门在群里分享了一下这件事情。
 
-![image\.png](/images/codex-long-term-memory/image-4.png)
+![微信群聊讨论 Codex 长期记忆问题的聊天截图](/images/codex-long-term-memory/image-4.png)
 
 当时我还感慨：
 
 我去！模型真的越来越强了。
 
-![image\.png](/images/codex-long-term-memory/image-11.png)
+![Codex 长上下文处理界面截图](/images/codex-long-term-memory/image-11.png)
 
 但是今天继续做的时候，我突然想到一个问题。
 
@@ -47,7 +47,7 @@ wechat_url: "https://mp.weixin.qq.com/s/lji3zWDmPp8ClY49PLGgfA"
 
 这个项目从Round 1一路跑到了 Round 31。
 
-![image\.png](/images/codex-long-term-memory/image-3.png)
+![项目目录结构截图，包含 Round 1 到 Round 31 文件夹](/images/codex-long-term-memory/image-3.png)
 
 中间换过很多次对话，也做过大量实验。
 
@@ -61,9 +61,9 @@ wechat_url: "https://mp.weixin.qq.com/s/lji3zWDmPp8ClY49PLGgfA"
 
 我的交接文档还停在 Round 26。
 
-![image\.png](/images/codex-long-term-memory/image-10.png)
+![交接文档停留在 Round 26 的 md 文件截图](/images/codex-long-term-memory/image-10.png)
 
-![image\.png](/images/codex-long-term-memory/image-9.png)
+![交接文档 Round 26 内容截图](/images/codex-long-term-memory/image-9.png)
 
 我专门弄了一套东西防止 AI 失忆，结果这套记忆自己先失忆了。
 
@@ -79,7 +79,7 @@ wechat_url: "https://mp.weixin.qq.com/s/lji3zWDmPp8ClY49PLGgfA"
 
 这些东西如果全部进入长期记忆，项目做不了多久，记忆自己就先爆啦。
 
-![image\.png](/images/codex-long-term-memory/image-2.png)
+![项目文件夹中大量 md 与音频文件的资源管理器截图](/images/codex-long-term-memory/image-2.png)
 
 所以我现在判断一条信息值不值得留下，只问一个问题：
 
@@ -116,7 +116,7 @@ wechat_url: "https://mp.weixin.qq.com/s/lji3zWDmPp8ClY49PLGgfA"
 
 六个问题全部回答完，再决定哪些信息写入长期记忆，这些规则存储在 agents\.md 里：
 
-![image\.png](/images/codex-long-term-memory/image-7.png)
+![agents.md 中写入长期记忆规则的代码截图](/images/codex-long-term-memory/image-7.png)
 
 也就是
 
@@ -170,7 +170,7 @@ archive/
 旧聊天、日志、历史交接
 ```
 
-![image\.png](/images/codex-long-term-memory/image-6.png)
+![记忆文件拆开存放的目录结构截图](/images/codex-long-term-memory/image-6.png)
 
 文件叫什么无所谓。
 
@@ -180,7 +180,7 @@ archive/
 
 历史记忆需要的时候再查。
 
-![image\.png](/images/codex-long-term-memory/image-8.png)
+![信息图：记忆分三层，长期稳定记忆、当前工作记忆、历史记忆](/images/codex-long-term-memory/image-8.png)
 
 ## 三、写：长期记忆最容易断的地方，写回
 
@@ -239,7 +239,7 @@ vibePaper 不是没有记忆文件。
 本任务不得标记为 DONE。
 ```
 
-![image\.png](/images/codex-long-term-memory/image-12.png)
+![AGENTS.md 中写记忆检查点规则的代码截图](/images/codex-long-term-memory/image-12.png)
 
 这样以后就不是AI想起来了就更新一下。
 
@@ -247,7 +247,7 @@ vibePaper 不是没有记忆文件。
 
 这一步最好放在每个任务完成、准备切换阶段、准备压缩上下文的时候自动执行。
 
-![image\.png](/images/codex-long-term-memory/image-5.png)
+![信息图：写回完成才算任务完成的流程](/images/codex-long-term-memory/image-5.png)
 
 ---
 
@@ -286,7 +286,7 @@ vibePaper 不是没有记忆文件。
 5. 对应结果和证据
 ```
 
-![image\.png](/images/codex-long-term-memory/image-13.png)
+![新对话读取顺序的规则代码截图](/images/codex-long-term-memory/image-13.png)
 
 如果这些已经够完成任务，就不继续往下读。
 
@@ -302,7 +302,7 @@ vibePaper 不是没有记忆文件。
 > 
 > 
 
-![image\.png](/images/codex-long-term-memory/image-1.png)
+![信息图：热记忆、温记忆、冷记忆分层](/images/codex-long-term-memory/image-1.png)
 
 ---
 
@@ -451,7 +451,7 @@ HANDOFF是否落后
 
 AI负责理解记忆，脚本负责检查 AI 有没有认真记。
 
-![image\.png](/images/codex-long-term-memory/image.png)
+![信息图：记忆可信度的优先级金字塔](/images/codex-long-term-memory/image.png)
 
 ## 最后，整套长期记忆其实就是一个循环
 

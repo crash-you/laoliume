@@ -80,7 +80,7 @@ wechat_url: "https://mp.weixin.qq.com/s/0VcO-UTGauRx_3utgL2_1A"
 
 这一句对汇报材料很好用。
 
-![image\.png](/images/de-ai-flavor-prompts/image-2.png)
+![汇报材料去 AI 味的对话截图](/images/de-ai-flavor-prompts/image-2.png)
 
 ## 二、拿组会汇报试一下
 
@@ -104,7 +104,7 @@ wechat_url: "https://mp.weixin.qq.com/s/0VcO-UTGauRx_3utgL2_1A"
 
 组会汇报就够了。
 
-![image\.png](/images/de-ai-flavor-prompts/image-3.png)
+![组会汇报改写前后的对话截图](/images/de-ai-flavor-prompts/image-3.png)
 
 ## 三、论文里的AI味也能这样改
 
@@ -126,7 +126,7 @@ AI 原文：
 
 重点是**把空话换成信息。**
 
-![image\.png](/images/de-ai-flavor-prompts/image.png)
+![把空话换成具体信息的对话截图](/images/de-ai-flavor-prompts/image.png)
 
 ## 四、再拿公众号文章试一下
 
@@ -164,7 +164,7 @@ AI 原文：
 > 
 > 
 
-![image\.png](/images/de-ai-flavor-prompts/image-1.png)
+![AI 编程开发方式文章改写的对话截图](/images/de-ai-flavor-prompts/image-1.png)
 
 ## 六、我又给提示词加了一条：禁止乱用副词
 
@@ -210,7 +210,7 @@ AI 很喜欢写：
 
 这里的已经不能乱删，因为它表达了状态。
 
-![image\.png](/images/de-ai-flavor-prompts/image-4.png)
+![分析不能乱删状态表达句子的对话截图](/images/de-ai-flavor-prompts/image-4.png)
 
 ## 六、去AI味，我现在就看这四件事
 

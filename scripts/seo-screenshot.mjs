@@ -95,6 +95,22 @@ for (const [vpName, width, height] of VIEWPORTS) {
         failed++;
         continue;
       }
+      // 滚动到页面底部再回到顶部，触发 loading="lazy" 的图片加载，
+      // 否则全页截图会把未加载的懒加载图片截成空白，造成与基线的假差异。
+      await page.evaluate(async () => {
+        const step = Math.max(400, window.innerHeight);
+        for (let y = 0; y < document.body.scrollHeight; y += step) {
+          window.scrollTo(0, y);
+          await new Promise((r) => setTimeout(r, 60));
+        }
+        window.scrollTo(0, 0);
+      });
+      // 等待所有图片解码完成（含懒加载触发后的加载）
+      await page.waitForFunction(
+        () => Array.from(document.images).every((img) => img.complete && img.naturalWidth > 0),
+        null,
+        { timeout: 60000 }
+      );
       await page.waitForTimeout(500); // 等阅读量 mock 渲染与字体稳定
       const file = join(outDir, `${pageName}-${vpName}.png`);
       await page.screenshot({ path: file, fullPage: true });

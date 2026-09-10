@@ -15,7 +15,7 @@ wechat_url: "https://mp.weixin.qq.com/s/WBOpSCIS-kroI-z7wde2HA"
 
 这几天社群一直有人问我，能不能分享一期Vibe coding技巧
 
-![image\.png](/images/vibe-coding-practice/image-4.png)
+![社群询问 Vibe Coding 技巧的聊天截图](/images/vibe-coding-practice/image-4.png)
 
 之所以一直没写，是因为现在分享vibe coding技巧的人太多了！随便一查就是一大堆。
 
@@ -85,11 +85,11 @@ wechat_url: "https://mp.weixin.qq.com/s/WBOpSCIS-kroI-z7wde2HA"
 
 整个流程大概是这样：
 
-![image\.png](/images/vibe-coding-practice/image-14.png)
+![信息图：Vibe Coding 整个流程的步骤](/images/vibe-coding-practice/image-14.png)
 
 而且我去翻了一下 GPT 最新的官方 Prompting 建议，方向其实也差不多：比起给模型塞一大堆机械步骤，更重要的是告诉它**目标、上下文、约束、完成标准和最终想得到什么结果**。
 
-![image\.png](/images/vibe-coding-practice/image-18.png)
+![GPT 官方 Prompting 建议文档截图](/images/vibe-coding-practice/image-18.png)
 
 一轮一轮来。
 
@@ -135,7 +135,7 @@ wechat_url: "https://mp.weixin.qq.com/s/WBOpSCIS-kroI-z7wde2HA"
 > 
 > 
 
-![image\.png](/images/vibe-coding-practice/image-6.png)
+![Codex 准备开始工作的界面截图](/images/vibe-coding-practice/image-6.png)
 
 这一轮我特别加了一句话：
 
@@ -149,13 +149,13 @@ wechat_url: "https://mp.weixin.qq.com/s/WBOpSCIS-kroI-z7wde2HA"
 
 所以这一轮，我只让它问。
 
-![image\.png](/images/vibe-coding-practice/image-3.png)
+![让 GPT Pro 提问需求的对话截图](/images/vibe-coding-practice/image-3.png)
 
 然后我就按照它的问题，一轮一轮回答。
 
 最后慢慢把这个产品确定下来。
 
-![image\.png](/images/vibe-coding-practice/image-5.png)
+![与 GPT Pro 确定产品需求的对话截图](/images/vibe-coding-practice/image-5.png)
 
 # 三、先把大而全砍掉
 
@@ -197,7 +197,7 @@ wechat_url: "https://mp.weixin.qq.com/s/WBOpSCIS-kroI-z7wde2HA"
 
 所以第一版最后被我砍成了几个东西。
 
-![image\.png](/images/vibe-coding-practice/image-8.png)
+![砍掉大而全功能后的需求对话截图](/images/vibe-coding-practice/image-8.png)
 
 ---
 
@@ -241,7 +241,7 @@ AI 找出低竞争、高需求、适合公众号承接的选题 →
 
 
 
-![image\.png](/images/vibe-coding-practice/image-12.png)
+![产品需求确定的对话截图](/images/vibe-coding-practice/image-12.png)
 
 这一点我现在越来越喜欢。
 
@@ -291,13 +291,13 @@ PRD 一旦生成之后：
 > 
 > 
 
-![image\.png](/images/vibe-coding-practice/image-7.png)
+![让 GPT Image V2 设计页面的对话截图](/images/vibe-coding-practice/image-7.png)
 
 这里其实 GPT\-5\.6 Pro 挺适合干这个。
 
 让 Pro 先决定页面应该长什么样。
 
-![image\.png](/images/vibe-coding-practice/image-19.png)
+![GPT Image V2 设计页面的对话截图](/images/vibe-coding-practice/image-19.png)
 
 再让 Codex 去实现。
 
@@ -305,7 +305,7 @@ PRD 一旦生成之后：
 
 效果图：
 
-![image\.png](/images/vibe-coding-practice/image-17.png)
+![页面设计效果图](/images/vibe-coding-practice/image-17.png)
 
 # 七、到这里，我才第一次打开 Codex
 
@@ -355,13 +355,13 @@ PRD 一旦生成之后：
 > 
 > 
 
-![image\.png](/images/vibe-coding-practice/image-9.png)
+![Codex 开始执行任务的对话截图](/images/vibe-coding-practice/image-9.png)
 
 我先让 GPT\-5\.6 Pro 当产品经理。
 
 然后 Codex 拿到需求之后，再让它自己当一次技术负责人。
 
-![image\.png](/images/vibe-coding-practice/image-1.png)
+![Codex 拿到需求后当技术负责人的对话截图](/images/vibe-coding-practice/image-1.png)
 
 两个模型都先想清楚。
 
@@ -369,17 +369,17 @@ PRD 一旦生成之后：
 
 # 九、计划确认后，再让 Codex 一段一段做
 
-![image\.png](/images/vibe-coding-practice/image-16.png)
+![Codex 一段一段实现功能的对话截图](/images/vibe-coding-practice/image-16.png)
 
 # 十、第一版出来之后，再把东西扔回 GPT\-5\.6 Pro
 
 第一版成品！
 
-![image\.png](/images/vibe-coding-practice/image-10.png)
+![第一版成品页面截图](/images/vibe-coding-practice/image-10.png)
 
-![image\.png](/images/vibe-coding-practice/image-15.png)
+![第一版成品页面截图](/images/vibe-coding-practice/image-15.png)
 
-![image\.png](/images/vibe-coding-practice/image-13.png)
+![第一版成品功能弹窗截图](/images/vibe-coding-practice/image-13.png)
 
 到这里 Codex 基本开发完成。
 
@@ -445,7 +445,7 @@ AI也一样。所以我重新回到 GPT Pro。
 > 
 > 
 
-![image\.png](/images/vibe-coding-practice/image-2.png)
+![审查报告文档截图](/images/vibe-coding-practice/image-2.png)
 
 这个时候 Pro 的身份又变了。
 
@@ -477,7 +477,7 @@ AI也一样。所以我重新回到 GPT Pro。
 > 
 > 
 
-![image\.png](/images/vibe-coding-practice/image.png)
+![把审查报告交给 Codex 的对话截图](/images/vibe-coding-practice/image.png)
 
 然后继续：
 
@@ -543,7 +543,7 @@ Codex 再改。
 
 跑完第一个之后，很多东西自然就懂了。
 
-![image\.png](/images/vibe-coding-practice/image-11.png)
+![信息图：Vibe Coding 新理解，最难的已经不是写代码](/images/vibe-coding-practice/image-11.png)
 
 # 最后
 

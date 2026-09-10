@@ -35,7 +35,7 @@ wechat_url: "https://mp.weixin.qq.com/s/LLv993B_6fuBXjTfAYNPiQ"
 
 但是在 Codex 最新源码里，`$CODEX_HOME/skills` 已经明确被标成了 **Deprecated user skills location，**翻译过来就是已弃用，也就是旧路径进入 维护模式，能用但别再用啦，赶快迁移到官方新推荐的位置。保留下来主要是为了兼容旧版本。
 
-![image\.png](/images/codex-skill-usage/image-10.png)
+![Codex 官方文档中 $CODEX_HOME/skills 标记为已弃用路径的截图](/images/codex-skill-usage/image-10.png)
 
 官方现在给普通用户推荐的全局 Skill 路径已经变成：
 
@@ -55,7 +55,7 @@ $HOME/.agents/skills
 > 
 > 
 
-![image\.png](/images/codex-skill-usage/image-18.png)
+![openai/skills 仓库 README 标注已弃用的截图](/images/codex-skill-usage/image-18.png)
 
 目前新的 Codex Skill / Plugin 示例，已经开始迁移到 `openai/plugins`。
 
@@ -128,7 +128,7 @@ my-skill/
 
 最后封装成了一个 Codex 能自己调用的能力包。
 
-![image\.png](/images/codex-skill-usage/image-6.png)
+![Skill 目录结构文档截图](/images/codex-skill-usage/image-6.png)
 
 ## 二、先看自己的 Codex 有没有 Skill
 
@@ -142,13 +142,13 @@ my-skill/
 
 Codex 会列出当前可以使用的 Skill。
 
-![image\.png](/images/codex-skill-usage/image-2.png)
+![Codex 终端列出当前可用 Skill 的截图](/images/codex-skill-usage/image-2.png)
 
 OpenAI 官方目前支持两种调用方式：
 
 一种是你自己明确指定 Skill，比如图中，按键盘上下键可以自己选择某个skill
 
-![image\.png](/images/codex-skill-usage/image-24.png)
+![终端按键盘上下键选择 Skill 的界面截图](/images/codex-skill-usage/image-24.png)
 
 另一种是 Codex 根据你的任务，**自动判断**要不要调用某个 Skill。
 
@@ -171,7 +171,7 @@ $paper-reading-notes
 
 打开软件在页面输入 /skill ，就会看到skill列表！
 
-![image\.png](/images/codex-skill-usage/image-19.png)
+![Codex 页面输入 /skill 显示 Skill 列表的截图](/images/codex-skill-usage/image-19.png)
 
 ## 三、Codex Skill 怎么安装？
 
@@ -195,11 +195,11 @@ $skill-installer linear
 
 执行以后，Codex 会帮你安装 Linear Skill。
 
-![image\.png](/images/codex-skill-usage/image-14.png)
+![Codex 执行安装 Linear Skill 的终端截图](/images/codex-skill-usage/image-14.png)
 
 然后等待一段时间，就安装成功了！
 
-![image\.png](/images/codex-skill-usage/image-5.png)
+![Skill 安装成功的终端输出截图](/images/codex-skill-usage/image-5.png)
 
 ### GitHub仓库安装
 
@@ -217,13 +217,13 @@ $skill-installer linear
 [这里粘贴 GitHub Skill 地址]
 ```
 
-![image\.png](/images/codex-skill-usage/image-1.png)
+![终端查看 Skill 安装目录结构的截图](/images/codex-skill-usage/image-1.png)
 
 比如我下载nature\-skill，给codex以GitHub仓库地址，让 Codex 自己处理。
 
 等待一段时间后，skill安装成功！
 
-![image\.png](/images/codex-skill-usage/image-22.png)
+![Skill 安装成功的对话界面截图](/images/codex-skill-usage/image-22.png)
 
 这也是我目前更建议小白使用的方法。
 
@@ -235,7 +235,7 @@ $skill-installer linear
 
 所以 GitHub 上看到一个 Skill，最好还是先看一下来源和代码（让codex看就行）
 
-![image\.png](/images/codex-skill-usage/image-11.png)
+![查看 GitHub 上 Skill 来源和代码的对话截图](/images/codex-skill-usage/image-11.png)
 
 
 
@@ -285,7 +285,7 @@ my-project/
 
 这种 Skill 可以直接跟着 Git 仓库一起提交。
 
-![image\.png](/images/codex-skill-usage/image-17.png)
+![项目内 .agents/skills 目录的资源管理器截图](/images/codex-skill-usage/image-17.png)
 
 也就是说，别人把你的项目 clone 下来以后，对应的 Skill 也一起有了。
 
@@ -311,7 +311,7 @@ C:\Users\Liu\.agents\skills\paper-reading-notes\SKILL.md
 
 这才是目前官方文档里的**用户级 Skill 推荐位置**。
 
-![image\.png](/images/codex-skill-usage/image-3.png)
+![用户级 Skill 推荐目录 .agents/skills 的资源管理器截图](/images/codex-skill-usage/image-3.png)
 
 这里有一个很容易踩坑的地方。
 
@@ -349,13 +349,13 @@ $HOME/.agents/skills
 
 最直接，直接输入： /skill
 
-![image\.png](/images/codex-skill-usage/image-21.png)
+![Codex 界面直接输入 /skill 的截图](/images/codex-skill-usage/image-21.png)
 
 然后选择对应 Skill。
 
 这样就属于明确告诉 Codex：这次任务，你给我按这个 Skill 来。
 
-![image\.png](/images/codex-skill-usage/image-23.png)
+![明确指定本次任务使用某个 Skill 的对话截图](/images/codex-skill-usage/image-23.png)
 
 ### 第二种：自动调用
 
@@ -480,7 +480,7 @@ $skill-creator
 目前先做纯指令型 Skill，不需要额外脚本。
 ```
 
-![image\.png](/images/codex-skill-usage/image-12.png)
+![现场创建最简单 Skill 的对话截图](/images/codex-skill-usage/image-12.png)
 
 接下来跟着它继续配置。
 
@@ -491,11 +491,11 @@ paper-reading-notes/
 └── SKILL.md
 ```
 
-![image\.png](/images/codex-skill-usage/image-16.png)
+![创建完成后得到的 Skill 目录结构截图](/images/codex-skill-usage/image-16.png)
 
 打开 `SKILL.md`。
 
-![image\.png](/images/codex-skill-usage/image-15.png)
+![SKILL.md 文件内容截图](/images/codex-skill-usage/image-15.png)
 
 最基础的结构其实很简单
 
@@ -530,7 +530,7 @@ $paper-reading-notes
 分析当前目录里的论文。
 ```
 
-![image\.png](/images/codex-skill-usage/image-9.png)
+![第一轮明确调用 Skill 的对话截图](/images/codex-skill-usage/image-9.png)
 
 第二轮完全不写 Skill 名：
 
@@ -539,7 +539,7 @@ $paper-reading-notes
 整理研究问题、方法、数据、结论和局限。
 ```
 
-![image\.png](/images/codex-skill-usage/image-7.png)
+![第二轮不写 Skill 名的对话截图](/images/codex-skill-usage/image-7.png)
 
 看看 Codex 会不会自动匹配这个 Skill。
 
@@ -554,7 +554,7 @@ Skill 明明安装了，为什么 `/skills` 找不到？
 但是我们既然都有codex了，还要自己看路径干什么？
 直接把问题发给codex，把绝对路径给codex，让codex自己修复！
 
-![image\.png](/images/codex-skill-usage/image-13.png)
+![把问题和绝对路径发给 Codex 让它自己修复的对话截图](/images/codex-skill-usage/image-13.png)
 
 这才是AI时代的正确用法！**让AI自修复AI！**
 
@@ -564,7 +564,7 @@ Skill 明明安装了，为什么 `/skills` 找不到？
 
 还是和codex直接说，把skill安装的绝对路径发给AI！
 
-![image\.png](/images/codex-skill-usage/image-8.png)
+![把 Skill 安装的绝对路径发给 AI 的对话截图](/images/codex-skill-usage/image-8.png)
 
 AI时代，能省就省哈哈哈哈！
 
@@ -580,7 +580,7 @@ AI时代，当然是问AI啦！
 
 直接问codex：
 
-![image\.png](/images/codex-skill-usage/image-4.png)
+![直接询问 Codex 的对话截图](/images/codex-skill-usage/image-4.png)
 
 然后codex就会给一堆的skill，高星的，推荐理由，适合场景，判断等等都有！
 
@@ -624,7 +624,7 @@ AI时代，当然是问AI啦！
 
 而不是为了拥有 Skill 去安装 Skill。
 
-![image\.png](/images/codex-skill-usage/image.png)
+![信息图：第三方 Skill 怎么找](/images/codex-skill-usage/image.png)
 
 ## 十三、Codex Skill 还能和 MCP 一起用
 
@@ -648,7 +648,7 @@ Skill 不一定只是“提示词”。
 
 这也是为什么我觉得 Skill 这个东西值得单独学一下。
 
-![image\.png](/images/codex-skill-usage/image-20.png)
+![信息图：Codex Skill 与 MCP 一起使用](/images/codex-skill-usage/image-20.png)
 
 ## 最后
 
