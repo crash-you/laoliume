@@ -1,6 +1,10 @@
 ---
 title: "从 0 - 1 注册并使用chatGPT"
 description: "从注册开始手把手带你用上 ChatGPT，解决「不是不会用，而是不知道怎么注册」的问题。"
+seoTitle: "ChatGPT 注册与使用教程：从 0 到 1（含 Codex 下载登录）"
+seoDescription: "ChatGPT 注册、Codex 下载与登录全流程：谷歌账号注册、邮箱注册、接码版说明，以及 Plus/Pro 充值方法，适合完全新手。"
+image: "/og/from-0-to-1-chatgpt.png"
+imageAlt: "佬刘AI 文章分享图：ChatGPT 注册与使用教程：从 0 到 1（含 Codex 下载登录）"
 date: 2026-08-26
 slug: "from-0-to-1-chatgpt"
 published: true

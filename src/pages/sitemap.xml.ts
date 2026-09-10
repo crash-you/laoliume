@@ -4,6 +4,8 @@ import { postPath, absoluteUrl } from '../lib/url';
 
 export const GET: APIRoute = async () => {
   const posts = await getPublishedPosts();
+  // noindex 文章不进 sitemap（本站发布策略：不希望被索引的页面也不主动分发）
+  const indexable = posts.filter((p) => !p.data.noindex);
 
   // 首页 lastmod 取最新一篇文章的发布/更新时间，反映首页列表的实际变化；
   // 没有文章时省略，不用构建时间冒充内容变化。
@@ -14,7 +16,7 @@ export const GET: APIRoute = async () => {
 
   const urls = [
     { loc: absoluteUrl('/'), lastmod: latest ? isoDate(latest) : undefined },
-    ...posts.map((p) => ({
+    ...indexable.map((p) => ({
       loc: absoluteUrl(postPath(postSlug(p))),
       lastmod: isoDate(p.data.updated ?? p.data.date),
     })),

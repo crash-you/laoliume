@@ -13,10 +13,12 @@ export const SITE_CONFIG = {
   /** 目标宣言（首页左栏 / 文章末尾作者区） */
   goal: '努力赚到第一个100万！',
   /** 首页 SEO title */
-  seoTitle: '佬刘AI - AI、Codex 与 Vibe Coding 实操',
+  seoTitle: '佬刘AI - ChatGPT、Codex 使用教程与 AI 实操',
   /** 首页 SEO description */
   seoDescription:
     '佬刘的个人 AI 实操博客，记录 Codex、Vibe Coding、ChatGPT、AI 工具与实际使用过程。',
+  /** 默认分享图（首页 / 404 等无文章配图页面的 OG 回退，1200x630） */
+  ogImageDefault: '/og/default.png',
   /** 线上域名（不要带结尾斜杠），canonical / sitemap / RSS 都用它 */
   domain: 'https://laoliu.me',
   /** X (Twitter) 主页地址。占位地址，换成你自己的即可，全站自动生效 */

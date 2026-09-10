@@ -4,16 +4,22 @@ import { absoluteUrl } from '../lib/url';
 import '../styles/global.css';
 
 interface Props {
-  /** 页面 <title> */
+  /** 页面 <title>（调用方负责 seoTitle ?? title + 品牌后缀） */
   title: string;
-  /** meta description */
+  /** meta description（调用方负责 seoDescription ?? description 回退） */
   description: string;
-  /** canonical 路径，如 /codex-buy；不传则用当前路径 */
+  /** canonical 路径，如 /codex-buy/；不传则用当前路径 */
   canonicalPath?: string;
   /** Open Graph 类型 */
   ogType?: 'website' | 'article';
-  /** Article JSON-LD 对象（仅文章页传） */
-  jsonLd?: Record<string, unknown>;
+  /** 分享图站内路径（如 /og/codex-buy.png）；不传用全站默认分享图 */
+  image?: string;
+  /** 分享图替代文本 */
+  imageAlt?: string;
+  /** 明确索引控制：默认允许索引；404 等页面传 true */
+  noindex?: boolean;
+  /** JSON-LD 对象（文章页传 Article；首页传 WebSite / Person 数组） */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -21,10 +27,22 @@ const {
   description,
   canonicalPath,
   ogType = 'website',
+  image = SITE_CONFIG.ogImageDefault,
+  imageAlt = SITE_CONFIG.name,
+  noindex = false,
   jsonLd,
 } = Astro.props;
 
 const canonical = absoluteUrl(canonicalPath ?? Astro.url.pathname);
+const imageUrl = absoluteUrl(image);
+
+/** 防止内容里的 <、>、& 破坏 script 边界；输出必须可 JSON.parse */
+const jsonLdHtml = jsonLd
+  ? JSON.stringify(jsonLd)
+      .replace(/</g, '\\u003c')
+      .replace(/>/g, '\\u003e')
+      .replace(/&/g, '\\u0026')
+  : undefined;
 ---
 
 <!doctype html>
@@ -34,6 +52,7 @@ const canonical = absoluteUrl(canonicalPath ?? Astro.url.pathname);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title={SITE_CONFIG.name} href="/rss.xml" />
@@ -45,15 +64,20 @@ const canonical = absoluteUrl(canonicalPath ?? Astro.url.pathname);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="zh_CN" />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    {SITE_CONFIG.xHandle && <meta name="twitter:site" content={SITE_CONFIG.xHandle} />}
 
-    {jsonLd && (
-      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    )}
+    {jsonLdHtml && <script type="application/ld+json" set:html={jsonLdHtml} />}
   </head>
   <body>
     <slot />

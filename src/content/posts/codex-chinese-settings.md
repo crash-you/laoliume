@@ -1,6 +1,10 @@
 ---
 title: "Codex怎么设置成中文？界面中文、中文回复和全局设置一次讲清楚"
 description: "Codex 中文界面、中文回复，以及换新对话后仍默认中文的全局设置，三种情况一次讲清楚。"
+seoTitle: "Codex 怎么设置中文？界面中文、中文回复与全局 AGENTS.md 配置"
+seoDescription: "三种 Codex 中文设置：当前对话中文回复、全局 AGENTS.md 让新对话默认中文、Codex App 界面切中文，附设置失败的排查点。"
+image: "/og/codex-chinese-settings.png"
+imageAlt: "佬刘AI 文章分享图：Codex 怎么设置中文？界面中文、中文回复与全局 AGENTS.md 配置"
 date: 2026-08-28
 slug: "codex-chinese-settings"
 published: true

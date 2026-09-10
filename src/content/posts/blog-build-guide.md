@@ -1,6 +1,10 @@
 ---
 title: "个人博客网站怎么搭建？从买域名到GitHub+Cloudflare上线完整实操"
 description: "没买服务器、没用 WordPress、全程零成本：从买域名、让 AI 做网站、GitHub 托管，到 Cloudflare 上线 laoliu.me 的完整实操记录。"
+seoTitle: "个人博客网站怎么搭建？从买域名到 GitHub+Cloudflare 上线"
+seoDescription: "零成本个人博客实操：买域名、让 AI 生成网站、GitHub 托管、Cloudflare Workers 部署、D1 阅读量和公众号入口，全程记录。"
+image: "/og/blog-build-guide.png"
+imageAlt: "佬刘AI 文章分享图：个人博客网站怎么搭建？从买域名到 GitHub+Cloudflare 上线"
 date: 2026-09-06
 slug: "blog-build-guide"
 published: true

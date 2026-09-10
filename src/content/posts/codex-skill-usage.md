@@ -1,6 +1,10 @@
 ---
 title: "codex skill怎么用？安装、配置、调用到自定义 Skill 完整教程"
 description: "Codex Skill 的安装、配置、调用到自定义 Skill 的完整教程。"
+seoTitle: "Codex Skill 怎么用？安装、配置、调用到自定义完整教程"
+seoDescription: "按最新官方文档整理的 Codex Skill 教程：.agents/skills 新路径、官方与 GitHub 安装、手动/自动调用、创建自定义 Skill 与不生效排查。"
+image: "/og/codex-skill-usage.png"
+imageAlt: "佬刘AI 文章分享图：Codex Skill 怎么用？安装、配置、调用到自定义完整教程"
 date: 2026-08-27
 slug: "codex-skill-usage"
 published: true

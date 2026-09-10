@@ -1,6 +1,10 @@
 ---
 title: "Codex 自定义 Skill 教程：从 0 做一个长期记忆 Skill（从开发到 GitHub 开源上线）"
 description: "从 0 做一个长期记忆 Skill：从开发到 GitHub 开源上线的完整过程。"
+seoTitle: "Codex 自定义 Skill 教程：从 0 做一个长期记忆 Skill 并开源"
+seoDescription: "用 Skill Creator 从 0 做一个 Project Memory 长期记忆 Skill：三条指令、初始化与真实性检查脚本，到 GitHub 开源上线的完整过程。"
+image: "/og/codex-custom-memory-skill.png"
+imageAlt: "佬刘AI 文章分享图：Codex 自定义 Skill 教程：从 0 做一个长期记忆 Skill 并开源"
 date: 2026-08-30
 slug: "codex-custom-memory-skill"
 published: true

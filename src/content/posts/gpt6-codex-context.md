@@ -1,6 +1,10 @@
 ---
 title: "GPT-6 Codex上下文机制：长期项目怎么接着做？"
 description: "GPT-6 Astra 正式发布，部分测试从 GPT-5.6 Sol 的 7.8% 提升到 99.9%。这篇不只看跑分，聊聊这次 Codex 的上下文机制更新：跨窗口保留 Notes、旧上下文可搜索，长期项目的工作方式变了。"
+seoTitle: "GPT-6 Codex 上下文机制：长期项目怎么接着做？"
+seoDescription: "GPT-6 Astra 发布，部分测试从 GPT-5.6 Sol 的 7.8% 提升到 99.9%。本篇解读 Codex 上下文机制更新：跨窗口 Notes、旧上下文可搜索。"
+image: "/og/gpt6-codex-context.png"
+imageAlt: "佬刘AI 文章分享图：GPT-6 Codex 上下文机制：长期项目怎么接着做？"
 date: 2026-09-04
 slug: "gpt6-codex-context"
 published: true

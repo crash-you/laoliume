@@ -4,12 +4,41 @@ import ViewsScript from '../components/ViewsScript.astro';
 import { SITE_CONFIG } from '../site.config';
 import { getPublishedPosts, postSlug, formatDate } from '../lib/posts';
 import { postPath } from '../lib/url';
+import { absoluteUrl } from '../lib/url';
 
 const posts = await getPublishedPosts();
 const year = new Date().getFullYear();
+
+// 首页实体：站点与作者均使用可见的真实信息；sameAs 仅列已确认账号
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': absoluteUrl('/#website'),
+    name: SITE_CONFIG.name,
+    url: absoluteUrl('/'),
+    description: SITE_CONFIG.seoDescription,
+    inLanguage: 'zh-CN',
+    publisher: { '@id': absoluteUrl('/#author') },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': absoluteUrl('/#author'),
+    name: SITE_CONFIG.author,
+    description: SITE_CONFIG.description,
+    url: absoluteUrl('/'),
+    sameAs: [SITE_CONFIG.xUrl],
+  },
+];
 ---
 
-<BaseLayout title={SITE_CONFIG.seoTitle} description={SITE_CONFIG.seoDescription} canonicalPath="/">
+<BaseLayout
+  title={SITE_CONFIG.seoTitle}
+  description={SITE_CONFIG.seoDescription}
+  canonicalPath="/"
+  jsonLd={jsonLd}
+>
   <div class="home-shell">
     <!-- 左栏：个人信息（桌面端 sticky，平板/手机变为顶部品牌行） -->
     <header class="home-brand">

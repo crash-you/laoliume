@@ -1,6 +1,10 @@
 ---
 title: "Vibe Coding教程实战：我让ChatGPT Pro当产品经理，Codex当程序员"
 description: "一次完整的 Vibe Coding 实战：我让 ChatGPT Pro 当产品经理，Codex 当程序员。"
+seoTitle: "Vibe Coding 教程实战：ChatGPT Pro 当产品经理，Codex 当程序员"
+seoDescription: "一次完整 Vibe Coding 实战：先让 GPT Pro 追问需求、砍功能、写 PRD，再让 GPT Image V2 设计页面，最后 Codex 分段实现与审查。"
+image: "/og/vibe-coding-practice.png"
+imageAlt: "佬刘AI 文章分享图：Vibe Coding 教程实战：ChatGPT Pro 当产品经理，Codex 当程序员"
 date: 2026-09-01
 slug: "vibe-coding-practice"
 published: true

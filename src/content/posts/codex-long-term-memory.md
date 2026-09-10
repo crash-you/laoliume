@@ -1,6 +1,10 @@
 ---
 title: "Codex长期记忆怎么做？换个对话，复杂项目还能接着跑"
 description: "换个对话，复杂项目还能接着跑：Codex 长期记忆的实践方法。"
+seoTitle: "Codex 长期记忆怎么做？记、分、写、读、忘、真六步循环"
+seoDescription: "换对话后让 Codex 接着做复杂项目：长期记忆的记、分、写、读、忘、真六个环节与实操方法，避免记忆失真和上下文爆炸。"
+image: "/og/codex-long-term-memory.png"
+imageAlt: "佬刘AI 文章分享图：Codex 长期记忆怎么做？记、分、写、读、忘、真六步循环"
 date: 2026-08-29
 slug: "codex-long-term-memory"
 published: true

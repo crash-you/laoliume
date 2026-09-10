@@ -1,6 +1,10 @@
 ---
 title: "Codex接入DeepSeek完整教程：接入第三方模型，配置V4 Flash、Pro与Vision"
 description: "给 Codex 接入第三方模型：DeepSeek V4 Flash、V4 Pro 与 Vision 的完整配置教程。"
+seoTitle: "Codex 接入 DeepSeek 完整教程：V4 Flash、Pro 与 Vision 配置"
+seoDescription: "Codex 接入第三方模型 DeepSeek：Windows/macOS 配置、V4 Flash / V4 Pro / Vision 区别、费用估算、验证接入成功与恢复原配置。"
+image: "/og/codex-deepseek.png"
+imageAlt: "佬刘AI 文章分享图：Codex 接入 DeepSeek 完整教程：V4 Flash、Pro 与 Vision 配置"
 date: 2026-09-02
 slug: "codex-deepseek"
 published: true

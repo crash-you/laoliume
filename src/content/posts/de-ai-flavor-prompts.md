@@ -1,6 +1,10 @@
 ---
 title: "去AI味指令词怎么写？我现在用的去AI味提示词，直接复制可用！"
 description: "我现在在用的去 AI 味提示词，组会汇报、课程作业、项目材料都能用，直接复制可用。"
+seoTitle: "去 AI 味提示词怎么写？直接复制可用的实测版本"
+seoDescription: "我现在在用的去 AI 味提示词：组会汇报、论文、公众号文章、网文四个场景的实测，加上一条「禁止乱用副词」规则。"
+image: "/og/de-ai-flavor-prompts.png"
+imageAlt: "佬刘AI 文章分享图：去 AI 味提示词怎么写？直接复制可用的实测版本"
 date: 2026-08-31
 slug: "de-ai-flavor-prompts"
 published: true

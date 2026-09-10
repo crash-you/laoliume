@@ -1,6 +1,10 @@
 ---
 title: "Codex怎么购买 | 2026年9月版，一篇文章带你看懂"
 description: "2026 年 9 月版：ChatGPT Plus / Pro 订阅怎么开、Codex 需要什么套餐，一篇文章讲清楚。"
+seoTitle: "Codex 怎么购买？2026年9月版：套餐、付款方式与 Plus/Pro 选择"
+seoDescription: "Codex 包含在 ChatGPT 订阅里，不需要单独购买。2026 年 9 月实测：官方订阅流程、国内银行卡限制、手机端购买、Plus 和 Pro 怎么选。"
+image: "/og/codex-buy.png"
+imageAlt: "佬刘AI 文章分享图：Codex 怎么购买？2026年9月版：套餐、付款方式与 Plus/Pro 选择"
 date: 2026-09-03
 slug: "codex-buy"
 published: true
