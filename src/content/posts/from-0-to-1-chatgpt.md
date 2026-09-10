@@ -281,7 +281,7 @@ gpt会自动跳转到网页鉴权页面，在页面中登录你的账号即可
 
 打开店铺链接：
 
-https://pay\.ldxp\.cn/shop/liu
+https://wzyp\.cn/shop/liu
 
 ![代充店铺页面截图](/images/from-0-to-1-chatgpt/image-31.png)
 
@@ -323,7 +323,7 @@ over！
 
 打开店铺链接：
 
-https://pay\.ldxp\.cn/shop/liu
+https://wzyp\.cn/shop/liu
 
 ![代充店铺选择充值套餐的页面截图](/images/from-0-to-1-chatgpt/image-6.png)
 

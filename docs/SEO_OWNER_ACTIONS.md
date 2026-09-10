@@ -2,27 +2,55 @@
 
 以下事项需要站长账号 / DNS / Cloudflare 后台权限，本轮 Agent 无法执行。每项附验收方式。完成一项勾一项。
 
-## 1. Cloudflare：robots.txt 被托管内容覆盖（优先级高）
+## 0. 主域冲突：laoliu.me 被 301 到 www.laoliu.me（上线前必须解决，优先级最高）
 
-**现状**（2026-09-10 实测）：`https://laoliu.me/robots.txt` 返回的是 Cloudflare 注入的版本：
-- 丢失了仓库文件里的 `Sitemap: https://laoliu.me/sitemap.xml` 声明；
-- 对 GPTBot、ClaudeBot、Google-Extended、CCBot、Bytespider、Amazonbot、Applebot-Extended、meta-externalagent、CloudflareBrowserRenderingCrawler 共 9 个 AI 爬虫全站 Disallow。
+**现状**（2026-09-10 实测跳转链）：
+```
+https://laoliu.me/            -> 301 -> https://www.laoliu.me/
+https://laoliu.me/codex-buy   -> 301 -> https://www.laoliu.me/codex-buy -> 307 -> /codex-buy/
+```
+而代码 `site: 'https://laoliu.me'`、canonical、sitemap、OG 全部指向**不带 www 的 laoliu.me**。
+结果：**canonical 指向一个会被 301 到 www 的地址**，搜索引擎会看到规范地址自相矛盾，
+是当前最影响收录一致性的问题。`_redirects` 只能消除第二跳（非规范入口 307→308），
+无法消除第一跳（apex→www）。
 
-**操作**：
-1. Cloudflare Dashboard → laoliu.me → 检查「Crawlers / 内容信号 / AI bot 拦截」类开关（不同套餐名称不同，常见于 Security 或 Bots 设置）。
-2. 决策：是否允许 AI 爬虫（这是商业决策：允许→内容可被 AI 搜索引用；禁止→防抓取但损失 AI 渠道曝光）。**无论如何，Sitemap 声明必须恢复**——要么关闭 robots 托管让仓库文件生效，要么在 Cloudflare 自定义 robots 配置里加回 Sitemap 行。
+**操作（二选一，站长决策）**：
+1. **方案 A（推荐，改动最小）**：在 Cloudflare 关掉「www 优先 / apex→www」跳转，或把
+   www 301 到 apex，让 `https://laoliu.me` 成为唯一规范域，与代码一致。
+2. **方案 B**：若坚持用 www 为主域，则需改代码 `site`/canonical/sitemap/OG 全部换成
+   `https://www.laoliu.me`（需要一轮代码改动，Agent 可协助）。
 
-**验收**：`curl -s https://laoliu.me/robots.txt | grep Sitemap` 输出 `Sitemap: https://laoliu.me/sitemap.xml`。
+**验收**：`https://laoliu.me/` 直接 200（不再 301 到 www），或代码 canonical 与线上主域完全一致。
+
+## 1. Cloudflare：robots.txt 被托管内容覆盖（Content-Signal 功能）
+
+**现状**（2026-09-10 实测，完整原始响应已存 `docs/reports/robots-live.txt`）：
+`https://laoliu.me/robots.txt` 返回 Cloudflare「Managed Content / 内容信号」生成版本（含
+`# BEGIN Cloudflare Managed content`），仓库 `public/robots.txt` 的内容未出现在响应中：
+- 丢失 `Sitemap: https://laoliu.me/sitemap.xml` 声明；
+- 含 `Content-Signal: search=yes,ai-train=no,use=reference`（允许搜索，禁止 AI 训练）；
+- 对 Amazonbot / Applebot-Extended / Bytespider / CCBot / ClaudeBot /
+  CloudflareBrowserRenderingCrawler / Google-Extended / GPTBot / meta-externalagent 全站 Disallow。
+
+**关键区分**：`Googlebot`、`Bingbot` 不在 Disallow 列表内，**搜索引擎收录不受阻**；
+被禁的是 AI 训练/扩展类爬虫。这是「搜索抓取 vs AI 训练」两类策略，不是全站屏蔽。
+
+**操作**（站长决策）：
+1. 是否放开 AI 爬虫是商业决策，Agent 不擅自关闭防护。
+2. **Sitemap 声明建议恢复**：在 Cloudflare 托管 robots 配置里加回 Sitemap 行，或关闭该
+   Content-Signal 托管让仓库 robots.txt 生效。
+
+**验收**：`curl -s https://laoliu.me/robots.txt | grep -i sitemap` 有输出。
 
 ## 2. 部署本分支（审阅后）
 
-**操作**：审阅 `seo-round1` 分支的 6 个提交，确认无误后合并 main 并执行既有部署流程 `npm run deploy`（或你的 GitHub→Cloudflare 流水线）。
+**操作**：审阅 `seo-round1` 分支提交，确认无误后合并 main 并执行既有部署流程 `npm run deploy`（或你的 GitHub→Cloudflare 流水线）。
 
-**验收**（部署后运行，预期全绿）：
+**验收**（部署后，用手动工作流 `SEO Deploy Verify`，输入部署的提交 SHA）：
 ```bash
-npm run seo:smoke -- --base-url https://laoliu.me
+npm run seo:smoke -- --base-url https://laoliu.me --env production --expected-commit <sha>
 ```
-重点确认：`/og/codex-buy.png` 与 `/og/default.png` 变 200；robots Sitemap 行恢复；非规范入口为 308 一跳。
+重点确认：`/og/default.png` 变 200；robots Sitemap 行恢复；非规范入口 308；build-commit 标记与提交一致。
 
 ## 3. Google Search Console
 

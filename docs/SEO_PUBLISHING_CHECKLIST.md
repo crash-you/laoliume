@@ -24,18 +24,21 @@ wechat_url: "https://mp.weixin.qq.com/s/..."   # 可选
 ## 2. 新文章上线前必做（顺序执行）
 
 ```bash
-# 1) 生成本篇 + 默认分享图（新增文章后跑一次；已有图会跳过）
+# 1) （可选）生成本篇专属分享图；不生成也行，会回退到默认分享图 og/default.png
 npm run og:image
 
 # 2) 构建 + 全量 SEO 校验（title/description/canonical/H1/sitemap/RSS/_redirects/OG 图等）
 npm run seo:check
 ```
 
+**注意**：`_redirects` 由构建期自动生成（`src/lib/seo-integration.mjs`），
+**新增文章不需要手动改任何重定向**。分享图也不强制（缺图自动回退默认图）。
+
 **seo:check 失败的常见原因**：
-- 忘了跑 `npm run og:image`（缺 `/og/<slug>.png`）；
-- 忘了在 `public/_redirects` 加 `/<slug> /<slug>/ 308` 一行（校验器会报缺规则）；
 - slug 与保留路由冲突（api/images/og/_astro/404）；
-- date/updated 格式错误或 updated 早于 date。
+- slug 非法（需小写字母/数字/连字符开头）；
+- date/updated 格式错误或 updated 早于 date；
+- 正文 `.prose` 缺失或过短。
 
 ## 3. 视觉回归（改了模板/样式时）
 
@@ -53,18 +56,19 @@ npm run seo:verify-ui
 ## 4. 部署后 smoke test
 
 ```bash
-node scripts/seo-smoke.mjs --base-url https://laoliu.me --out docs/reports/smoke-<日期>.md
+node scripts/seo-smoke.mjs --base-url https://laoliu.me --env production \
+  --expected-commit <部署的提交SHA> --out docs/reports/smoke-<日期>.md
 ```
 
-全绿才算发布完成。任何「未验证」项（网络问题）当天补测，不能留过夜。
+退出码：0=全通过；1=确定失败；2=未验证。全绿才算发布完成；「未验证」项当天补测。
 
 ## 5. 快速自查口诀
 
-- **一个 slug 一条 308**：`public/_redirects` 与文章同步。
-- **一张图一次生成**：`npm run og:image` 幂等，新增文章后跑一次即可。
+- **重定向全自动**：`_redirects` 构建期按发布集合生成，无需手改；人工迁移规则写 `redirects-extra.txt`。
+- **分享图可选**：`npm run og:image` 可选跑；缺图自动回退默认图，不阻塞发布。
 - **改的是内容还是模板？** 内容 → 只跑 seo:check；模板/样式 → 加跑视觉回归。
 - **updated 字段**：只有正文/信息真实修订才改；排版微调不算。
-- **草稿**：`published: false` 即可，不需要删文件；校验器会确保它不进 sitemap/RSS/路由。
+- **草稿**：`published: false` 即可，不需要删文件；校验器确保它不进 sitemap/RSS/路由。
 - **noindex**：`noindex: true` 的文章自动从 sitemap/RSS 排除，页面仍在（适合「公开但不想被收录」的页面）。
 
 ## 6. 每季度（低频）

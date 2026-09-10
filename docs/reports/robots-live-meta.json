@@ -1,0 +1,23 @@
+{
+  "chain": [
+    {
+      "url": "https://laoliu.me/robots.txt",
+      "status": 200,
+      "location": "https://www.laoliu.me/robots.txt"
+    }
+  ],
+  "status": 200,
+  "contentType": "text/plain; charset=utf-8",
+  "headers": {
+    "cf-ray": "a38e8eafdab3f5d7-AMS",
+    "connection": "keep-alive",
+    "content-encoding": "br",
+    "content-type": "text/plain; charset=utf-8",
+    "date": "Thu, 10 Sep 2026 12:50:15 GMT",
+    "location": "https://www.laoliu.me/robots.txt",
+    "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+    "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=7CIXT5o8R6nG8geqF4ZfkIw4KByT5UdxpvhRvKZNNs%2B95sF%2FlnjSlZcbMyGOGIteBHlycCiXXHwAyn0Fr%2FN3jtdxg5Nqc1LgzbSXpJvxN7HH7fwVYwzYQXWMez4%3D\"}]}",
+    "server": "cloudflare",
+    "transfer-encoding": "chunked"
+  }
+}
