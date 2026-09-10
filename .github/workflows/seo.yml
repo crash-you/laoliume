@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build-and-seo-check:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,18 +16,21 @@ jobs:
           node-version: 22
           cache: npm
 
-      # 按锁文件安装，禁止顺手升级依赖
+      # 干净安装（按锁文件），失败即阻断，不用临时 npm install 补包
       - name: Install dependencies (lockfile)
         run: npm ci
 
+      # 单元测试（rehype 标题转换）+ 反例测试（本地 mock，无需公网）
+      - name: Unit & negative tests
+        run: npm test
+
+      # 构建 + 真实产物 SEO 校验（失败阻断 CI）
       - name: Build & SEO check (artifacts)
         run: npm run seo:check
 
-      # 线上 smoke test 仅对默认分支执行，且网络失败标记未验证而不静默通过
-      - name: Smoke test (production)
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: node scripts/seo-smoke.mjs --base-url https://laoliu.me
-        continue-on-error: true
+      # 隔离发布夹具：新增 Markdown 无需手改 _redirects / 生图，构建+校验通过，并自清理
+      - name: Publish fixture test
+        run: npm run test:fixture
 
       - name: Upload build artifacts
         if: always()
@@ -37,8 +40,4 @@ jobs:
           path: dist/
           retention-days: 7
 
-  # 视觉回归按实际基础设施接入；本仓库暂无远端截图基线，先在本地执行：
-  #   npx wrangler dev --port 8788 --local &
-  #   node scripts/seo-screenshot.mjs --base-url http://localhost:8788 --out-dir docs/screenshots/after
-  #   node scripts/seo-verify-ui.mjs --before docs/screenshots/before --after docs/screenshots/after
-  # 失败不允许被静默忽略（脚本非零退出码）。
+  # 部署后验证不在这里跑（需确认线上已部署对应提交），见 seo-deploy-verify.yml。

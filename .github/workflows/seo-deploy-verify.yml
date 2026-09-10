@@ -1,0 +1,55 @@
+name: SEO Deploy Verify
+
+# 部署后验收：手动触发，输入要验证的提交 SHA。
+# 只有确认线上已部署对应提交后才有意义——用 build-commit 标记核验，不靠固定 sleep。
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: '要验证的提交 SHA（部署已完成的那个）'
+        required: true
+        default: ''
+      canonical-origin:
+        description: '预期 canonical 站点（默认 https://laoliu.me）'
+        required: false
+        default: 'https://laoliu.me'
+
+jobs:
+  deploy-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout commit to verify
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies (lockfile)
+        run: npm ci
+
+      # 构建该提交的产物，作为线上 smoke 的预期来源
+      - name: Build expected artifacts
+        run: npm run build
+
+      # 真实 GET 线上：含 build-commit 核验 + 全部必需检查。
+      # 失败/未验证都返回非零；不设 continue-on-error。
+      - name: Smoke test (production, verify commit)
+        run: |
+          node scripts/seo-smoke.mjs \
+            --base-url ${{ inputs.canonical-origin }} \
+            --canonical-origin ${{ inputs.canonical-origin }} \
+            --env production \
+            --expected-commit ${{ inputs.commit }} \
+            --out docs/reports/smoke-deploy-verify.md
+
+      - name: Upload report & evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-verify-report
+          path: docs/reports/smoke-deploy-verify.md
+          retention-days: 30

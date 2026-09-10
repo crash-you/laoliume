@@ -36,6 +36,9 @@ const {
 const canonical = absoluteUrl(canonicalPath ?? Astro.url.pathname);
 const imageUrl = absoluteUrl(image);
 
+/** 构建提交标记（vite define 注入），用于部署后验收确认线上产物对应的提交 */
+const buildCommit = typeof __BUILD_COMMIT__ !== 'undefined' ? __BUILD_COMMIT__ : 'unknown';
+
 /** 防止内容里的 <、>、& 破坏 script 边界；输出必须可 JSON.parse */
 const jsonLdHtml = jsonLd
   ? JSON.stringify(jsonLd)
@@ -56,6 +59,7 @@ const jsonLdHtml = jsonLd
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title={SITE_CONFIG.name} href="/rss.xml" />
+    <meta name="build-commit" content={buildCommit} />
 
     <!-- Open Graph -->
     <meta property="og:site_name" content={SITE_CONFIG.name} />
