@@ -1,0 +1,24 @@
+# laoliu.me URL 基线（基线 commit 6f0edda，生成于 2026-09-10 09:04    ）
+# 来源：src/content/posts 实际发布集合（published: true）+ 固定路由
+
+## 固定页面
+https://laoliu.me/
+https://laoliu.me/404（软 404 页面文件，真实状态码待线上核验）
+https://laoliu.me/robots.txt
+https://laoliu.me/sitemap.xml
+https://laoliu.me/rss.xml
+https://laoliu.me/api/views/:slug（JSON 计数接口，非 HTML）
+
+## 正式文章（12 篇，均为 published: true，无草稿）
+https://laoliu.me/blog-build-guide/
+https://laoliu.me/codex-buy/
+https://laoliu.me/codex-chinese-settings/
+https://laoliu.me/codex-custom-memory-skill/
+https://laoliu.me/codex-deepseek/
+https://laoliu.me/codex-long-term-memory/
+https://laoliu.me/codex-skill-usage/
+https://laoliu.me/de-ai-flavor-prompts/
+https://laoliu.me/from-0-to-1-chatgpt/
+https://laoliu.me/gpt-download-install/
+https://laoliu.me/gpt6-codex-context/
+https://laoliu.me/vibe-coding-practice/
