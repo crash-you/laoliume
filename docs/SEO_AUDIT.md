@@ -121,3 +121,21 @@ f9730de chore(seo): 阶段A基线——URL 清单、构建与路由实测记录�
 ```
 
 推送时请使用 `seo-round1`（若 `seo/no-ui-regression` 在你的环境稳定存在，二者等价）。
+
+---
+
+## 第二轮：审查修复（2026-09-10，提交 bbcc250..c3c742f）
+
+针对 `laoliume-workbuddy-review-fixes.md` 的修复，摘要：
+
+| 项 | 内容 | 验证 |
+|---|---|---|
+| 标题转换越界 | rehype-seo 改用 h1-h6 安全映射，单次遍历，不生成 undefined/h7 | `npm run test:rehype` 14 断言通过 |
+| 新增即发布 | _redirects 构建期按真实产物自动生成；分享图可选回退默认图；og-image 过滤草稿 | `npm run test:fixture` 15 断言通过 |
+| 检查脚本 | smoke 退出码 0/1/2、base-url/canonical-origin/env 分离、X-Robots-Tag、.prose 正文指纹、真实 XML/JSON 解析；check 的 noindex 策略；verify-ui 校验完整 4×3 集合 | `npm run test:negative` 9 反例通过 |
+| CI 拆分 | 构建/PR 测试真实失败；新增 workflow_dispatch 部署后验收（build-commit 标记核验） | 见 .github/workflows/ |
+| UI 回归 | main vs 最终代码：11/12 页零差异，register-mobile 644 像素（店铺链接 URL 有意变更） | `docs/reports/ui-regression.md` |
+| Cloudflare/业务 | 发现 www 301 冲突（上线前阻断项）、robots 被 Managed Content 覆盖、店铺链接统一 wzyp.cn | `docs/reports/cloudflare-verification.md` |
+
+上线前必须处理（详见 docs/SEO_OWNER_ACTIONS.md 第 0 条）：**主域 laoliu.me 被 301 到
+www.laoliu.me，与代码 canonical 冲突**，需站长在 Cloudflare 统一主域方向。
