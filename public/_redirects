@@ -1,15 +1,3 @@
-# 非规范文章入口 -> 规范地址（永久 308，优于 Workers html_handling 默认的 307 临时跳转）
-# 新增文章时在这里加一行：/<slug> /<slug>/ 308
-# 注意：不要用「/. / 308」通配形式——实测对文章路由无效，且会导致 / 自我循环。
-/codex-buy /codex-buy/ 308
-/blog-build-guide /blog-build-guide/ 308
-/codex-chinese-settings /codex-chinese-settings/ 308
-/codex-custom-memory-skill /codex-custom-memory-skill/ 308
-/codex-deepseek /codex-deepseek/ 308
-/codex-long-term-memory /codex-long-term-memory/ 308
-/codex-skill-usage /codex-skill-usage/ 308
-/de-ai-flavor-prompts /de-ai-flavor-prompts/ 308
-/from-0-to-1-chatgpt /from-0-to-1-chatgpt/ 308
-/gpt-download-install /gpt-download-install/ 308
-/gpt6-codex-context /gpt6-codex-context/ 308
-/vibe-coding-practice /vibe-coding-practice/ 308
+# 注意：本站的 _redirects 由构建期自动生成（见 src/lib/seo-integration.mjs）。
+# 本文件仅供人工迁移规则参考；构建产物 dist/_redirects 会被自动覆盖，
+# 新增/删除文章后重新构建即可，无需维护本文件。

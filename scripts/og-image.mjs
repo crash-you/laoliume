@@ -1,25 +1,27 @@
 /**
  * og-image.mjs — 生成全站 OG / Twitter 分享图（1200x630）
  *
- * 用法: node scripts/og-image.mjs
+ * 用法: node scripts/og-image.mjs [--force]
  *
  * - public/og/default.png            全站默认分享图（首页 / 404 回退）
- * - public/og/<slug>.png             每篇文章的分享卡（文章标题 + 站点名 + 域名）
+ * - public/og/<slug>.png             每篇「已发布」文章的分享卡
+ * - 草稿（published: false）不生成任何分享卡，不进入公开 manifest
  * - 使用 playwright-core + 本机已缓存 Chromium，系统字体，不引入在线字体
- * - 分享图只用于 head 元数据，不渲染进页面正文
- * - 幂等：可用 --force 覆盖，默认文件已存在时跳过
+ * - 幂等：默认文件已存在时跳过，--force 覆盖
+ * - 本脚本是本地/开发者工具；构建与 CI 不依赖它（云端构建无需 Chromium）
  */
 import { chromium } from 'playwright-core';
 import { mkdirSync, readdirSync, existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { homedir } from 'node:os';
+import matter from 'gray-matter';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = join(root, 'public', 'og');
+const postsDir = join(root, 'src', 'content', 'posts');
 const force = process.argv.includes('--force');
 
-/** 与 src/lib/url.ts 一致：文章 URL = /<slug>/ */
 const SITE = {
   name: '佬刘AI',
   domain: 'laoliu.me',
@@ -50,18 +52,17 @@ function findChrome() {
   return candidates[0]?.[1] ?? null;
 }
 
-/** 直接解析 posts 目录 frontmatter（title/slug），不依赖 astro:content */
-function readPosts() {
-  const dir = join(root, 'src', 'content', 'posts');
-  return readdirSync(dir)
+/** 读取「已发布」文章（gray-matter 解析，支持单/双引号与多行 YAML） */
+function readPublishedPosts() {
+  return readdirSync(postsDir)
     .filter((f) => f.endsWith('.md'))
     .map((f) => {
-      const text = readFileSync(join(dir, f), 'utf-8');
-      const fm = text.split(/^---$/m)[1] ?? '';
-      const title = fm.match(/^title:\s*"(.*)"$/m)?.[1] ?? f.replace('.md', '');
-      const slug = fm.match(/^slug:\s*"(.*)"$/m)?.[1] ?? f.replace('.md', '');
-      return { slug, title: title.trim() };
-    });
+      const { data } = matter(readFileSync(join(postsDir, f), 'utf-8'));
+      const slug = data.slug || f.replace(/\.md$/, '');
+      const title = String(data.title ?? f.replace(/\.md$/, '')).trim();
+      return { file: f, slug, title, published: data.published !== false };
+    })
+    .filter((p) => p.published && p.title);
 }
 
 function cardHtml({ title, name, domain, accent }) {
@@ -110,7 +111,7 @@ const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, dev
 
 const targets = [
   { file: 'default.png', title: 'ChatGPT、Codex 使用教程与 AI 实操' },
-  ...readPosts().map((p) => ({ file: p.slug + '.png', title: p.title })),
+  ...readPublishedPosts().map((p) => ({ file: p.slug + '.png', title: p.title })),
 ];
 
 let made = 0;
