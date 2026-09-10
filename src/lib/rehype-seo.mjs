@@ -41,23 +41,27 @@ function imageSize(file) {
 }
 
 export function rehypeDemoteBodyHeadings() {
-  const LEVELS = ['h1', 'h2', 'h3', 'h4'];
+  // 安全映射：h1→h2 … h5→h6；h6 保持 h6（HTML 无 h7）。
+  // 只有被降级的层级才加 rh* 类，供 global.css 还原原视觉。
+  const DEMOTE = { h1: 'h2', h2: 'h3', h3: 'h4', h4: 'h5', h5: 'h6', h6: 'h6' };
+  const RH_CLASS = { h1: 'rh1', h2: 'rh2', h3: 'rh3', h4: 'rh4', h5: 'rh5' };
   return (tree) => {
     let hasH1 = false;
     walk(tree, (node) => {
       if (node.tagName === 'h1') hasH1 = true;
     });
     if (!hasH1) return; // 正文不含一级标题的文章保持原样
-    // 先降低级再降高级，避免连续处理同一个节点
-    for (let level = 3; level >= 0; level--) {
-      walk(tree, (node) => {
-        if (node.tagName === LEVELS[level]) {
-          node.tagName = LEVELS[level + 1];
-          const cls = node.properties.className ?? [];
-          node.properties.className = [...cls, `rh${level + 1}`];
-        }
-      });
-    }
+    // 单次遍历：每个节点只处理一次，不会连续降级同一节点
+    walk(tree, (node) => {
+      const from = node.tagName;
+      if (!DEMOTE[from]) return; // 非标题节点
+      node.tagName = DEMOTE[from];
+      if (RH_CLASS[from]) {
+        const cls = node.properties?.className ?? [];
+        node.properties = node.properties ?? {};
+        node.properties.className = [...cls, RH_CLASS[from]];
+      }
+    });
   };
 }
 
