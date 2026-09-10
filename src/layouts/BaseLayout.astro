@@ -1,5 +1,6 @@
 ---
 import { SITE_CONFIG } from '../site.config';
+import { absoluteUrl } from '../lib/url';
 import '../styles/global.css';
 
 interface Props {
@@ -23,7 +24,7 @@ const {
   jsonLd,
 } = Astro.props;
 
-const canonical = SITE_CONFIG.domain + (canonicalPath ?? Astro.url.pathname);
+const canonical = absoluteUrl(canonicalPath ?? Astro.url.pathname);
 ---
 
 <!doctype html>

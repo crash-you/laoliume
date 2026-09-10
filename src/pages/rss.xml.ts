@@ -2,6 +2,7 @@ import rss from '@astrojs/rss';
 import type { APIRoute } from 'astro';
 import { SITE_CONFIG } from '../site.config';
 import { getPublishedPosts, postSlug } from '../lib/posts';
+import { postPath } from '../lib/url';
 
 export const GET: APIRoute = async (context) => {
   const posts = await getPublishedPosts();
@@ -14,7 +15,7 @@ export const GET: APIRoute = async (context) => {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.date,
-      link: '/' + postSlug(post),
+      link: postPath(postSlug(post)),
     })),
     customData: `<language>zh-CN</language>`,
   });

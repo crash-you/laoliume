@@ -11,6 +11,7 @@ import {
   isSameDay,
   type Post,
 } from '../lib/posts';
+import { postPath, canonicalPostUrl } from '../lib/url';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -29,7 +30,7 @@ const { post, allPosts, prev, next } = Astro.props;
 const { Content } = await render(post);
 
 const slug = postSlug(post);
-const url = SITE_CONFIG.domain + '/' + slug + '/';
+const url = canonicalPostUrl(slug);
 const description = post.data.description || post.data.title;
 const hasUpdate = post.data.updated && !isSameDay(post.data.date, post.data.updated);
 const currentSlug = slug;
@@ -63,7 +64,7 @@ const year = new Date().getFullYear();
 <BaseLayout
   title={post.data.title + ' - ' + SITE_CONFIG.name}
   description={description}
-  canonicalPath={'/' + slug + '/'}
+  canonicalPath={postPath(slug)}
   ogType="article"
   jsonLd={jsonLd}
 >
@@ -78,7 +79,7 @@ const year = new Date().getFullYear();
           <ul>
             {allPosts.map((p) => (
               <li class={postSlug(p) === currentSlug ? 'active' : undefined}>
-                <a href={'/' + postSlug(p)}>{p.data.title}</a>
+                <a href={postPath(postSlug(p))}>{p.data.title}</a>
                 <span class="sidebar-meta">{formatDate(p.data.date)}</span>
               </li>
             ))}
@@ -158,12 +159,12 @@ const year = new Date().getFullYear();
 
           <nav class="post-nav" aria-label="上一篇 / 下一篇">
             {prev ? (
-              <a href={'/' + postSlug(prev)}>
+              <a href={postPath(postSlug(prev))}>
                 <span class="nav-label">← 上一篇</span>{prev.data.title}
               </a>
             ) : <span />}
             {next ? (
-              <a class="nav-next" href={'/' + postSlug(next)}>
+              <a class="nav-next" href={postPath(postSlug(next))}>
                 <span class="nav-label">下一篇 →</span>{next.data.title}
               </a>
             ) : <span />}
