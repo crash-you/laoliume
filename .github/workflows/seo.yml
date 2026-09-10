@@ -1,0 +1,44 @@
+name: SEO Check
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  build-and-seo-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # 按锁文件安装，禁止顺手升级依赖
+      - name: Install dependencies (lockfile)
+        run: npm ci
+
+      - name: Build & SEO check (artifacts)
+        run: npm run seo:check
+
+      # 线上 smoke test 仅对默认分支执行，且网络失败标记未验证而不静默通过
+      - name: Smoke test (production)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: node scripts/seo-smoke.mjs --base-url https://laoliu.me
+        continue-on-error: true
+
+      - name: Upload build artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+  # 视觉回归按实际基础设施接入；本仓库暂无远端截图基线，先在本地执行：
+  #   npx wrangler dev --port 8788 --local &
+  #   node scripts/seo-screenshot.mjs --base-url http://localhost:8788 --out-dir docs/screenshots/after
+  #   node scripts/seo-verify-ui.mjs --before docs/screenshots/before --after docs/screenshots/after
+  # 失败不允许被静默忽略（脚本非零退出码）。
