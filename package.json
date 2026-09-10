@@ -13,7 +13,11 @@
     "seo:smoke": "node scripts/seo-smoke.mjs",
     "seo:screenshot": "node scripts/seo-screenshot.mjs",
     "seo:verify-ui": "node scripts/seo-verify-ui.mjs --before docs/screenshots/before --after docs/screenshots/after --diff-dir docs/screenshots/diff",
-    "og:image": "node scripts/og-image.mjs"
+    "og:image": "node scripts/og-image.mjs",
+    "test": "node scripts/test-rehype-seo.mjs && node scripts/test-negative.mjs",
+    "test:rehype": "node scripts/test-rehype-seo.mjs",
+    "test:negative": "node scripts/test-negative.mjs",
+    "test:fixture": "node scripts/test-fixture-publish.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.0",
@@ -21,6 +25,8 @@
     "astro": "^5.13.0"
   },
   "devDependencies": {
+    "fast-xml-parser": "^5.11.1",
+    "gray-matter": "^4.0.3",
     "pixelmatch": "^7.2.0",
     "playwright-core": "^1.63.0",
     "pngjs": "^7.0.0",

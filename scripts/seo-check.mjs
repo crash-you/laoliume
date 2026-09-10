@@ -4,23 +4,16 @@
  * 用法: node scripts/seo-check.mjs [--dist dist]
  * 退出码: 有硬错误 -> 1；仅警告 -> 0
  *
- * 硬错误（阻断 CI）：
- *   - 发布集合 / slug 唯一性 / 保留路由冲突 / 日期异常
- *   - 规范页面缺 title、description、canonical
- *   - title / description 重复或为空
- *   - 每页主 H1 数量不等于 1（首页除外，其 H1 为站点名）
- *   - 正文未出现在原始 HTML
- *   - JSON-LD 无法 JSON.parse / 缺主要字段 / URL 与 canonical 冲突
- *   - 内部链接、图片路径、锚点、规范地址无效
- *   - sitemap 含草稿 / noindex，或与页面集合不一致
- *   - RSS / sitemap 非法 XML
- *   - 公共 HTML 含 localhost / 磁盘路径 / 开发域名
- *   - 代充链接、公众号原文链接丢失
- * 警告（不阻断）：描述长度、alt 过短等编辑判断
+ * noindex 策略（与发布策略一致）：
+ *   - published:false —— 无公开页面/列表/sitemap/RSS/分享卡（草稿，非隐私机制）
+ *   - published:true + noindex:true —— 页面生成且带 noindex，排除 sitemap/RSS
+ *   - 普通已发布文章 —— 应可索引，误带 noindex 才判失败
  */
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import matter from 'gray-matter';
+import { XMLValidator, XMLParser } from 'fast-xml-parser';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -44,43 +37,38 @@ if (!existsSync(DIST)) {
   process.exit(2);
 }
 
-/* ---------- 1. 发布集合（源） ---------- */
-function parseFrontmatter(text) {
-  const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!m) return {};
-  const fm = {};
-  for (const line of m[1].split(/\r?\n/)) {
-    const kv = line.match(/^([A-Za-z_][\w-]*):\s*(.*)$/);
-    if (!kv) continue;
-    let v = kv[2].trim();
-    if (/^".*"$/.test(v)) v = v.slice(1, -1);
-    fm[kv[1]] = v;
-  }
-  return fm;
+/* ---------- 1. 发布集合（gray-matter 解析 frontmatter） ---------- */
+/** 归一化 frontmatter 日期为 YYYY-MM-DD（js-yaml 会把 2026-09-03 解析成 Date） */
+function fmtDate(v) {
+  if (v instanceof Date) return v.toISOString().slice(0, 10);
+  if (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}/.test(v)) return v.slice(0, 10);
+  return v ? String(v) : '';
 }
-
 const posts = readdirSync(SRC_POSTS)
   .filter((f) => f.endsWith('.md'))
   .map((f) => {
-    const fm = parseFrontmatter(readFileSync(join(SRC_POSTS, f), 'utf-8'));
+    const { data } = matter(readFileSync(join(SRC_POSTS, f), 'utf-8'));
     return {
       file: f,
-      slug: fm.slug || f.replace(/\.md$/, ''),
-      title: fm.title || '',
-      description: fm.description || '',
-      seoTitle: fm.seoTitle || '',
-      seoDescription: fm.seoDescription || '',
-      date: fm.date || '',
-      updated: fm.updated || '',
-      published: fm.published !== 'false',
-      noindex: fm.noindex === 'true',
-      wechat: fm.wechat_url || '',
+      slug: data.slug || f.replace(/\.md$/, ''),
+      title: String(data.title ?? ''),
+      description: String(data.description ?? ''),
+      seoTitle: data.seoTitle ?? '',
+      seoDescription: data.seoDescription ?? '',
+      image: data.image ?? '',
+      date: fmtDate(data.date),
+      updated: fmtDate(data.updated),
+      published: data.published !== false,
+      noindex: data.noindex === true,
+      wechat: String(data.wechat_url ?? ''),
     };
   });
 
 const published = posts.filter((p) => p.published);
 const drafts = posts.filter((p) => !p.published);
 const indexable = published.filter((p) => !p.noindex);
+const noindexPosts = published.filter((p) => p.noindex);
+const noindexBySlug = new Set(noindexPosts.map((p) => p.slug));
 
 /* ---------- 2. slug 唯一性与合法性 ---------- */
 const seen = new Map();
@@ -92,7 +80,6 @@ for (const p of posts) {
   }
   if (RESERVED.has(p.slug)) fail(`slug 与保留路由冲突: "${p.slug}"（${p.file}）`);
 }
-if (errors.length === 0) pass(`slug 校验：${posts.length} 篇，唯一且无保留路由冲突`);
 
 /* ---------- 3. 日期异常 ---------- */
 for (const p of published) {
@@ -106,11 +93,8 @@ for (const p of published) {
 
 /* ---------- 4. 草稿不得有公开产物 ---------- */
 for (const d of drafts) {
-  const dir = join(DIST, d.slug);
-  if (existsSync(join(dir, 'index.html'))) fail(`草稿生成了公开路由: /${d.slug}/（${d.file}）`);
+  if (existsSync(join(DIST, d.slug, 'index.html'))) fail(`草稿生成了公开路由: /${d.slug}/（${d.file}）`);
 }
-if (drafts.length) pass(`草稿检查：${drafts.length} 篇草稿均无公开产物`);
-else pass('草稿检查：当前无草稿');
 
 /* ---------- 5. 逐页 HTML 校验 ---------- */
 const htmlPages = [];
@@ -129,15 +113,37 @@ function collectPages(dir, rel = '') {
 collectPages(DIST);
 
 const byUrl = new Map(htmlPages.map((p) => [p.url, p]));
-
-function getMeta(html, re) {
+const getMeta = (html, re) => {
   const m = html.match(re);
   return m ? m[1].trim() : null;
-}
+};
+const hasNoindex = (html) =>
+  /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html) ||
+  /<meta[^>]+content=["'][^"']*noindex[^"']*["'][^>]+name=["']robots["']/i.test(html);
 
 const titles = new Map();
 const descriptions = new Map();
 const canonicalSet = new Set();
+
+/** 读取 PNG / JPEG 固有尺寸（校验 og:image 声明真实） */
+function imageSize(file) {
+  const buf = readFileSync(file);
+  if (buf.length > 24 && buf[0] === 0x89 && buf[1] === 0x50) {
+    return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+  }
+  if (buf.length > 4 && buf[0] === 0xff && buf[1] === 0xd8) {
+    let off = 2;
+    while (off + 9 < buf.length) {
+      if (buf[off] !== 0xff) { off++; continue; }
+      const marker = buf[off + 1];
+      if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
+        return { height: buf.readUInt16BE(off + 5), width: buf.readUInt16BE(off + 7) };
+      }
+      off += 2 + buf.readUInt16BE(off + 2);
+    }
+  }
+  return null;
+}
 
 for (const page of htmlPages) {
   const html = readFileSync(page.file, 'utf-8');
@@ -148,7 +154,10 @@ for (const page of htmlPages) {
   const title = getMeta(html, /<title>([\s\S]*?)<\/title>/);
   const desc = getMeta(html, /<meta name="description" content="([^"]*)"/);
   const canonical = getMeta(html, /<link rel="canonical" href="([^"]*)"/);
-  const robots = getMeta(html, /<meta name="robots" content="([^"]*)"/);
+  const ogImage = getMeta(html, /property="og:image" content="([^"]*)"/);
+  const ogW = getMeta(html, /property="og:image:width" content="([^"]*)"/);
+  const ogH = getMeta(html, /property="og:image:height" content="([^"]*)"/);
+  const robotsNoindex = hasNoindex(html);
 
   if (!title) fail(`${page.url}: 缺少 <title>`);
   if (!desc) fail(`${page.url}: 缺少 meta description`);
@@ -172,83 +181,91 @@ for (const page of htmlPages) {
     canonicalSet.add(canonical);
   }
 
-  if (robots && /noindex/.test(robots)) {
-    if (!is404) fail(`${page.url}: 正式页面出现 noindex（生产站严禁误设）`);
+  // noindex 策略：只有「显式 noindex 文章」或 404 允许 noindex；普通文章误带即失败
+  if (robotsNoindex) {
+    const isNoindexPost = !isHome && !is404 && noindexBySlug.has(slug);
+    if (!isNoindexPost && !is404) {
+      fail(`${page.url}: 普通页面误带 noindex（显式 noindex 文章或 404 除外）`);
+    }
+  } else if (noindexBySlug.has(slug)) {
+    fail(`${page.url}: 声明 noindex 的文章页面缺少 noindex 元数据`);
   }
 
-  // H1：首页 H1 为站点名，404 也有 H1，均要求恰好 1 个
+  // H1 恰好 1 个
   const h1s = (html.match(/<h1[ >]/g) || []).length;
   if (h1s !== 1) fail(`${page.url}: H1 数量为 ${h1s}，应为 1`);
 
-  // 正文必须静态存在于原始 HTML（文章页）
-  if (!isHome && !is404 && slug && published.some((p) => p.slug === slug)) {
-    const rawText = html
-      .replace(/<script[\s\S]*?<\/script>/g, '')
-      .replace(/<style[\s\S]*?<\/style>/g, '')
-      .replace(/<[^>]+>/g, '')
-      .replace(/\s+/g, '');
-    if (rawText.length < 800) fail(`${page.url}: 原始 HTML 正文过短（${rawText.length} 字符），可能依赖 JS`);
+  // 文章页正文：.prose 存在且有实质内容（不用全页固定字符数冒充）
+  const isPost = published.some((p) => p.slug === slug);
+  if (isPost) {
+    const prose = (html.match(/<div class="prose">([\s\S]*?)<\/article>/) || [])[1] || '';
+    const proseText = prose.replace(/<[^>]+>/g, '').replace(/\s+/g, '');
+    if (!prose || proseText.length < 80) {
+      fail(`${page.url}: 正文 .prose 缺失或过短（${proseText.length} 字符），可能依赖 JS 或只剩模板`);
+    }
   }
 
-  // JSON-LD 可解析（404 页面不需要结构化数据）
+  // og:image 以页面最终引用为准，校验文件真实存在且尺寸声明真实
+  if (ogImage && ogImage.startsWith('/')) {
+    const rel = ogImage.replace(/^\//, '');
+    const fp = join(DIST, decodeURIComponent(rel));
+    if (!existsSync(fp)) fail(`${page.url}: og:image 文件不存在 -> ${ogImage}`);
+    else {
+      const size = imageSize(fp);
+      if (!size) fail(`${page.url}: og:image 不是可识别的 PNG/JPEG -> ${ogImage}`);
+      else if (ogW && ogH && (String(size.width) !== ogW || String(size.height) !== ogH)) {
+        fail(`${page.url}: og:image 尺寸声明不真实（声明 ${ogW}x${ogH}，实际 ${size.width}x${size.height}）`);
+      }
+    }
+  }
+
+  // JSON-LD 可解析（404 不需要）
   const lds = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   if (!lds.length && !is404) fail(`${page.url}: 缺少 JSON-LD`);
   for (const [, raw] of lds) {
-    let parsed;
     try {
-      parsed = JSON.parse(raw);
+      const objs = JSON.parse(raw);
+      for (const o of Array.isArray(objs) ? objs : [objs]) {
+        if (!o['@context']) fail(`${page.url}: JSON-LD 缺 @context`);
+        if (!o['@type']) fail(`${page.url}: JSON-LD 缺 @type`);
+        if (o.url && canonical && o.url !== canonical && !isHome) {
+          fail(`${page.url}: JSON-LD url(${o.url}) 与 canonical(${canonical}) 不一致`);
+        }
+      }
     } catch (e) {
       fail(`${page.url}: JSON-LD 无法解析 -> ${e.message.slice(0, 60)}`);
-      continue;
-    }
-    const objs = Array.isArray(parsed) ? parsed : [parsed];
-    for (const o of objs) {
-      if (!o['@context']) fail(`${page.url}: JSON-LD 缺 @context`);
-      if (!o['@type']) fail(`${page.url}: JSON-LD 缺 @type`);
-      if (o.url && canonical && o.url !== canonical && !isHome) {
-        fail(`${page.url}: JSON-LD url(${o.url}) 与 canonical(${canonical}) 不一致`);
-      }
     }
   }
 
   // 站内链接 / 图片 / 锚点
   for (const m of html.matchAll(/(?:href|src)="(\/[^"#?]*)"/g)) {
     const href = m[1];
-    // 资源路径可能包含中文等百分号编码字符，需解码后再查文件系统
     let decoded = href;
-    try {
-      decoded = decodeURIComponent(href);
-    } catch {
-      /* 保留原值 */
-    }
+    try { decoded = decodeURIComponent(href); } catch { /* keep */ }
     if (/\.(png|jpe?g|gif|svg|webp|ico|xml|txt|exe|mp4|webm|avif)$/i.test(decoded)) {
       if (!existsSync(join(DIST, decoded))) fail(`${page.url}: 资源不存在 -> ${href}`);
       continue;
     }
     if (href.startsWith('/api/')) continue;
     const rel = decoded.replace(/^\//, '');
-    const cand = existsSync(join(DIST, rel, 'index.html')) || existsSync(join(DIST, rel));
-    if (!cand) fail(`${page.url}: 站内链接指向不存在的路径 -> ${href}`);
+    if (!existsSync(join(DIST, rel, 'index.html')) && !existsSync(join(DIST, rel))) {
+      fail(`${page.url}: 站内链接指向不存在的路径 -> ${href}`);
+    }
   }
 
-  // 锚点有效性（仅校验本页内锚点）
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
   for (const m of html.matchAll(/href="#([^"]+)"/g)) {
     if (!ids.has(m[1])) fail(`${page.url}: 锚点 #${m[1]} 在本页不存在`);
   }
 
-  // 业务与来源链接必须存在
-  if (isHome || (!isHome && !is404)) {
-    const isPost = published.some((p) => p.slug === slug);
-    if (isHome || isPost) {
-      if (!html.includes(MEMBERSHIP_URL)) fail(`${page.url}: 缺少 AI会员代充入口链接`);
-    }
+  if (isHome || isPost) {
+    if (!html.includes(MEMBERSHIP_URL)) fail(`${page.url}: 缺少 AI会员代充入口链接`);
   }
   const post = published.find((p) => p.slug === slug);
   if (post?.wechat && !html.includes(post.wechat)) fail(`${page.url}: 缺少公众号原文链接`);
-  if (post?.wechat && canonical && canonical === post.wechat) fail(`${page.url}: 微信原文地址被当成了 canonical`);
+  if (post?.wechat && canonical === post.wechat) fail(`${page.url}: 微信原文地址被当成了 canonical`);
 
-  // 开发痕迹：只在「正文之外」检查，避免教程正文里合法的 C:\Users 示例路径误报
+  // 开发痕迹（正文之外）
   const nonProse = html
     .replace(/<div class="prose">[\s\S]*?<\/article>/, '')
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
@@ -269,56 +286,52 @@ for (const page of htmlPages) {
     warn(`${page.url}: description 长度 ${d.length}（建议 40-170）：编辑建议，不阻断构建`);
   }
 }
-pass(`title / description 唯一性检查完成（${titles.size} 个唯一 title）`);
 
-/* ---------- 7. sitemap ---------- */
+/* ---------- 7. sitemap（真实 XML 解析） ---------- */
 const sitemapPath = join(DIST, 'sitemap.xml');
 if (!existsSync(sitemapPath)) fail('缺少 sitemap.xml');
 else {
   const xml = readFileSync(sitemapPath, 'utf-8');
-  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  if (!locs.length) fail('sitemap 无 <loc>');
-  for (const loc of locs) {
-    if (!loc.startsWith(DOMAIN + '/')) fail(`sitemap loc 非生产绝对地址: ${loc}`);
-    if (!canonicalSet.has(loc)) fail(`sitemap loc 与任何 canonical 不一致: ${loc}`);
-    if (/&(?!(amp|lt|gt|quot|apos);)/.test(loc)) fail(`sitemap loc XML 转义不完整: ${loc}`);
-  }
-  for (const d of drafts) if (locs.some((l) => l.endsWith(`/${d.slug}/`))) fail(`sitemap 含草稿: ${d.slug}`);
-  for (const n of published.filter((p) => p.noindex)) {
-    if (locs.some((l) => l.endsWith(`/${n.slug}/`))) fail(`sitemap 含 noindex 文章: ${n.slug}`);
-  }
-  for (const p of indexable) {
-    if (!locs.includes(`${DOMAIN}/${p.slug}/`)) fail(`sitemap 缺少正式文章: /${p.slug}/`);
-  }
-  // 页面集合 vs sitemap 一致性
-  for (const loc of locs) {
-    const u = loc.replace(DOMAIN, '');
-    if (!byUrl.has(u === '/' ? '/' : u.replace(/\/$/, '')) && !byUrl.has(u)) {
-      fail(`sitemap 有 URL 但无对应页面: ${loc}`);
+  const valid = XMLValidator.validate(xml);
+  if (valid !== true) fail(`sitemap.xml 非法 XML: ${String(valid.err?.msg ?? valid)}`);
+  else {
+    const parsed = new XMLParser().parse(xml);
+    const urls = Array.isArray(parsed.urlset?.url) ? parsed.urlset.url : [parsed.urlset?.url];
+    const locs = urls.map((u) => u?.loc).filter(Boolean);
+    if (!locs.length) fail('sitemap 无 <loc>');
+    for (const loc of locs) {
+      if (!loc.startsWith(DOMAIN + '/')) fail(`sitemap loc 非生产绝对地址: ${loc}`);
+      if (!canonicalSet.has(loc)) fail(`sitemap loc 与任何 canonical 不一致: ${loc}`);
     }
+    for (const d of drafts) if (locs.some((l) => l.endsWith(`/${d.slug}/`))) fail(`sitemap 含草稿: ${d.slug}`);
+    for (const n of noindexPosts) if (locs.some((l) => l.endsWith(`/${n.slug}/`))) fail(`sitemap 含 noindex 文章: ${n.slug}`);
+    for (const p of indexable) {
+      if (!locs.includes(`${DOMAIN}/${p.slug}/`)) fail(`sitemap 缺少正式文章: /${p.slug}/`);
+    }
+    for (const loc of locs) {
+      const u = loc.replace(DOMAIN, '');
+      if (!byUrl.has(u.replace(/\/$/, '')) && !byUrl.has(u)) fail(`sitemap 有 URL 但无对应页面: ${loc}`);
+    }
+    pass(`sitemap：${locs.length} 个 loc，XML 合法且与页面集合一致`);
   }
-  if (!/<\?xml/.test(xml)) fail('sitemap 缺少 XML 声明');
-  pass(`sitemap：${locs.length} 个 loc，符号表与页面集合一致`);
 }
 
-/* ---------- 8. RSS ---------- */
+/* ---------- 8. RSS（真实 XML 解析） ---------- */
 const rssPath = join(DIST, 'rss.xml');
 if (!existsSync(rssPath)) fail('缺少 rss.xml');
 else {
   const xml = readFileSync(rssPath, 'utf-8');
-  if (!/<\?xml/.test(xml)) fail('RSS 缺少 XML 声明');
-  const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)];
-  if (!items.length) fail('RSS 无 item');
-  const links = [...xml.matchAll(/<link>([^<]+)<\/link>/g)].map((m) => m[1]);
-  for (const l of links) {
-    if (!l.startsWith(DOMAIN)) fail(`RSS link 非生产绝对地址: ${l}`);
+  const valid = XMLValidator.validate(xml);
+  if (valid !== true) fail(`rss.xml 非法 XML: ${String(valid.err?.msg ?? valid)}`);
+  else {
+    const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)];
+    if (!items.length) fail('RSS 无 item');
+    const links = [...xml.matchAll(/<link>([^<]+)<\/link>/g)].map((m) => m[1]);
+    for (const l of links) if (!l.startsWith(DOMAIN)) fail(`RSS link 非生产绝对地址: ${l}`);
+    for (const d of drafts) if (links.some((l) => l.includes(`/${d.slug}/`))) fail(`RSS 含草稿: ${d.slug}`);
+    for (const n of noindexPosts) if (links.some((l) => l.includes(`/${n.slug}/`))) fail(`RSS 含 noindex 文章: ${n.slug}`);
+    pass(`RSS：${items.length} 个 item，XML 合法且链接均为规范地址`);
   }
-  for (const d of drafts) if (links.some((l) => l.includes(`/${d.slug}/`))) fail(`RSS 含草稿: ${d.slug}`);
-  for (const n of published.filter((p) => p.noindex)) {
-    if (links.some((l) => l.includes(`/${n.slug}/`))) fail(`RSS 含 noindex 文章: ${n.slug}`);
-  }
-  if (!xml.includes('佬刘AI')) warn('RSS 未包含站点名');
-  pass(`RSS：${items.length} 个 item，链接均为规范地址`);
 }
 
 /* ---------- 9. robots.txt ---------- */
@@ -331,42 +344,28 @@ else {
   pass('robots.txt：允许抓取且 sitemap 地址正确');
 }
 
-/* ---------- 10. _redirects 覆盖完整性 ---------- */
+/* ---------- 10. _redirects 覆盖（自动生成） ---------- */
 const rdPath = join(DIST, '_redirects');
 const expectRedirects = published.map((p) => `/${p.slug} /${p.slug}/`);
-if (!existsSync(rdPath)) fail('缺少 _redirects（非规范文章入口无 308 永久重定向）');
+if (!existsSync(rdPath)) fail('缺少 dist/_redirects（构建期自动生成未生效）');
 else {
   const rd = readFileSync(rdPath, 'utf-8');
   for (const line of expectRedirects) {
-    if (!rd.includes(line)) fail(`_redirects 缺少规则: ${line} 308`);
+    if (!rd.includes(line + ' 308')) fail(`_redirects 缺少规则: ${line} 308`);
   }
   if (/\bwww\./.test(rd)) fail('_redirects 出现未确认的 www 规则');
   pass(`_redirects：${expectRedirects.length} 条 308 规则覆盖全部正式文章`);
 }
 
-/* ---------- 11. OG 分享图存在 ---------- */
-const ogDir = join(DIST, 'og');
-if (!existsSync(ogDir)) fail('缺少 og/ 分享图目录');
-else {
-  if (!existsSync(join(ogDir, 'default.png'))) fail('缺少默认分享图 og/default.png');
-  for (const p of published) {
-    const png = join(ogDir, `${p.slug}.png`);
-    if (!existsSync(png)) fail(`缺少分享图 og/${p.slug}.png`);
-  }
-  pass(`OG 分享图：${published.length} 篇 + 默认图齐全`);
-}
+/* ---------- 11. 默认分享图 ---------- */
+const ogDefault = join(DIST, 'og', 'default.png');
+if (!existsSync(ogDefault)) fail('缺少默认分享图 og/default.png');
 
 /* ---------- 输出 ---------- */
 console.log('\n=== SEO 构建产物校验 ===\n');
-console.log(`检查页面数: ${htmlPages.length}，源文章: ${posts.length}（正式 ${published.length}，草稿 ${drafts.length}）\n`);
-if (ok.length) {
-  console.log('通过:');
-  ok.forEach((m) => console.log('  [通过] ' + m));
-}
-if (warnings.length) {
-  console.log('\n警告（不阻断构建）:');
-  warnings.forEach((m) => console.log('  [警告] ' + m));
-}
+console.log(`页面数: ${htmlPages.length}，文章: ${posts.length}（正式 ${published.length}，草稿 ${drafts.length}，noindex ${noindexPosts.length}）\n`);
+if (ok.length) { console.log('通过:'); ok.forEach((m) => console.log('  [通过] ' + m)); }
+if (warnings.length) { console.log('\n警告（不阻断）:'); warnings.forEach((m) => console.log('  [警告] ' + m)); }
 if (errors.length) {
   console.log('\n错误:');
   errors.forEach((m) => console.log('  [失败] ' + m));
