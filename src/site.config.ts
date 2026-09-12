@@ -27,6 +27,8 @@ export const SITE_CONFIG = {
   xHandle: '@laoliuai',
   /** 微信公众号名称 */
   wechatName: '佬刘AI',
+  /** Google Analytics 4 度量 ID（gtag.js）；留空则不加载统计脚本 */
+  gaMeasurementId: 'G-4FRL9L21XL',
   /** AI 会员代充入口（首页左栏 / 文章末尾作者区，纯文字链接） */
   membership: {
     title: 'AI会员代充',

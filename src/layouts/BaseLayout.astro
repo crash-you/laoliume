@@ -82,6 +82,19 @@ const jsonLdHtml = jsonLd
     {SITE_CONFIG.xHandle && <meta name="twitter:site" content={SITE_CONFIG.xHandle} />}
 
     {jsonLdHtml && <script type="application/ld+json" set:html={jsonLdHtml} />}
+
+    <!-- Google Analytics 4 (gtag.js)，度量 ID 集中在 SITE_CONFIG.gaMeasurementId -->
+    {SITE_CONFIG.gaMeasurementId && (
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE_CONFIG.gaMeasurementId}`} />
+    )}
+    {SITE_CONFIG.gaMeasurementId && (
+      <script is:inline set:html={`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${SITE_CONFIG.gaMeasurementId}');
+`} />
+    )}
   </head>
   <body>
     <slot />
