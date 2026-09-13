@@ -14,8 +14,9 @@
 | 设计基线（main） | `6f0edda5459c668b72ba129839484d0a9eac3275` |
 | 起始时 seo-round1 vs main | ahead 16 / behind 0 |
 | 起始前新增提交 | 无（工作区仅未跟踪的任务书文档，已保留未动） |
-| 结束 SHA | `b756de24de2aeaa16f6208b609342c5f84352b8e`（第 6 号提交；本轮 6 个提交见 §9） |
-| 远端同步 | 与 `origin/seo-round1`：ahead 6、behind 0；未强推、未合并 main、未部署 |
+| **代码变更末端 SHA** | `27673fb25da073d44444e9679e85c022c239fec2`（第 5 号提交；**审代码差异请以此为终点**） |
+| 分支末端 | `seo-round1` 末端在其后还有 docs-only 提交（本报告及 §9 补充），不影响代码差异 |
+| 远端同步 | 与 `origin/seo-round1`：ahead 7、behind 0；未强推、未合并 main、未部署 |
 
 **已存在并被验证后跳过的项**：h1–h6 降级越界（第二轮已修）、`_redirects` 自动生成（第二轮已修）、
 `published:false/noindex` 策略（第二轮已修）、smoke 退出码 0/1/2（第二轮已修）。
@@ -308,8 +309,9 @@
 | 5 | `27673fb` | `fix(ci): 构建提交标记与实际 HEAD 交叉核验…` | `astro.config.mjs`、`.github/workflows/seo-deploy-verify.yml` | 只改构建标记与工作流；**需重点审阅**（构建期硬失败逻辑） |
 | 6 | `b756de2` | `docs(seo): 第三轮报告、线上实测原文…` | `docs/**`、`docs/screenshots/round2-*` | 纯文档与证据截图 |
 
-**结束 SHA**：第 6 号提交 `b756de24de2aeaa16f6208b609342c5f84352b8e`（本报告所在提交；
-其后追加的 §9 补充提交为同一 docs 主题的收尾）。分支 `seo-round1` 相对 `origin/seo-round1`：ahead 6、behind 0。
+**代码变更末端**：第 5 号提交 `27673fb25da073d44444e9679e85c022c239fec2`——**审代码差异请以此为终点**。
+在其之后只有 docs-only 提交（第 6 号 `b756de2` 与本报告 §9 的补充修订），
+不改变任何代码或产物行为。分支 `seo-round1` 相对 `origin/seo-round1`：ahead 7、behind 0。
 
 ### 是否建议合并
 
