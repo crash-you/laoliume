@@ -14,8 +14,8 @@
 | 设计基线（main） | `6f0edda5459c668b72ba129839484d0a9eac3275` |
 | 起始时 seo-round1 vs main | ahead 16 / behind 0 |
 | 起始前新增提交 | 无（工作区仅未跟踪的任务书文档，已保留未动） |
-| 结束 SHA | 见 §9（本轮改动已分组提交） |
-| 远端同步 | 与 `origin/seo-round1` 同步；未强推、未合并 main、未部署 |
+| 结束 SHA | `b756de24de2aeaa16f6208b609342c5f84352b8e`（第 6 号提交；本轮 6 个提交见 §9） |
+| 远端同步 | 与 `origin/seo-round1`：ahead 6、behind 0；未强推、未合并 main、未部署 |
 
 **已存在并被验证后跳过的项**：h1–h6 降级越界（第二轮已修）、`_redirects` 自动生成（第二轮已修）、
 `published:false/noindex` 策略（第二轮已修）、smoke 退出码 0/1/2（第二轮已修）。
@@ -297,7 +297,41 @@
 
 ## 9. 提交与合并建议
 
-<!-- COMMIT_AND_MERGE -->
+本轮改动按「一个可独立审阅的主题一组」拆成 6 个提交（均为本地提交，**未合并 main、未部署生产、未强推**）：
+
+| # | SHA | 提交 | 内容 | 独立可审阅点 |
+|---|---|---|---|---|
+| 1 | `3435053` | `fix(seo): 图片路径按 URL pathname 解析…` | `src/lib/rehype-seo.mjs`、`scripts/test-rehype-seo.mjs` | 只改图片元数据解析；渲染尺寸不变的证据见 §6 |
+| 2 | `452f30c` | `fix(seo): 构建检查改读真实 .prose 子树…` | 新增 `scripts/html-prose.mjs`、`scripts/seo-check.mjs` | 只改**构建期校验器**，不改页面产物 |
+| 3 | `bbf20fd` | `fix(seo): 重写部署后 smoke 与反例测试对照…` | `scripts/seo-smoke.mjs`、`scripts/test-negative.mjs` | 只改**验收脚本与反例** |
+| 4 | `1314c9d` | `fix(seo): 夹具样本补足正常篇幅…` | `scripts/test-fixture-publish.mjs` | 只改**测试夹具**，未放宽阈值 |
+| 5 | `27673fb` | `fix(ci): 构建提交标记与实际 HEAD 交叉核验…` | `astro.config.mjs`、`.github/workflows/seo-deploy-verify.yml` | 只改构建标记与工作流；**需重点审阅**（构建期硬失败逻辑） |
+| 6 | `b756de2` | `docs(seo): 第三轮报告、线上实测原文…` | `docs/**`、`docs/screenshots/round2-*` | 纯文档与证据截图 |
+
+**结束 SHA**：第 6 号提交 `b756de24de2aeaa16f6208b609342c5f84352b8e`（本报告所在提交；
+其后追加的 §9 补充提交为同一 docs 主题的收尾）。分支 `seo-round1` 相对 `origin/seo-round1`：ahead 6、behind 0。
+
+### 是否建议合并
+
+**建议：可以合并，但需站长先处理第 0 条域名阻塞。**
+
+- **代码侧**：四项验收命令 + 本地 Wrangler 运行时烟测全部通过（§3.1），UI 11/12 像素零差异
+  且唯一差异是既有的店铺 URL 文本变更（§6）。所有改动都在**非渲染路径**：
+  `src/pages/**`、`src/layouts/**`、样式、`src/site.config.ts`、`src/content/posts/**`、
+  `public/robots.txt` **零改动**，品牌要素与商业入口位置未动，未新增任何 UI 模块。
+- **合并前必须先解决**：`laoliu.me` 仍 301 到 `www.laoliu.me`，而代码 canonical 全部指向 apex
+  （`docs/SEO_OWNER_ACTIONS.md` 第 0 条）。**不处理就上线，规范地址会自相矛盾**，
+  这比本轮修掉的所有校验漏洞都更影响收录一致性。该事项需要 Cloudflare 后台权限，
+  Agent 无凭据、未操作。
+- **合并后**：用 `SEO Deploy Verify` 工作流输入实际部署 SHA 重跑 smoke；
+  `/og/*`、308、`build-commit` 标记需要部署后才生效，**不应要求它们在生产先返回 200 才准许合并**。
+- **不建议**为了「让检查更好看」而回退本轮任何校验；本轮所有收紧都配了反例证明。
+
+### 本轮的定位
+
+本轮是**收尾修复 + 补齐会漏检的验收逻辑**：把「看起来通过」变成「真的能判错」。
+它不提升排名、不保证收录，也不改变页面外观。价值集中在
+「以后改坏了能被 CI 拦住」，而不是「这一版 SEO 分数更高」。
 
 ---
 
