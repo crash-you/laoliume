@@ -1,6 +1,10 @@
 ---
 title: "Codex接入DeepSeek完整教程：接入第三方模型，配置V4 Flash、Pro与Vision"
 description: "给 Codex 接入第三方模型：DeepSeek V4 Flash、V4 Pro 与 Vision 的完整配置教程。"
+seoTitle: "Codex 接入 DeepSeek 完整教程：V4 Flash、Pro 与 Vision 配置"
+seoDescription: "Codex 接入第三方模型 DeepSeek：Windows/macOS 配置、V4 Flash / V4 Pro / Vision 区别、费用估算、验证接入成功与恢复原配置。"
+image: "/og/codex-deepseek.png"
+imageAlt: "佬刘AI 文章分享图：Codex 接入 DeepSeek 完整教程：V4 Flash、Pro 与 Vision 配置"
 date: 2026-09-02
 slug: "codex-deepseek"
 published: true
@@ -39,9 +43,9 @@ deepseek\-v4\-flash\-vision\-exp
 
 旧教程里常见的`deepseek-chat`和`deepseek-reasoner`已经停止使用，当前接入时不要再填写这两个旧模型名。
 
-![image\.png](/images/codex-deepseek/image-11.png)
+![DeepSeek 模型列表文档截图，旧模型名已停用](/images/codex-deepseek/image-11.png)
 
-![image\.png](/images/codex-deepseek/image-28.png)
+![DeepSeek V4-Flash-Vision-Exp 上线公告及定价截图](/images/codex-deepseek/image-28.png)
 
 下面从API Key创建、模型选择、一键配置、接入验证、视觉模型、价格、常见报错到恢复原配置，完整走一遍。
 
@@ -89,19 +93,19 @@ Codex CLI、ChatGPT桌面版或者VS Code Codex扩展都可以。
 
 打开PowerShell，如果不知道怎么找，可以直接在底部搜索框输入 powershell：
 
-![image\.png](/images/codex-deepseek/image-21.png)
+![开始菜单搜索并打开 PowerShell 的截图](/images/codex-deepseek/image-21.png)
 
 输入：
 
 codex \-\-version
 
-![image\.png](/images/codex-deepseek/image-4.png)
+![终端执行 codex --version 的截图](/images/codex-deepseek/image-4.png)
 
 当前DeepSeek官方模型目录要求Codex客户端版本不低于： 0\.144\.0
 
 如果你的版本低于`0.144.0`，打开chatGPT软件，左下角这里会有一个蓝色的更新按钮，更新一下，，再继续操作。
 
-![image\.png](/images/codex-deepseek/image-27.png)
+![ChatGPT 软件左下角蓝色更新按钮截图](/images/codex-deepseek/image-27.png)
 
 ### 3、DeepSeek API Key
 
@@ -113,23 +117,23 @@ API Key不是DeepSeek网页版的账号密码。
 
 打开deepseek官网：https://www\.deepseek\.com/
 
-![image\.png](/images/codex-deepseek/image-15.png)
+![DeepSeek 官网首页截图](/images/codex-deepseek/image-15.png)
 
 点击API开放平台，按照流程注册实名好之后，会看到一个这样的页面
 
-![image\.png](/images/codex-deepseek/image.png)
+![DeepSeek 开放平台控制台首页截图](/images/codex-deepseek/image.png)
 
 点击API Keys，点击创建 API Key
 
-![image\.png](/images/codex-deepseek/image-23.png)
+![DeepSeek 开放平台创建 API Key 页面截图](/images/codex-deepseek/image-23.png)
 
 输入一个可以正常识别的名称（方便你后续知道这个Key的工作内容是什么），比如 **接入Codex**
 
-![image\.png](/images/codex-deepseek/image-16.png)
+![创建 API Key 时输入名称的弹窗截图](/images/codex-deepseek/image-16.png)
 
 点击创建，成功后，会返回给你一个sk开头的key，注意注意！这个key只会出现一次！！也不要让任何人拿到你的key！任何拿到Key的人，都有可能消耗你的DeepSeek余额！
 
-![image\.png](/images/codex-deepseek/image-10.png)
+![API Key 创建成功弹窗截图，显示 sk 开头的 key](/images/codex-deepseek/image-10.png)
 
 复制下来，这样Deepseek API Key就已经准备好了。
 
@@ -143,7 +147,7 @@ API Key不是DeepSeek网页版的账号密码。
 
 DeepSeek账户的可用余额由充值余额和未过期赠送余额组成。
 
-![image\.png](/images/codex-deepseek/image-26.png)
+![DeepSeek 账户余额与充值页面截图](/images/codex-deepseek/image-26.png)
 
 ## 四、Windows一键配置Codex接入DeepSeek
 
@@ -163,7 +167,7 @@ Windows用户打开PowerShell。
 
 irm https://cdn\.deepseek\.com/api\-docs/codex\-deepseek\-setup\-en\.ps1 \| iex
 
-![image\.png](/images/codex-deepseek/image-2.png)
+![PowerShell 执行一键配置脚本的截图](/images/codex-deepseek/image-2.png)
 
 这条命令会从DeepSeek官方CDN下载并运行Codex配置脚本。
 
@@ -171,11 +175,11 @@ irm https://cdn\.deepseek\.com/api\-docs/codex\-deepseek\-setup\-en\.ps1 \| iex
 
 当前菜单对应关系如下：
 
-![image\.png](/images/codex-deepseek/image-18.png)
+![PowerShell 配置脚本输出模型菜单的截图](/images/codex-deepseek/image-18.png)
 
 第一次接入，建议输入 1：
 
-![image\.png](/images/codex-deepseek/image-9.png)
+![PowerShell 配置脚本菜单截图，首次接入输入 1](/images/codex-deepseek/image-9.png)
 
 选择：deepseek\-v4\-flash
 
@@ -187,17 +191,17 @@ Flash速度更快，价格更低，适合先确认整个过程能不能正常运
 
 切换也很简单！codex中直接选择就行！
 
-![image\.png](/images/codex-deepseek/image-13.png)
+![Codex 对话界面模型选择器截图](/images/codex-deepseek/image-13.png)
 
 输入模型编号以后，脚本会要求填写DeepSeek API Key。
 
 把刚刚创建的、以`sk-`开头的API Key粘贴进去。
 
-![image\.png](/images/codex-deepseek/image-1.png)
+![PowerShell 粘贴 sk 开头 API Key 的截图](/images/codex-deepseek/image-1.png)
 
 enter！
 
-![image\.png](/images/codex-deepseek/image-6.png)
+![终端脚本运行输出配置信息的截图](/images/codex-deepseek/image-6.png)
 
 这样说明格式配置验证成功。
 
@@ -241,7 +245,7 @@ bash <(curl -fsSL https://cdn.deepseek.com/api-docs/codex-deepseek-setup-en.sh)
 > 
 > 
 
-![image\.png](/images/codex-deepseek/image-3.png)
+![PowerShell 进入项目目录的截图](/images/codex-deepseek/image-3.png)
 
 然后运行： 
 
@@ -251,7 +255,7 @@ codex
 
 如果让你勾选是否信任此项目，选择信任即可
 
-![image\.png](/images/codex-deepseek/image-20.png)
+![Codex 启动时提示信任项目的界面截图](/images/codex-deepseek/image-20.png)
 
 只要启动横幅中的模型名称已经变成DeepSeek，配置就已经生效。
 
@@ -263,11 +267,11 @@ codex
 
 查看当前会话正在使用的模型、目录和权限设置。
 
-![image\.png](/images/codex-deepseek/image-17.png)
+![Codex 启动界面显示当前模型、目录和权限设置的截图](/images/codex-deepseek/image-17.png)
 
 可以尝试问一下，你是什么模型？
 
-![image\.png](/images/codex-deepseek/image-5.png)
+![Codex 对话中询问模型身份的截图](/images/codex-deepseek/image-5.png)
 
 ### 方法二：查看ChatGPT桌面版
 
@@ -275,7 +279,7 @@ codex
 
 你就会惊奇的发现，codex下方模型选择处，已经变为deepsek模型了！
 
-![image\.png](/images/codex-deepseek/image-30.png)
+![Codex 界面底部模型选择变为 deepseek 模型的截图](/images/codex-deepseek/image-30.png)
 
 也有部分可能会显示 Custom ，不代表接入失败，当前实际调用的，仍然是配置文件中选择的DeepSeek模型。
 
@@ -287,7 +291,7 @@ codex
 
 只要余额发生变化，或者后台出现对应调用记录，就能确认这次任务确实通过DeepSeek API完成。
 
-![image\.png](/images/codex-deepseek/image-24.png)
+![DeepSeek 控制台余额与调用记录页面截图](/images/codex-deepseek/image-24.png)
 
 ## 七、不要只问你是什么模型，直接拿真实项目测试
 
@@ -329,13 +333,13 @@ codex
 
 然后codex，就会苦哈哈的执行任务了
 
-![image\.png](/images/codex-deepseek/image-14.png)
+![Codex 执行项目任务的对话界面截图](/images/codex-deepseek/image-14.png)
 
 经过一段时间思考执行，最终输出
 
-![image\.png](/images/codex-deepseek/image-19.png)
+![Codex 执行任务后的过程与输出截图](/images/codex-deepseek/image-19.png)
 
-![image\.png](/images/codex-deepseek/image-12.png)
+![Codex 任务执行完成的输出结果截图](/images/codex-deepseek/image-12.png)
 
 确认读取项目没有问题以后，再让它完成一个最小改动：
 
@@ -369,7 +373,7 @@ codex
 
 可以选择新建一个文件
 
-![image\.png](/images/codex-deepseek/image-25.png)
+![Codex 界面中选择新建文件的截图](/images/codex-deepseek/image-25.png)
 
 ## 八、DeepSeek V4 Flash、V4 Pro和Vision怎么选？
 
@@ -403,7 +407,7 @@ DeepSeek官方在2026年8月21日上线了这个实验性多模态模型。它�
 
 也可以直接在codex里选择  deepseek\-v4\-flash\-vision\-exp 选项。
 
-![image\.png](/images/codex-deepseek/image-29.png)
+![Codex 模型选择中选择 deepseek-v4-flash-vision-exp 的截图](/images/codex-deepseek/image-29.png)
 
 ## 十、Codex接入DeepSeek需要多少钱？
 
@@ -435,7 +439,7 @@ irm https://cdn.deepseek.com/api-docs/codex-deepseek-setup-en.ps1 | iex
 
 然后重新选择：
 
-![image\.png](/images/codex-deepseek/image-22.png)
+![PowerShell 重新选择模型菜单的截图](/images/codex-deepseek/image-22.png)
 
 脚本会更新默认模型。
 
@@ -451,7 +455,7 @@ irm https://cdn.deepseek.com/api-docs/codex-deepseek-setup-en.ps1 | iex
 
 选择 9 
 
-![image\.png](/images/codex-deepseek/image-7.png)
+![终端配置脚本菜单中选择 9 的截图](/images/codex-deepseek/image-7.png)
 
 输入y，代表yes。
 
@@ -509,7 +513,7 @@ DeepSeek目前支持Responses API的核心能力，但并不是所有参数和�
 
 因此，接入成功不等于所有高级功能都能和OpenAI官方模型保持完全一致。
 
-![image\.png](/images/codex-deepseek/image-8.png)
+![OpenAI 官方功能文档截图，接入成功不等于功能完全一致](/images/codex-deepseek/image-8.png)
 
 ### 缺点三：视觉模型仍处于实验阶段
 

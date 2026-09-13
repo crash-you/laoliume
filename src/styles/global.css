@@ -805,3 +805,57 @@ a {
     padding: 120px 24px;
   }
 }
+
+/* ============================================================
+   SEO 语义修复兼容（作用域受限，不改变任何 computed style）
+   构建期 rehype 插件把正文 h1->h2、h2->h3、…、h5->h6 并加 rh* 类；
+   以下规则只作用于带 rh* 类的降级标题，恢复原来的字号与外边距。
+   h4->h5、h5->h6 会脱离 .prose h1-h4 的共享规则（font-weight/line-height/
+   color），因此这两条需要一并补全，保证视觉不变。
+   ============================================================ */
+.prose h2.rh1 {
+  font-size: 28px;
+  margin: 2em 0 0.8em;
+}
+
+.prose h3.rh2 {
+  font-size: 25px;
+  margin: 2.4em 0 0.9em;
+}
+
+.prose h4.rh3 {
+  font-size: 20px;
+  margin: 2em 0 0.8em;
+}
+
+.prose h5.rh4 {
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--text);
+  font-size: 17px;
+  margin: 1.8em 0 0.7em;
+}
+
+.prose h6.rh5 {
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--text);
+  font-size: 17px;
+  margin: 1.8em 0 0.7em;
+}
+
+/* 移动端断点：原样式针对 .prose h1/h2/h3，降级后标签名变了，
+   这里按相同数值镜像，保证移动端标题字号与修改前一致。 */
+@media (max-width: 767px) {
+  .prose h2.rh1 {
+    font-size: 24px;
+  }
+
+  .prose h3.rh2 {
+    font-size: 21px;
+  }
+
+  .prose h4.rh3 {
+    font-size: 18px;
+  }
+}

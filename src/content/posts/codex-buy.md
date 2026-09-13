@@ -1,6 +1,10 @@
 ---
 title: "Codex怎么购买 | 2026年9月版，一篇文章带你看懂"
 description: "2026 年 9 月版：ChatGPT Plus / Pro 订阅怎么开、Codex 需要什么套餐，一篇文章讲清楚。"
+seoTitle: "Codex 怎么购买？2026年9月版：套餐、付款方式与 Plus/Pro 选择"
+seoDescription: "Codex 包含在 ChatGPT 订阅里，不需要单独购买。2026 年 9 月实测：官方订阅流程、国内银行卡限制、手机端购买、Plus 和 Pro 怎么选。"
+image: "/og/codex-buy.png"
+imageAlt: "佬刘AI 文章分享图：Codex 怎么购买？2026年9月版：套餐、付款方式与 Plus/Pro 选择"
 date: 2026-09-03
 slug: "codex-buy"
 published: true
@@ -33,7 +37,7 @@ Codex 是包含在 ChatGPT 订阅里的！
 
 开通对应套餐后，用同一个 OpenAI 账号登录 Codex 就可以。
 
-![image\.png](/images/codex-buy/image-6.png)
+![信息图：Codex 包含在 ChatGPT 订阅里](/images/codex-buy/image-6.png)
 
 ## 二、Codex怎么购买？
 
@@ -41,23 +45,23 @@ Codex 是包含在 ChatGPT 订阅里的！
 
 打开 ChatGPT 官网 ： chatgpt\.com
 
-![image\.png](/images/codex-buy/image-3.png)
+![ChatGPT 官网首页截图](/images/codex-buy/image-3.png)
 
 登录自己的 OpenAI 账号。
 
 点击头像，升级套餐
 
-![image\.png](/images/codex-buy/image-8.png)
+![ChatGPT 头像菜单中点击升级套餐的截图](/images/codex-buy/image-8.png)
 
 选择需要的套餐。Plus 或 Pro
 
-![image\.png](/images/codex-buy/image.png)
+![ChatGPT 套餐选择页面截图，显示 Plus 和 Pro 价格](/images/codex-buy/image.png)
 
 然后进入付款页面。
 
 网页端目前支持的基础付款方式是：**信用卡和借记卡。** 
 
-![image\.png](/images/codex-buy/image-5.png)
+![ChatGPT 付款页面截图，支持信用卡和借记卡](/images/codex-buy/image-5.png)
 
 但国内用户的问题就出在这里。
 
@@ -75,7 +79,7 @@ OpenAI 当前规则要求：**付款方式需要来自其支持的国家或地�
 
 **中国大陆发行的银行卡，即使支持境外消费，不能简单理解成“有 Visa 就一定能付”。**
 
-![image\.png](/images/codex-buy/image-2.png)
+![信息图：国内银行卡支付 ChatGPT 的限制说明](/images/codex-buy/image-2.png)
 
 **特别注意：**
 
@@ -93,7 +97,7 @@ Googlepay绑卡，然后用Googlepay支付
 
 付款也走对应应用商店的支付体系，这个方式和网页端银行卡支付不是一个通道。
 
-![image\.png](/images/codex-buy/image-4.png)
+![信息图：手机端通过 App Store 或 Google Play 订阅](/images/codex-buy/image-4.png)
 
 ## 五、Plus和Pro买哪个？
 
@@ -105,7 +109,7 @@ Googlepay绑卡，然后用Googlepay支付
 
 如果你每天让 Codex 跑大量任务，再考虑 Pro。
 
-![image\.png](/images/codex-buy/image-1.png)
+![信息图：Plus 与 Pro 套餐对比及选择建议](/images/codex-buy/image-1.png)
 
 ## 六、没有合适的海外付款方式怎么办？
 
@@ -123,7 +127,7 @@ https://wzyp.cn/shop/liu
 
 小店里有 ChatGPT对应的会员服务。
 
-![image\.png](/images/codex-buy/image-7.png)
+![代充小店商品页面截图](/images/codex-buy/image-7.png)
 
 不知道 Plus 和 Pro 怎么选，也可以先看前面的区别。
 

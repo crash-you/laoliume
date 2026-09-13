@@ -15,6 +15,8 @@ const json = (data: unknown, status = 200) =>
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'no-store',
+      // 计数接口非 HTML 内容，无需进入索引
+      'X-Robots-Tag': 'noindex',
     },
   });
 

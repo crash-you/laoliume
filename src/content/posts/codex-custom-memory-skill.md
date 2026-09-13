@@ -1,6 +1,10 @@
 ---
 title: "Codex 自定义 Skill 教程：从 0 做一个长期记忆 Skill（从开发到 GitHub 开源上线）"
 description: "从 0 做一个长期记忆 Skill：从开发到 GitHub 开源上线的完整过程。"
+seoTitle: "Codex 自定义 Skill 教程：从 0 做一个长期记忆 Skill 并开源"
+seoDescription: "用 Skill Creator 从 0 做一个 Project Memory 长期记忆 Skill：三条指令、初始化与真实性检查脚本，到 GitHub 开源上线的完整过程。"
+image: "/og/codex-custom-memory-skill.png"
+imageAlt: "佬刘AI 文章分享图：Codex 自定义 Skill 教程：从 0 做一个长期记忆 Skill 并开源"
 date: 2026-08-30
 slug: "codex-custom-memory-skill"
 published: true
@@ -36,7 +40,7 @@ https://github.com/crash-you/Project-Memory.git
 
 在 Codex 中调用 /skill installer：
 
-![image\.png](/images/codex-custom-memory-skill/image-6.png)
+![在 Codex 中调用 /skill installer 的对话截图](/images/codex-custom-memory-skill/image-6.png)
 
 然后告诉它：
 
@@ -48,7 +52,7 @@ https://github.com/crash-you/Project-Memory.git
 安装完成后，告诉我实际安装到了哪个目录，并确认 Codex 能够识别 $project-memory。
 ```
 
-![image\.png](/images/codex-custom-memory-skill/image-7.png)
+![给 Codex 发送安装 Project Memory Skill 指令的对话截图](/images/codex-custom-memory-skill/image-7.png)
 
 点击发送
 
@@ -146,7 +150,7 @@ PDF 只负责给 Codex 理解需求，不跟着 Skill 一起上传到 GitHub。
 
 然后，我在 Codex 中进入 Plan 模式，发了第一条指令。
 
-![image\.png](/images/codex-custom-memory-skill/image-5.png)
+![在 Codex Plan 模式发送第一条指令的对话截图](/images/codex-custom-memory-skill/image-5.png)
 
 ## 第一条指令
 
@@ -239,11 +243,11 @@ v0.1.0 必须支持：
 
 输入完成等待一段时间之后，就给了一堆的计划md文档
 
-![image\.png](/images/codex-custom-memory-skill/image-2.png)
+![Codex 生成项目计划文档的界面截图](/images/codex-custom-memory-skill/image-2.png)
 
 仓库目录
 
-![image\.png](/images/codex-custom-memory-skill/image-1.png)
+![Project Memory Skill 仓库目录结构截图](/images/codex-custom-memory-skill/image-1.png)
 
 # 五、用 Skill Creator 生成第一版
 
@@ -253,7 +257,7 @@ Codex 现在内置了 `skill-creator`。
 
 我给 Codex 的第二条指令是：
 
-![image\.png](/images/codex-custom-memory-skill/image-3.png)
+![给 Codex 发送第二条指令的对话截图](/images/codex-custom-memory-skill/image-3.png)
 
 即：
 
@@ -375,7 +379,7 @@ codex-project-memory/
 └─ .gitignore
 ```
 
-![image\.png](/images/codex-custom-memory-skill/image.png)
+![第一版 Project Memory Skill 目录结构截图](/images/codex-custom-memory-skill/image.png)
 
 这里面：
 
@@ -408,7 +412,7 @@ Codex 一开始只需要看到 Skill 的名称和描述。
 
 真正使用 Skill 的时候，再读取完整的 `SKILL.md` 和相关资料。
 
-![image\.png](/images/codex-custom-memory-skill/image-8.png)
+![SKILL.md 文件内容截图，含记忆结构与退役规则](/images/codex-custom-memory-skill/image-8.png)
 
 不会为了一个可能用不到的工作流，每次都把全部内容塞进上下文。
 
@@ -434,7 +438,7 @@ Codex 一开始只需要看到 Skill 的名称和描述。
 
 接下来，我让 Codex 实现两个确定性脚本。
 
-![image\.png](/images/codex-custom-memory-skill/image-4.png)
+![让 Codex 实现两个确定性脚本的对话截图](/images/codex-custom-memory-skill/image-4.png)
 
 ## 第三个指令：实现初始化和真实性检查
 

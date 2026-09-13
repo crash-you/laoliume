@@ -1,6 +1,10 @@
 ---
 title: "个人博客网站怎么搭建？从买域名到GitHub+Cloudflare上线完整实操"
 description: "没买服务器、没用 WordPress、全程零成本：从买域名、让 AI 做网站、GitHub 托管，到 Cloudflare 上线 laoliu.me 的完整实操记录。"
+seoTitle: "个人博客网站怎么搭建？从买域名到 GitHub+Cloudflare 上线"
+seoDescription: "零成本个人博客实操：买域名、让 AI 生成网站、GitHub 托管、Cloudflare Workers 部署、D1 阅读量和公众号入口，全程记录。"
+image: "/og/blog-build-guide.png"
+imageAlt: "佬刘AI 文章分享图：个人博客网站怎么搭建？从买域名到 GitHub+Cloudflare 上线"
 date: 2026-09-06
 slug: "blog-build-guide"
 published: true
@@ -21,7 +25,7 @@ wechat_url: "https://mp.weixin.qq.com/s/-R7VwMVjPvdkuTIPtP05xg"
 
 这篇就把我从买域名、做网站，到最后上线 `laoliu.me` 的完整过程重新走一遍。
 
-![image](/images/blog-build-guide/image-1.png)
+![微信公众号佬刘AI的文章列表截图](/images/blog-build-guide/image-1.png)
 
 ## 一、我为什么又做了一个个人博客？
 
@@ -51,7 +55,7 @@ wechat_url: "https://mp.weixin.qq.com/s/-R7VwMVjPvdkuTIPtP05xg"
 
 没了！
 
-![image](/images/blog-build-guide/image-2.png)
+![微信公众号佬刘AI主页截图](/images/blog-build-guide/image-2.png)
 
 ## 二、第一件事：先买一个域名
 
@@ -63,7 +67,7 @@ wechat_url: "https://mp.weixin.qq.com/s/-R7VwMVjPvdkuTIPtP05xg"
 
 结果一搜价格，500 多一年。
 
-![image](/images/blog-build-guide/image-3.png)
+![laoliu.ai 域名搜索结果及注册价格截图](/images/blog-build-guide/image-3.png)
 
 打扰了。
 
@@ -73,7 +77,7 @@ wechat_url: "https://mp.weixin.qq.com/s/-R7VwMVjPvdkuTIPtP05xg"
 
 首年价格不到 10 块钱。
 
-![image](/images/blog-build-guide/image-4.png)
+![laoliu.me 域名购买页面截图，显示首年优惠价格](/images/blog-build-guide/image-4.png)
 
 `.me` 也刚好符合这个网站的定位：
 
@@ -85,7 +89,7 @@ wechat_url: "https://mp.weixin.qq.com/s/-R7VwMVjPvdkuTIPtP05xg"
 
 `laoliu.me` 都还能接着用。
 
-![image](/images/blog-build-guide/image-5.png)
+![域名控制台截图，显示 laoliu.me 可继续使用](/images/blog-build-guide/image-5.png)
 
 域名买好以后，我就开始让 WorkBuddy 干活。
 
@@ -93,7 +97,7 @@ wechat_url: "https://mp.weixin.qq.com/s/-R7VwMVjPvdkuTIPtP05xg"
 
 不用那么麻烦，直接大白话说就行！
 
-![image](/images/blog-build-guide/image-6.png)
+![与 GPT 对话截图，用大白话描述博客需求](/images/blog-build-guide/image-6.png)
 
 然后AI就会给我一堆建议，当然我是要求，第一版绝对简单！
 
@@ -109,7 +113,7 @@ wechat_url: "https://mp.weixin.qq.com/s/-R7VwMVjPvdkuTIPtP05xg"
 
 域名买好，需求确认完成之后，和GPT说，让 GPT 给我提示词。
 
-![image](/images/blog-build-guide/image-7.png)
+![GPT 生成建站提示词的回复截图](/images/blog-build-guide/image-7.png)
 
 ## 五、UI设计
 
@@ -117,11 +121,11 @@ wechat_url: "https://mp.weixin.qq.com/s/-R7VwMVjPvdkuTIPtP05xg"
 
 众所周知，AI coding自己生成的UI，往往丑不拉几的，所以，我让 GPT Image 来帮我设计UI
 
-![image](/images/blog-build-guide/image-8.png)
+![WorkBuddy 中让 GPT Image 设计博客 UI 的对话截图](/images/blog-build-guide/image-8.png)
 
 UI有问题，直接让AI改：
 
-![image](/images/blog-build-guide/image-9.png)
+![让 AI 修改博客 UI 的对话截图](/images/blog-build-guide/image-9.png)
 
 这样，才算是完成准备工作，
 
@@ -129,17 +133,17 @@ UI有问题，直接让AI改：
 
 新建一个文件夹，我给它命名为blog
 
-![image](/images/blog-build-guide/image-10.png)
+![新建名为 blog 的文件夹截图](/images/blog-build-guide/image-10.png)
 
 在workbuddy中，打开这个文件夹
 
-![image](/images/blog-build-guide/image-11.png)
+![在 WorkBuddy 中打开 blog 文件夹的界面截图](/images/blog-build-guide/image-11.png)
 
 然后把UI原型图，和刚刚的提示词全发给workbuddy。
 
 模型选择极致：
 
-![image](/images/blog-build-guide/image-12.png)
+![WorkBuddy 模型选择界面截图](/images/blog-build-guide/image-12.png)
 
 这样，workbuddy就开始干活了！
 
@@ -151,25 +155,25 @@ UI有问题，直接让AI改：
 
 网址： github.com
 
-![image](/images/blog-build-guide/image-13.png)
+![GitHub 网站首页截图](/images/blog-build-guide/image-13.png)
 
 点击New
 
-![image](/images/blog-build-guide/image-14.png)
+![GitHub 新建仓库页面截图](/images/blog-build-guide/image-14.png)
 
 设置好，仓库地址，仓库昵称，选择是否为公开仓库之后，点击Create repository
 
-![image](/images/blog-build-guide/image-15.png)
+![GitHub 仓库创建成功页面截图，显示 git 命令](/images/blog-build-guide/image-15.png)
 
 这样GitHub初始化仓库已经完成！
 
 复制一下仓库地址
 
-![image](/images/blog-build-guide/image-16.png)
+![GitHub 仓库地址复制界面截图](/images/blog-build-guide/image-16.png)
 
 接下来就不用动了，等待workbuddy写好代码。
 
-![image](/images/blog-build-guide/image-17.png)
+![WorkBuddy 生成博客代码的对话截图](/images/blog-build-guide/image-17.png)
 
 写好代码之后，把代码推送到GitHub里：
 
@@ -185,7 +189,7 @@ UI有问题，直接让AI改：
 
 在访问之前，我又问了一下GPT，让GPT给我一次上线前验收
 
-![image](/images/blog-build-guide/image-18.png)
+![向 GPT 询问上线前验收指令的对话截图](/images/blog-build-guide/image-18.png)
 
 同时，因为我没有单独买云服务器。
 
@@ -199,11 +203,11 @@ WorkBuddy 已经把 Cloudflare 的配置文件也写好了。
 
 所以把，GPT再次给我的上线前验收指令，与授权workbuddy让它帮我授权指令，全都给workbuddy
 
-![image](/images/blog-build-guide/image-19.png)
+![GPT 给出的上线前验收指令对话截图](/images/blog-build-guide/image-19.png)
 
 部署成功以后，Cloudflare 会先生成一个 `workers.dev` 地址。
 
-![image](/images/blog-build-guide/image-20.png)
+![部署成功页面截图，显示 Cloudflare workers.dev 地址](/images/blog-build-guide/image-20.png)
 
 我先用这个地址测试网站。
 
@@ -225,7 +229,7 @@ WorkBuddy 已经把 Cloudflare 的配置文件也写好了。
 
 同一个浏览器短时间重复刷新，不会一直加。
 
-![image](/images/blog-build-guide/image-21.png)
+![佬刘AI 博客上线后的首页截图](/images/blog-build-guide/image-21.png)
 
 我没有去做复杂 UV、用户识别、账号体系。
 
@@ -237,67 +241,67 @@ Cloudflare 部署完成之后，我把域名 DNS 接到 Cloudflare。
 
 打开我们刚刚购买域名的网址，点击launchpad
 
-![image](/images/blog-build-guide/image-22.png)
+![域名购买平台首页，点击 launchpad 入口](/images/blog-build-guide/image-22.png)
 
 点击域名管理器
 
-![image](/images/blog-build-guide/image-23.png)
+![平台菜单中选择域名管理器的截图](/images/blog-build-guide/image-23.png)
 
 就可以看到我们刚刚买的域名
 
-![image](/images/blog-build-guide/image-24.png)
+![域名管理器中显示已购域名的截图](/images/blog-build-guide/image-24.png)
 
 点击域名，点击名称服务和DNS
 
-![image](/images/blog-build-guide/image-25.png)
+![域名详情页的名称服务和 DNS 入口截图](/images/blog-build-guide/image-25.png)
 
 把这里的配置，更改为cloudflare中所显示要配置的
 
-![image](/images/blog-build-guide/image-26.png)
+![更新名称服务器弹窗，填入 Cloudflare 名称服务器](/images/blog-build-guide/image-26.png)
 
 这个在哪找呢，登录cloudflare，点击概览
 
-![image](/images/blog-build-guide/image-27.png)
+![Cloudflare 控制台概览页面截图](/images/blog-build-guide/image-27.png)
 
 点击添加域名
 
-![image](/images/blog-build-guide/image-28.png)
+![Cloudflare 添加域名入口截图](/images/blog-build-guide/image-28.png)
 
 连接域名
 
-![image](/images/blog-build-guide/image-29.png)
+![Cloudflare 添加站点时输入域名的截图](/images/blog-build-guide/image-29.png)
 
 输入域名，其他保持默认，点击继续
 
-![image](/images/blog-build-guide/image-30.png)
+![Cloudflare 连接域名配置页面截图](/images/blog-build-guide/image-30.png)
 
 选择免费计划
 
-![image](/images/blog-build-guide/image-31.png)
+![Cloudflare 选择免费计划页面截图](/images/blog-build-guide/image-31.png)
 
 继续前往激活
 
-![image](/images/blog-build-guide/image-32.png)
+![Cloudflare 域名激活页面截图](/images/blog-build-guide/image-32.png)
 
 把这里现实的服务器名称，在 spaceship里更改
 
-![image](/images/blog-build-guide/image-33.png)
+![Spaceship 名称服务器修改界面截图](/images/blog-build-guide/image-33.png)
 
-![image](/images/blog-build-guide/image-34.png)
+![Spaceship 更新名称服务器弹窗截图](/images/blog-build-guide/image-34.png)
 
 然后点击保存服务器设置，等待一段时间，就自动配置好啦
 
 回到cloudflare，点击check nameservers now
 
-![image](/images/blog-build-guide/image-35.png)
+![Cloudflare 检查名称服务器页面截图](/images/blog-build-guide/image-35.png)
 
 当前是等待状态
 
-![image](/images/blog-build-guide/image-36.png)
+![Cloudflare 域名等待激活状态截图](/images/blog-build-guide/image-36.png)
 
 过一会，发现有一个绿色的勾，说明我们刚刚的nameserver替换成功了
 
-![image](/images/blog-build-guide/image-37.png)
+![Cloudflare 域名激活成功截图](/images/blog-build-guide/image-37.png)
 
 **重定向等基础配置：**
 
@@ -305,19 +309,19 @@ A：设置 SSL/TLS = Flexible
 
 进入cloudflare.com
 
-![image](/images/blog-build-guide/image-38.png)
+![cloudflare.com 控制台首页截图](/images/blog-build-guide/image-38.png)
 
 找到SSL/TLS encryption mode，选择Flexible
 
-![image](/images/blog-build-guide/image-39.png)
+![Cloudflare SSL/TLS 加密模式设置页截图](/images/blog-build-guide/image-39.png)
 
 B：开启 Always Use HTTPS
 
-![image](/images/blog-build-guide/image-40.png)
+![Cloudflare 开启 Always Use HTTPS 设置截图](/images/blog-build-guide/image-40.png)
 
 C：root → www 重定向
 
-![image](/images/blog-build-guide/image-41.png)
+![Cloudflare root 到 www 重定向规则设置截图](/images/blog-build-guide/image-41.png)
 
 分别填：
 
@@ -333,27 +337,27 @@ https://www.你的域名/${1}
 
 创建 worker
 
-![image](/images/blog-build-guide/image-42.png)
+![Cloudflare 创建 Worker 页面截图](/images/blog-build-guide/image-42.png)
 
 选择使用 GitHub
 
-![image](/images/blog-build-guide/image-43.png)
+![Cloudflare 部署向导中选择 GitHub 的截图](/images/blog-build-guide/image-43.png)
 
 选择刚刚我们创建的GitHub仓库
 
-![image](/images/blog-build-guide/image-44.png)
+![选择刚创建的 GitHub 仓库的界面截图](/images/blog-build-guide/image-44.png)
 
 部署
 
-![image](/images/blog-build-guide/image-45.png)
+![Cloudflare Worker 部署设置页面截图](/images/blog-build-guide/image-45.png)
 
 等待一段时间
 
-![image](/images/blog-build-guide/image-46.png)
+![Cloudflare 部署进行中页面截图](/images/blog-build-guide/image-46.png)
 
 部署完成
 
-![image](/images/blog-build-guide/image-47.png)
+![Cloudflare 部署完成页面截图](/images/blog-build-guide/image-47.png)
 
 到这里，把GitHub仓库部署到cloud flare也已经完成了！
 
@@ -397,7 +401,7 @@ laoliu.me
 
 **公众号：佬刘AI**
 
-![image](/images/blog-build-guide/image-48.png)
+![公众号文章截图，显示公众号名称佬刘AI](/images/blog-build-guide/image-48.png)
 
 每一篇文章标题下面，也会显示：
 
@@ -407,11 +411,11 @@ laoliu.me
 
 点击以后，会打开对应的微信公众号原文。
 
-![image](/images/blog-build-guide/image-49.png)
+![微信文章跳转公众号原文的截图](/images/blog-build-guide/image-49.png)
 
 填哪篇公众号文章，它就跳到哪篇。文章底部我也保留了公众号原文入口。没有二维码，没有弹窗，没有关注浮窗。我还是想让这个网站保持现在的简约感。
 
-![image](/images/blog-build-guide/image-50.png)
+![博客文章底部保留微信原文入口的截图](/images/blog-build-guide/image-50.png)
 
 ## 十三、现在我每天怎么更新这个网站？
 

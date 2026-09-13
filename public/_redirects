@@ -1,0 +1,3 @@
+# 注意：本站的 _redirects 由构建期自动生成（见 src/lib/seo-integration.mjs）。
+# 本文件仅供人工迁移规则参考；构建产物 dist/_redirects 会被自动覆盖，
+# 新增/删除文章后重新构建即可，无需维护本文件。

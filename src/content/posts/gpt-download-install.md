@@ -1,6 +1,10 @@
 ---
 title: "GPT怎么下载安装 一文看懂！"
 description: "官方桌面程序叫 ChatGPT。这篇只讲下载和安装：从哪里下载、Windows 怎么装、macOS 怎么装、装完怎么登录。"
+seoTitle: "ChatGPT 怎么下载安装？Windows 与 macOS 官方安装教程"
+seoDescription: "官方桌面程序叫 ChatGPT。Windows 经 Microsoft Store 安装、macOS 从官网下载、安装后登录方法，以及常见安装问题解答。"
+image: "/og/gpt-download-install.png"
+imageAlt: "佬刘AI 文章分享图：ChatGPT 怎么下载安装？Windows 与 macOS 官方安装教程"
 date: 2026-09-04
 slug: "gpt-download-install"
 published: true

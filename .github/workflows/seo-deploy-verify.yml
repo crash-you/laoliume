@@ -1,0 +1,102 @@
+name: SEO Deploy Verify
+
+# 部署后验收：手动触发，输入要验证的提交 SHA。
+# 只有确认线上已部署对应提交后才有意义——用 build-commit 标记核验，不靠固定 sleep。
+#
+# 提交标记一致性约定（与 astro.config.mjs 的 resolveBuildCommit 对应）：
+# - GITHUB_SHA 是触发工作流的事件上下文（workflow_dispatch 时为默认分支 SHA），
+#   不代表实际检出的提交；实际检出以 git rev-parse HEAD 为准。
+# - 本工作流先 checkout inputs.commit，随后核验 git rev-parse HEAD 与输入一致，
+#   再以 BUILD_COMMIT=实际检出的完整 40 位 SHA 构建。
+# - astro.config.mjs 校验 BUILD_COMMIT 与实际 HEAD 完全一致，不一致即构建失败——
+#   这就是「工作流上下文 SHA 与被验收 SHA 不同」的自动检测。
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: '要验证的提交完整 40 位 SHA（部署已完成的那个）'
+        required: true
+        default: ''
+      canonical-origin:
+        description: '预期 canonical 站点（默认 https://laoliu.me）'
+        required: false
+        default: 'https://laoliu.me'
+
+jobs:
+  deploy-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate inputs
+        env:
+          COMMIT: ${{ inputs.commit }}
+          CANONICAL_ORIGIN: ${{ inputs.canonical-origin }}
+        run: |
+          # 输入通过环境变量传入 scripts/verify-inputs.mjs（单一实现源，测试共用同一逻辑）：
+          # - commit 必须是完整 40 位 SHA
+          # - canonical-origin 用 WHATWG URL 解析做结构化校验后归一化（无尾斜杠 origin）
+          # 校验失败即 exit 1，非法配置在网络访问前明确失败。
+          if ! node scripts/verify-inputs.mjs; then
+            exit 1
+          fi
+          # 归一化结果写入 GITHUB_ENV，后续步骤不再重复解析
+          ORIGIN="$(node scripts/verify-inputs.mjs | grep '^ORIGIN=' | cut -d= -f2-)"
+          echo "ORIGIN=$ORIGIN" >> "$GITHUB_ENV"
+
+      - name: Checkout commit to verify
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit }}
+
+      - name: Verify checkout matches expected commit
+        run: |
+          # 实际检出版本以 git rev-parse HEAD 为准（GITHUB_SHA 是事件上下文，
+          # 不随 checkout 变化，不能作为被验收版本的依据）。
+          ACTUAL="$(git rev-parse HEAD)"
+          EXPECTED="${{ inputs.commit }}"
+          # 输入已校验为完整 40 位，这里要求全值相等
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "::error::checkout 后 HEAD($ACTUAL) 与输入的 commit($EXPECTED) 不一致"
+            exit 1
+          fi
+          echo "checkout verified: $ACTUAL"
+          # 后续构建/验收统一使用实际检出的完整 SHA
+          echo "VERIFIED_COMMIT=$ACTUAL" >> "$GITHUB_ENV"
+
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies (lockfile)
+        run: npm ci
+
+      # 构建该提交的产物，作为线上 smoke 的预期来源。
+      # BUILD_COMMIT 与实际检出的完整 SHA 一致；astro.config.mjs 会校验它与实际 HEAD
+      # 完全相等，不等则构建失败（防止「触发 ref」冒充「实际构建版本」）。
+      - name: Build expected artifacts
+        env:
+          BUILD_COMMIT: ${{ env.VERIFIED_COMMIT }}
+        run: npm run build
+
+      # 真实 GET 线上：含 build-commit 标记核验 + 全部必需检查。
+      # 失败/未验证都返回非零；不设 continue-on-error。
+      - name: Smoke test (production, verify commit)
+        env:
+          CANONICAL_ORIGIN: ${{ env.ORIGIN }}
+          EXPECTED_COMMIT: ${{ env.VERIFIED_COMMIT }}
+        run: |
+          node scripts/seo-smoke.mjs \
+            --base-url "$CANONICAL_ORIGIN" \
+            --canonical-origin "$CANONICAL_ORIGIN" \
+            --env production \
+            --expected-commit "$EXPECTED_COMMIT" \
+            --out docs/reports/smoke-deploy-verify.md
+
+      - name: Upload report & evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-verify-report
+          path: docs/reports/smoke-deploy-verify.md
+          retention-days: 30

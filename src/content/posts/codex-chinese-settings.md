@@ -1,6 +1,10 @@
 ---
 title: "Codex怎么设置成中文？界面中文、中文回复和全局设置一次讲清楚"
 description: "Codex 中文界面、中文回复，以及换新对话后仍默认中文的全局设置，三种情况一次讲清楚。"
+seoTitle: "Codex 怎么设置中文？界面中文、中文回复与全局 AGENTS.md 配置"
+seoDescription: "三种 Codex 中文设置：当前对话中文回复、全局 AGENTS.md 让新对话默认中文、Codex App 界面切中文，附设置失败的排查点。"
+image: "/og/codex-chinese-settings.png"
+imageAlt: "佬刘AI 文章分享图：Codex 怎么设置中文？界面中文、中文回复与全局 AGENTS.md 配置"
 date: 2026-08-28
 slug: "codex-chinese-settings"
 published: true
@@ -47,7 +51,7 @@ wechat_url: "https://mp.weixin.qq.com/s/ZjUt4vrU3i31ClKTH3hUjw"
 除非我明确要求，否则不要切换为英文。
 ```
 
-![image\.png](/images/codex-chinese-settings/image-2.png)
+![让 Codex 用中文回答的对话截图](/images/codex-chinese-settings/image-2.png)
 
 发送之后，Codex后续的任务计划、最终总结，基本就会切换成中文。
 
@@ -89,7 +93,7 @@ wechat_url: "https://mp.weixin.qq.com/s/ZjUt4vrU3i31ClKTH3hUjw"
 
 比如如果你喜欢当霸总，可以限制说“每次回答前先说一句霸总！”
 
-![image\.png](/images/codex-chinese-settings/image-8.png)
+![让 Codex 每次回答前先说指定口癖的对话截图](/images/codex-chinese-settings/image-8.png)
 
 都可以写进`AGENTS.md`。
 
@@ -119,7 +123,7 @@ C:\Users\你的用户名\.codex
 
 Windows版Codex App和Windows原生Codex默认共用这个目录。
 
-![image\.png](/images/codex-chinese-settings/image-11.png)
+![Windows 文件资源管理器显示 Codex 配置目录的截图](/images/codex-chinese-settings/image-11.png)
 
 没有看到`.codex`文件夹，也可以手动新建一个。
 
@@ -129,7 +133,7 @@ Windows版Codex App和Windows原生Codex默认共用这个目录。
 .codex
 ```
 
-![image\.png](/images/codex-chinese-settings/image-6.png)
+![Codex 配置文件夹名称截图](/images/codex-chinese-settings/image-6.png)
 
 前面的点不要漏掉！
 
@@ -163,11 +167,11 @@ AGENTS.md
 查看 → 显示 → 文件扩展名
 ```
 
-![image\.png](/images/codex-chinese-settings/image-3.png)
+![文件资源管理器顶部地址栏操作截图](/images/codex-chinese-settings/image-3.png)
 
 确认最终文件名确实是：AGENTS\.md
 
-![image\.png](/images/codex-chinese-settings/image-10.png)
+![文件资源管理器中确认文件名为 AGENTS.md 的截图](/images/codex-chinese-settings/image-10.png)
 
 ### 3、写入全局中文规则
 
@@ -188,7 +192,7 @@ AGENTS.md
 
 保存文件。
 
-![image\.png](/images/codex-chinese-settings/image.png)
+![保存 AGENTS.md 文件的记事本截图](/images/codex-chinese-settings/image.png)
 
 我不建议为了显得专业，一上来就在里面写几十条规则。
 
@@ -214,7 +218,7 @@ Please inspect the current project and tell me what you would check first. Do no
 
 同时，代码、文件名、命令和技术名词仍然保留英文。
 
-![image\.png](/images/codex-chinese-settings/image-4.png)
+![Codex 中文回复但代码和命令保持英文的对话截图](/images/codex-chinese-settings/image-4.png)
 
 为了验证得更严谨一点，还可以继续发送：
 
@@ -232,7 +236,7 @@ Please inspect the current project and tell me what you would check first. Do no
 
 Codex能够正确说出全局`AGENTS.md`的路径，并复述出刚才设置的中文规则，基本就说明设置已经生效。
 
-![image\.png](/images/codex-chinese-settings/image-12.png)
+![Codex 复述全局 AGENTS.md 路径和中文规则的对话截图](/images/codex-chinese-settings/image-12.png)
 
 Codex CLI用户也可以按照官方文档提供的方式，让Codex直接总结当前加载的指令：
 
@@ -242,7 +246,7 @@ codex --ask-for-approval never "Summarize the current instructions."
 
 官方文档预期Codex会复述`~/.codex/AGENTS.md`中的规则。
 
-![image\.png](/images/codex-chinese-settings/image-9.png)
+![官方文档说明 Codex 会读取 ~/.codex/AGENTS.md 规则的截图](/images/codex-chinese-settings/image-9.png)
 
 ## 三、让Codex自己设置
 
@@ -288,13 +292,13 @@ Codex需要访问全局目录时，可能会向你申请对应的文件权限。
 
 这个简单一点，打开codex页面，点击右下角的设置
 
-![image\.png](/images/codex-chinese-settings/image-1.png)
+![Codex 页面右下角设置菜单截图](/images/codex-chinese-settings/image-1.png)
 
 找到，个性化，自定义指令。
 
 把上方的提示词，复制到这里，点击保存即可。
 
-![image\.png](/images/codex-chinese-settings/image-7.png)
+![Codex 个性化设置中粘贴中文提示词的截图](/images/codex-chinese-settings/image-7.png)
 
 ## 五、Codex App怎么设置中文界面？
 
@@ -304,15 +308,15 @@ Codex需要访问全局目录时，可能会向你申请对应的文件权限。
 
 打开Codex App之后，进入Settings
 
-![image\.png](/images/codex-chinese-settings/image-13.png)
+![Codex App 的 Settings 界面截图](/images/codex-chinese-settings/image-13.png)
 
 然后找到常规，往下滑，找到语言
 
-![image\.png](/images/codex-chinese-settings/image-5.png)
+![Codex App 常规设置中找到语言选项的截图](/images/codex-chinese-settings/image-5.png)
 
 将它修改成，Chinese（简体中文）
 
-![image\.png](/images/codex-chinese-settings/image-14.png)
+![语言选项切换为简体中文的截图](/images/codex-chinese-settings/image-14.png)
 
 没有直接看到中文选项，可以先选择：Auto Detect（自动检测）
 

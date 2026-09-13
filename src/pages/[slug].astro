@@ -11,6 +11,7 @@ import {
   isSameDay,
   type Post,
 } from '../lib/posts';
+import { postPath, canonicalPostUrl, absoluteUrl } from '../lib/url';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -29,27 +30,32 @@ const { post, allPosts, prev, next } = Astro.props;
 const { Content } = await render(post);
 
 const slug = postSlug(post);
-const url = SITE_CONFIG.domain + '/' + slug + '/';
-const description = post.data.description || post.data.title;
+const url = canonicalPostUrl(slug);
+const description = post.data.seoDescription || post.data.description || post.data.title;
 const hasUpdate = post.data.updated && !isSameDay(post.data.date, post.data.updated);
 const currentSlug = slug;
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
+  '@id': url + '#article',
   headline: post.data.title,
   description,
+  inLanguage: 'zh-CN',
   datePublished: isoDate(post.data.date),
   dateModified: isoDate(post.data.updated ?? post.data.date),
   author: {
     '@type': 'Person',
     name: SITE_CONFIG.author,
+    url: SITE_CONFIG.domain + '/#author',
   },
   publisher: {
     '@type': 'Organization',
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.domain,
   },
+  isPartOf: { '@id': SITE_CONFIG.domain + '/#website' },
+  image: [absoluteUrl(post.data.image ?? SITE_CONFIG.ogImageDefault)],
   url,
   mainEntityOfPage: {
     '@type': 'WebPage',
@@ -61,10 +67,13 @@ const year = new Date().getFullYear();
 ---
 
 <BaseLayout
-  title={post.data.title + ' - ' + SITE_CONFIG.name}
+  title={(post.data.seoTitle ?? post.data.title) + ' - ' + SITE_CONFIG.name}
   description={description}
-  canonicalPath={'/' + slug + '/'}
+  canonicalPath={postPath(slug)}
   ogType="article"
+  image={post.data.image}
+  imageAlt={post.data.imageAlt}
+  noindex={post.data.noindex}
   jsonLd={jsonLd}
 >
   <div class="layout">
@@ -78,7 +87,7 @@ const year = new Date().getFullYear();
           <ul>
             {allPosts.map((p) => (
               <li class={postSlug(p) === currentSlug ? 'active' : undefined}>
-                <a href={'/' + postSlug(p)}>{p.data.title}</a>
+                <a href={postPath(postSlug(p))}>{p.data.title}</a>
                 <span class="sidebar-meta">{formatDate(p.data.date)}</span>
               </li>
             ))}
@@ -105,11 +114,11 @@ const year = new Date().getFullYear();
         <p class="article-meta">
           <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
           {hasUpdate && <span>更新于 {formatDate(post.data.updated!)}</span>}
-          <ViewsScript slug={slug} increment={true} />
+          <span data-nosnippet><ViewsScript slug={slug} increment={true} /></span>
         </p>
 
         {post.data.wechat_url && (
-          <p class="article-wechat">
+          <p class="article-wechat" data-nosnippet>
             首发于微信公众号「{SITE_CONFIG.wechatName}」 ·
             <a href={post.data.wechat_url} target="_blank" rel="noopener noreferrer">
               查看微信原文 ↗
@@ -133,7 +142,7 @@ const year = new Date().getFullYear();
             </div>
           )}
 
-          <div class="end-author">
+          <div class="end-author" data-nosnippet>
             <p class="end-author-name">{SITE_CONFIG.displayName}</p>
             <p class="end-author-bio">
               {SITE_CONFIG.description}<br />
@@ -158,12 +167,12 @@ const year = new Date().getFullYear();
 
           <nav class="post-nav" aria-label="上一篇 / 下一篇">
             {prev ? (
-              <a href={'/' + postSlug(prev)}>
+              <a href={postPath(postSlug(prev))}>
                 <span class="nav-label">← 上一篇</span>{prev.data.title}
               </a>
             ) : <span />}
             {next ? (
-              <a class="nav-next" href={'/' + postSlug(next)}>
+              <a class="nav-next" href={postPath(postSlug(next))}>
                 <span class="nav-label">下一篇 →</span>{next.data.title}
               </a>
             ) : <span />}
