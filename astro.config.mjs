@@ -8,16 +8,16 @@ import { seoIntegration } from './src/lib/seo-integration.mjs';
 // 构建提交标记：用于部署后验收确认「线上产物对应哪个提交」。
 //
 // 优先级（与 .github/workflows/seo-deploy-verify.yml 的约定一致）：
-//   1. BUILD_COMMIT —— 显式指定，必须与实际工作树的 git rev-parse HEAD 完全相等，
-//      否则构建失败（防止「工作流触发 ref」冒充「实际构建版本」）。
-//   2. GITHUB_SHA   —— GitHub Actions 环境；checkout inputs.commit 后 GITHUB_SHA
-//      即为被验收提交（actions/checkout 会把 GITHUB_SHA 重写为实际 checkout 的 SHA）。
+//   1. BUILD_COMMIT —— 显式指定，必须是完整 40 位 SHA，且与实际工作树的
+//      git rev-parse HEAD 完全相等，否则构建失败（防止「工作流触发 ref」冒充
+//      「实际构建版本」，也防止短 SHA 无法与线上完整 build-commit 比较）。
+//   2. GITHUB_SHA   —— GitHub Actions 环境的事件上下文 SHA。注意：GITHUB_SHA
+//      是触发工作流的事件上下文（workflow_dispatch 时为默认分支 SHA），
+//      不随 actions/checkout 变化，因此不能代表实际检出的提交；仅在没有
+//      BUILD_COMMIT 且无法读取 git 时的兜底。
 //   3. git rev-parse HEAD —— 本地构建回退。
 //
-// 关键不变式：标记必须反映【实际构建的工作树版本】。
-// workflow_dispatch 触发时 GITHUB_SHA 是默认分支的 SHA，不是 inputs.commit 的 SHA——
-// 因此工作流里必须先 checkout inputs.commit 再构建（checkout 动作会更新 GITHUB_SHA），
-// 并用 BUILD_COMMIT 交叉核验（见 seo-deploy-verify.yml 的核验步骤）。
+// 关键不变式：标记必须反映【实际构建的工作树版本】（完整 40 位 SHA）。
 function resolveBuildCommit() {
   const explicit = process.env.BUILD_COMMIT;
   let actual = 'unknown';
@@ -27,17 +27,18 @@ function resolveBuildCommit() {
     /* git 不可用时保持 unknown */
   }
   if (explicit) {
-    if (!/^[0-9a-f]{7,40}$/i.test(explicit)) {
-      throw new Error(`BUILD_COMMIT 不是合法 SHA: ${explicit}`);
+    if (!/^[0-9a-f]{40}$/i.test(explicit)) {
+      throw new Error(`BUILD_COMMIT 必须是完整 40 位 SHA: ${explicit}`);
     }
-    // 显式指定的 BUILD_COMMIT 必须与实际 HEAD 一致（允许短 SHA 前缀匹配）
-    if (actual !== 'unknown' && !actual.startsWith(explicit.toLowerCase()) && !explicit.toLowerCase().startsWith(actual)) {
+    // 显式指定的 BUILD_COMMIT 必须与实际 HEAD 完全一致（不做短 SHA 前缀匹配：
+    // 构建标记要能与线上完整 SHA 全值比较）
+    if (actual !== 'unknown' && explicit.toLowerCase() !== actual.toLowerCase()) {
       throw new Error(
         `BUILD_COMMIT(${explicit}) 与实际工作树 HEAD(${actual}) 不一致。` +
           '工作流上下文 SHA 与被验收 SHA 不同：请确认已 checkout 到目标提交再构建。'
       );
     }
-    return explicit;
+    return explicit.toLowerCase();
   }
   return process.env.GITHUB_SHA || actual;
 }

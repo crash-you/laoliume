@@ -131,6 +131,24 @@ const titles = new Map();
 const descriptions = new Map();
 const canonicalSet = new Set();
 
+/** 从 proseStart（.prose 开标签起点）找配对闭合 </div> 的结束位置。
+ *  树解析已保证 .prose 子树存在且配对，这里只需按 div 深度扫描原文。 */
+function findProseClose(html, proseStart) {
+  const tagRe = /<div\b[^>]*>|<\/div\s*>/gi;
+  tagRe.lastIndex = proseStart;
+  let depth = 0;
+  let m;
+  while ((m = tagRe.exec(html)) !== null) {
+    if (m[0].startsWith('</')) {
+      depth--;
+      if (depth === 0) return m.index + m[0].length;
+    } else {
+      depth++;
+    }
+  }
+  return -1;
+}
+
 /** 读取 PNG / JPEG 固有尺寸（校验 og:image 声明真实） */
 function imageSize(file) {
   const buf = readFileSync(file);
@@ -344,13 +362,27 @@ for (const page of htmlPages) {
   if (post?.wechat && !html.includes(post.wechat)) fail(`${page.url}: 缺少公众号原文链接`);
   if (post?.wechat && canonical === post.wechat) fail(`${page.url}: 微信原文地址被当成了 canonical`);
 
-  // 开发痕迹（正文之外）：移除 .prose 子树后再检查
+  // 开发痕迹（正文之外）：移除 .prose 子树后再检查。
+  // 注意：extractProseHtml 的片段是 parse5 重新序列化的（实体写法可能与原文不同，
+  // 如 &#x3C; vs &lt;），不能直接用 String.replace 剥离——按首尾锚点切原文区间。
   const proseRaw = extractProseHtml(html) ?? '';
-  const nonProse = html
-    .replace(proseRaw, '')
-    .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
-  if (/localhost|127\.0\.0\.1|file:\/\/\/|[A-Za-z]:\\/.test(nonProse)) {
-    fail(`${page.url}: 公共 HTML（正文之外）含本地地址或磁盘路径`);
+  if (proseRaw) {
+    const anchorStart = html.search(/<div\s[^>]*class\s*=\s*["'][^"']*\bprose\b[^"']*["'][^>]*>/i);
+    if (anchorStart >= 0) {
+      const openTagMatch = html.slice(anchorStart).match(/^<div\s[^>]*>/i);
+      const innerStart = anchorStart + openTagMatch[0].length;
+      // .prose 子树长度 = 片段在原文中的等价区间（片段是内部内容）
+      // 用「从 innerStart 开始、长度与片段相同」近似不可靠（实体差异），
+      // 改用闭合定位：从 innerStart 起找配对的 </div>（树解析保证存在）。
+      const closeIdx = findProseClose(html, anchorStart);
+      if (closeIdx >= 0) {
+        const nonProse = (html.slice(0, anchorStart) + html.slice(closeIdx))
+          .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
+        if (/localhost|127\.0\.0\.1|file:\/\/\/|[A-Za-z]:\\/.test(nonProse)) {
+          fail(`${page.url}: 公共 HTML（正文之外）含本地地址或磁盘路径`);
+        }
+      }
+    }
   }
   if (/workers\.dev/.test(canonical || '')) fail(`${page.url}: canonical 指向 workers.dev 预览域名`);
 }

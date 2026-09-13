@@ -92,7 +92,7 @@
 | robots | 按 User-agent 分组 + 最长匹配评估主流爬虫；不再用「文件里有 Allow:/」证明允许 | Googlebot 被单独分组禁抓 → 失败；AI 爬虫被禁但 Googlebot/Bingbot 正常 → 通过（仅记录） |
 | sitemap/RSS | Content-Type、XML 根元素（拒绝合法 XHTML 错误页）、URL 集合与本地预期比对、去重 | 合法 XHTML 错误页 → 失败；根正确但集合错 → 失败；MIME 错 → 失败 |
 | 资源 | 校验真实文件魔数（PNG `89504E47`、SVG），不只 `content-type` 字符串 | 返回 HTML 却声明 `image/png` → 失败 |
-| 图片/正文 | 正文改用共享 `.prose` 三段指纹；线上与本地完整文本比较 | 丢中段 → 中段指纹不匹配；丢尾段 → 尾段不匹配 |
+| 图片/正文 | 正文改用共享 `.prose` 三段指纹；线上与本地按头/中/尾三段指纹比较（非完整文本逐字比较） | 丢中段 → 中段指纹不匹配；丢尾段 → 尾段不匹配 |
 | 参数分离 | `--base-url` 与 `--canonical-origin` 独立；生产验收 origin 必须为生产域 | 无效 `--env`、非法 origin、非法 SHA、生产误用预览 origin → 均 exit 2 并报错 |
 | 退出码 | 网络错误=未验证(2)、协议/断言错误=失败(1)，两者都不伪装 exit 0 | 断网 → exit 2 且 0 通过 |
 
@@ -118,6 +118,12 @@
     **`BUILD_COMMIT` 与实际 HEAD 不一致时构建硬失败并给出明确错误**。校验 SHA 合法性。
   - `.github/workflows/seo-deploy-verify.yml`：输入通过 env 传入并先校验（不拼接未校验输入到 shell）；
     checkout 后核验 `git rev-parse HEAD == inputs.commit`；构建时传 `BUILD_COMMIT`；smoke 传 `--expected-commit`。
+- **更正（2026-09-13 验收轮）**：本节初版曾表述「checkout 后 GITHUB_SHA 会被
+  actions/checkout 重写为实际检出 SHA」——该假设不成立。`GITHUB_SHA` 是触发工作流的
+  事件上下文，不随 checkout 变化；实际检出版本一律以 `git rev-parse HEAD` 为准。
+  当前约定：工作流输入只接受完整 40 位 SHA，checkout 后核验 HEAD 全值相等，
+  `BUILD_COMMIT`/`--expected-commit`/线上 build-commit 统一使用该完整 SHA
+  （见 `scripts/verify-inputs.mjs` 与 `scripts/test-verify-inputs.mjs`）。
 - **测试证据**：
   - `BUILD_COMMIT=<HEAD>` 构建 → **exit 0** ✅
   - `BUILD_COMMIT=1234567`（不等）→ **exit 1**，输出

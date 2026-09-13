@@ -53,13 +53,13 @@ https://www.laoliu.me/        -> 200
 **操作**：审阅 `seo-round1` 分支本轮提交，确认无误后合并 main 并执行既有部署流程 `npm run deploy`
 （或你的 GitHub→Cloudflare 流水线）。**Agent 本轮不合并、不部署。**
 
-**验收**（部署后，用手动工作流 `SEO Deploy Verify`，输入部署的提交 SHA；或本地）：
+**验收**（部署后，用手动工作流 `SEO Deploy Verify`，输入部署的**完整 40 位**提交 SHA；或本地）：
 ```bash
 node scripts/seo-smoke.mjs --base-url https://laoliu.me --canonical-origin https://laoliu.me \
-  --env production --expected-commit <sha> --out docs/reports/smoke-deploy-verify.md
+  --env production --expected-commit <40位SHA> --out docs/reports/smoke-deploy-verify.md
 ```
-重点确认：线上 `build-commit` 标记 == 部署的 SHA；robots Sitemap 行恢复；非规范入口 308；
-正文三段指纹与本地构建一致；`/og/*` 与新增编号分享图返回 200。
+重点确认：线上 `build-commit` 标记 == 部署的完整 SHA；robots Sitemap 行恢复；非规范入口 308；
+正文头/中/尾三段指纹与本地构建一致（三段指纹比较，非完整文本逐字比较）；`/og/*` 与新增编号分享图返回 200。
 
 > 注意：不要把「部署前旧站的 smoke 结果」当作新版本验收。新 OG 图与 `_redirects`
 > 需要部署后才生效，**不应要求它们在生产先返回 200 才准许合并**。

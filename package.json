@@ -14,9 +14,11 @@
     "seo:screenshot": "node scripts/seo-screenshot.mjs",
     "seo:verify-ui": "node scripts/seo-verify-ui.mjs --before docs/screenshots/before --after docs/screenshots/after --diff-dir docs/screenshots/diff",
     "og:image": "node scripts/og-image.mjs",
-    "test": "node scripts/test-rehype-seo.mjs && node scripts/test-negative.mjs",
+    "test": "node scripts/test-rehype-seo.mjs && node scripts/test-negative.mjs && node scripts/test-html-prose.mjs && node scripts/test-verify-inputs.mjs",
     "test:rehype": "node scripts/test-rehype-seo.mjs",
     "test:negative": "node scripts/test-negative.mjs",
+    "test:prose": "node scripts/test-html-prose.mjs",
+    "test:verify-inputs": "node scripts/test-verify-inputs.mjs",
     "test:fixture": "node scripts/test-fixture-publish.mjs"
   },
   "dependencies": {
@@ -27,6 +29,7 @@
   "devDependencies": {
     "fast-xml-parser": "^5.11.1",
     "gray-matter": "^4.0.3",
+    "parse5": "^8.0.1",
     "pixelmatch": "^7.2.0",
     "playwright-core": "^1.63.0",
     "pngjs": "^7.0.0",
