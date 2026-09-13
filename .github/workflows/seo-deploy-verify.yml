@@ -2,6 +2,13 @@ name: SEO Deploy Verify
 
 # 部署后验收：手动触发，输入要验证的提交 SHA。
 # 只有确认线上已部署对应提交后才有意义——用 build-commit 标记核验，不靠固定 sleep。
+#
+# 提交标记一致性约定（与 astro.config.mjs 的 resolveBuildCommit 对应）：
+# - workflow_dispatch 触发时 GITHUB_SHA 是默认分支的 SHA，不是 inputs.commit 的 SHA。
+# - 本工作流先 checkout inputs.commit（actions/checkout 会把 GITHUB_SHA 更新为
+#   实际 checkout 的提交），再以 BUILD_COMMIT=inputs.commit 构建。
+# - astro.config.mjs 校验 BUILD_COMMIT 与实际 HEAD 相等，不一致即构建失败——
+#   这就是「工作流上下文 SHA 与被验收 SHA 不同」的自动检测。
 on:
   workflow_dispatch:
     inputs:
@@ -18,10 +25,38 @@ jobs:
   deploy-verify:
     runs-on: ubuntu-latest
     steps:
+      - name: Validate inputs
+        env:
+          COMMIT: ${{ inputs.commit }}
+          CANONICAL_ORIGIN: ${{ inputs.canonical-origin }}
+        run: |
+          # 输入通过环境变量传入命令，校验后再使用（不把未校验输入直接拼进 shell）
+          if ! echo "$COMMIT" | grep -Eq '^[0-9a-f]{7,40}$'; then
+            echo "::error::commit 输入不是合法的 git SHA: $COMMIT"
+            exit 1
+          fi
+          if ! echo "$CANONICAL_ORIGIN" | grep -Eq '^https://[a-z0-9.-]+/[a-z0-9./-]*$'; then
+            echo "::error::canonical-origin 输入不是合法的 https URL: $CANONICAL_ORIGIN"
+            exit 1
+          fi
+          echo "validated commit=$COMMIT origin=$CANONICAL_ORIGIN"
+
       - name: Checkout commit to verify
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.commit }}
+
+      - name: Verify checkout matches expected commit
+        run: |
+          # 工作流上下文 SHA 与被验收 SHA 的一致性验证：
+          # checkout 后 GITHUB_SHA 应等于 inputs.commit；不等说明 checkout 没生效或 ref 解析异常
+          ACTUAL="$(git rev-parse HEAD)"
+          EXPECTED="${{ inputs.commit }}"
+          if [ "$ACTUAL" != "$EXPECTED" ] && [[ "$ACTUAL" != "$EXPECTED"* ]]; then
+            echo "::error::checkout 后 HEAD($ACTUAL) 与输入的 commit($EXPECTED) 不一致"
+            exit 1
+          fi
+          echo "checkout verified: $ACTUAL"
 
       - uses: actions/setup-node@v4
         with:
@@ -31,19 +66,26 @@ jobs:
       - name: Install dependencies (lockfile)
         run: npm ci
 
-      # 构建该提交的产物，作为线上 smoke 的预期来源
+      # 构建该提交的产物，作为线上 smoke 的预期来源。
+      # BUILD_COMMIT 与 inputs.commit 一致；astro.config.mjs 会校验它与实际 HEAD 相等，
+      # 不等则构建失败（防止「触发 ref」冒充「实际构建版本」）。
       - name: Build expected artifacts
+        env:
+          BUILD_COMMIT: ${{ inputs.commit }}
         run: npm run build
 
-      # 真实 GET 线上：含 build-commit 核验 + 全部必需检查。
+      # 真实 GET 线上：含 build-commit 标记核验 + 全部必需检查。
       # 失败/未验证都返回非零；不设 continue-on-error。
       - name: Smoke test (production, verify commit)
+        env:
+          CANONICAL_ORIGIN: ${{ inputs.canonical-origin }}
+          EXPECTED_COMMIT: ${{ inputs.commit }}
         run: |
           node scripts/seo-smoke.mjs \
-            --base-url ${{ inputs.canonical-origin }} \
-            --canonical-origin ${{ inputs.canonical-origin }} \
+            --base-url "$CANONICAL_ORIGIN" \
+            --canonical-origin "$CANONICAL_ORIGIN" \
             --env production \
-            --expected-commit ${{ inputs.commit }} \
+            --expected-commit "$EXPECTED_COMMIT" \
             --out docs/reports/smoke-deploy-verify.md
 
       - name: Upload report & evidence
