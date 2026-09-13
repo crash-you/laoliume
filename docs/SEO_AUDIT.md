@@ -139,3 +139,49 @@ f9730de chore(seo): 阶段A基线——URL 清单、构建与路由实测记录�
 
 上线前必须处理（详见 docs/SEO_OWNER_ACTIONS.md 第 0 条）：**主域 laoliu.me 被 301 到
 www.laoliu.me，与代码 canonical 冲突**，需站长在 Cloudflare 统一主域方向。
+
+---
+
+## 第三轮：收尾修复（2026-09-12，独立审查后的有边界收尾）
+
+> **时点声明**：本文件前述第一轮/第二轮的结论（224 张图片、12/12 零差异、22 通过/3 失败等）
+> 记录的是 **2026-09-10 的实测结果**，保留作为历史证据，**不代表 2026-09-12 的当前状态**。
+> 本轮已重新实测，当前结论见下方表格与本轮独立报告。
+
+**本轮起点/终点**
+- 起始：`08ff144b35cdfec7f268fb3ed1f24b8283d9627d`（seo-round1，审查锚点）
+- 设计基线：`6f0edda5459c668b72ba129839484d0a9eac3275`（main）
+- 起始时 seo-round1 相对 main：ahead 16 / behind 0；本轮开始前**无新增提交**，工作区仅有未跟踪的任务书文档。
+
+**修复项摘要**
+
+| # | 问题（独立审查确认） | 修改文件 | 验证 |
+|---|---|---|---|
+| 1 | 编码路径图片无 width/height（2 张） | `src/lib/rehype-seo.mjs` | 新增 `resolvePublicFile`（URL pathname 解析、只解码一次、防越界）；`test-rehype-seo` 31 断言；dist 实测 248/248 图片有尺寸，两张恢复 1922×818 / 1536×1024 |
+| 2 | seo-check 正文用「.prose→</article>」正则，混入 post-end | `scripts/seo-check.mjs` + 新 `scripts/html-prose.mjs` | 改为真实 `.prose` 子树；空正文/截断/丢中尾段反例均判失败 |
+| 3 | OG 校验只看 `ogImage.startsWith('/')`，实际全是绝对 URL | `scripts/seo-check.mjs` | 改为核对每页实际 `og:image`/`twitter:image`/JSON-LD image 引用；缺图/尺寸不符反例判失败 |
+| 4 | canonical 只查域名前缀 | `scripts/seo-check.mjs` | 改为与本页期望 URL 全值比较；404 期望 `/404` |
+| 5 | smoke 用固定脚本硬编码、漏重定向链/索引指令/robots 分组 | `scripts/seo-smoke.mjs` | 重写：完整跳转链+循环检测、HTML/HTTP 头索引指令（含 Googlebot 专用、none 等价）、robots 按 UA 分组评估、sitemap/RSS 集合与 MIME、图片魔数、参数分离与校验 |
+| 6 | 反例测试的 normal 样本不合格、缺整站 exit 0 断言 | `scripts/test-negative.mjs` | 重写：先断言正常站点 exit 0，再逐类注入故障（新增中段/尾段、伪 PNG、Googlebot 专用 noindex、robots 分组、sitemap 集合、参数校验等）43 断言通过 |
+| 7 | GITHUB_SHA 优先级与工作流 inputs.commit checkout 不一致 | `astro.config.mjs` + `.github/workflows/seo-deploy-verify.yml` | 以 `BUILD_COMMIT` 交叉核验实际 HEAD，不一致则构建硬失败；工作流加输入校验与 checkout 后 HEAD 核验 |
+| 8 | GA4 无预览隔离 | `docs/SEO_OWNER_ACTIONS.md` 第 3 条 | 记录待办；本轮截图已阻断外链统计，未污染生产 GA4 |
+
+**本轮线上重新实测（2026-09-12，不沿用历史结论）**
+- `https://laoliu.me/` → **301 → `https://www.laoliu.me/` → 200**（apex→www **仍未解决**）
+- `https://laoliu.me/codex-buy` → 301 → www → 307 → `/codex-buy/` → 200
+- `https://laoliu.me/robots.txt` → 200，**仍为 Cloudflare Managed content，无 `Sitemap:` 行**
+- 原始响应：`docs/reports/cloudflare-live-round3.md`
+
+**UI 回归（本轮重测，基线为原 main 6f0edda）**
+- 12 张截图（4 页面 × 3 视口）：**11/12 像素零差异**
+- `register-mobile.png`：644 像素差异，位置 y15852（页尾店铺 URL 文本），
+  内容为 `pay.ldxp.cn/shop/liu` → `wzyp.cn/shop/liu`——**第一轮有意的内容变更**，
+  与 2026-09-10 历史报告同一处（历史记录 644 像素、同一 y 区间）。
+  **不是本轮新增回归。**
+- 两张修复图片：渲染尺寸前后完全一致（350×149 / 350×233），仅新增属性，无视觉变化。
+
+**本轮未验证 / 待站长操作**（不伪装通过）
+- Cloudflare 后台（DNS/TLS/WAF/域级跳转/托管 robots/GA4 环境变量）：无权限，未验证。
+- GSC / Bing / 百度后台：无权限，未验证。
+- 线上部署与部署后 smoke：本轮不部署，属下一阶段。
+
