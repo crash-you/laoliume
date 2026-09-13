@@ -15,10 +15,45 @@
  *    不改变显示尺寸，可减少加载位移（CLS）。
  */
 import { readFileSync, existsSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, normalize, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const PUBLIC_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'public');
+
+/**
+ * 把站内 src（如 /images/x/%E4%B8%AD.png?query#frag）安全解析为 public/ 下的真实文件路径。
+ * 返回 null 表示不是本地 public 资源（外链、协议相对、非法编码、越出 public）。
+ *
+ * 规则：
+ * - 以 URL 解析，只取 pathname，只解码一次（避免双重解码把 %2520 变空格）。
+ * - 查询串/片段不参与文件定位；无效百分号编码（如 %zz、截断的 %e4）返回 null。
+ * - 解码后必须仍是站内绝对路径，且 resolve 后不能越出 public/（防 ../ 越界）。
+ */
+export function resolvePublicFile(src) {
+  if (typeof src !== 'string' || !src.startsWith('/') || src.startsWith('//')) return null; // 外链/相对/协议相对
+  let pathname;
+  try {
+    pathname = new URL(src, 'http://resolve.local').pathname;
+  } catch {
+    return null;
+  }
+  let decoded;
+  try {
+    decoded = decodeURIComponent(pathname);
+  } catch {
+    return null; // 无效编码（URIError: malformed URI）
+  }
+  if (decoded.includes('\0')) return null;
+  // 解码后必须仍是站内绝对路径（防 //host 或解码出协议前缀）
+  if (!decoded.startsWith('/')) return null;
+  // 解码后的路径段不能包含 . / ..（防 %2e%2e%2f 越界）
+  const segments = decoded.split('/');
+  if (segments.some((s) => s === '..' || s === '.')) return null;
+  const filePath = normalize(join(PUBLIC_DIR, decoded));
+  const publicRoot = normalize(PUBLIC_DIR) + sep;
+  if (filePath !== normalize(PUBLIC_DIR) && !filePath.startsWith(publicRoot)) return null;
+  return filePath;
+}
 
 /** 读取 PNG / JPEG 固有尺寸 */
 function imageSize(file) {
@@ -73,20 +108,23 @@ export function rehypeImageMeta() {
       if (node.tagName !== 'img' || !node.properties?.src) return;
       const src = String(node.properties.src);
       imgIndex++;
-      // 只处理站内 public/ 图片；外链不动
-      if (!src.startsWith('/')) return;
-      const filePath = join(PUBLIC_DIR, src);
-      if (existsSync(filePath) && /\.(png|jpe?g)$/i.test(src)) {
-        try {
-          const size = imageSize(filePath);
-          if (size && !node.properties.width && !node.properties.height) {
-            node.properties.width = size.width;
-            node.properties.height = size.height;
+      // 只处理站内 public/ 图片；外链与协议相对 URL 不动
+      if (!src.startsWith('/') || src.startsWith('//')) return;
+      const filePath = resolvePublicFile(src);
+      if (filePath && existsSync(filePath)) {
+        if (/\.(png|jpe?g)$/i.test(src)) {
+          try {
+            const size = imageSize(filePath);
+            if (size && !node.properties.width && !node.properties.height) {
+              node.properties.width = size.width;
+              node.properties.height = size.height;
+            }
+          } catch {
+            warnings.push(`图片尺寸读取失败: ${src}`);
           }
-        } catch {
-          warnings.push(`图片尺寸读取失败: ${src}`);
         }
-      } else if (!existsSync(filePath)) {
+      } else {
+        // 本地路径解析失败或文件缺失：构建期警告（产物断言在 seo-check 里兜底）
         warnings.push(`图片文件不存在: ${src}（${file.basename ?? 'unknown'}）`);
       }
       node.properties.decoding = 'async';
