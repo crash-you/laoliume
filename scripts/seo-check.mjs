@@ -8,12 +8,18 @@
  *   - published:false —— 无公开页面/列表/sitemap/RSS/分享卡（草稿，非隐私机制）
  *   - published:true + noindex:true —— 页面生成且带 noindex，排除 sitemap/RSS
  *   - 普通已发布文章 —— 应可索引，误带 noindex 才判失败
+ *
+ * 正文定义：只读取 .prose 子树（scripts/html-prose.mjs，与 seo-smoke 共用同一 DOM 定义），
+ * 不用「.prose 到 </article>」正则（会混入 post-end 模板）。
+ * OG 校验：以页面实际 og:image / twitter:image / JSON-LD image 引用为准（绝对 URL），
+ * 同站图映射到 dist 读取真实尺寸与格式，不只检查默认图。
  */
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { XMLValidator, XMLParser } from 'fast-xml-parser';
+import { extractProse, extractProseHtml, metaTag, linkRel, titleTag } from './html-prose.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -151,12 +157,13 @@ for (const page of htmlPages) {
   const slug = page.url.replace(/^\//, '').replace(/\/$/, '');
   const isHome = page.url === '/';
 
-  const title = getMeta(html, /<title>([\s\S]*?)<\/title>/);
-  const desc = getMeta(html, /<meta name="description" content="([^"]*)"/);
-  const canonical = getMeta(html, /<link rel="canonical" href="([^"]*)"/);
-  const ogImage = getMeta(html, /property="og:image" content="([^"]*)"/);
-  const ogW = getMeta(html, /property="og:image:width" content="([^"]*)"/);
-  const ogH = getMeta(html, /property="og:image:height" content="([^"]*)"/);
+  const title = titleTag(html);
+  const desc = metaTag(html, 'description');
+  const canonical = linkRel(html, 'canonical');
+  const ogImage = metaTag(html, 'og:image');
+  const ogW = metaTag(html, 'og:image:width');
+  const ogH = metaTag(html, 'og:image:height');
+  const twitterImage = metaTag(html, 'twitter:image');
   const robotsNoindex = hasNoindex(html);
 
   if (!title) fail(`${page.url}: 缺少 <title>`);
@@ -173,8 +180,15 @@ for (const page of htmlPages) {
   }
 
   if (canonical) {
-    if (!canonical.startsWith(DOMAIN + '/') && canonical !== DOMAIN) {
-      fail(`${page.url}: canonical 不是生产绝对地址 -> ${canonical}`);
+    // canonical 必须与该页面的实际期望 URL 全值一致（不只看域名开头）
+    // 404 页特殊：期望地址为 /404（无 .html 后缀，与线上一致）
+    let expected;
+    if (is404) expected = DOMAIN + '/404';
+    else if (isHome) expected = DOMAIN + '/';
+    else expected = DOMAIN + page.url;
+    const expectedNoSlash = expected.replace(/\/$/, '');
+    if (canonical !== expected && canonical !== expectedNoSlash && !(isHome && canonical === DOMAIN)) {
+      fail(`${page.url}: canonical 不是本页期望地址（期望 ${expected}，实际 ${canonical}）`);
     }
     if (/[?#]/.test(canonical)) fail(`${page.url}: canonical 含 fragment 或查询参数 -> ${canonical}`);
     if (canonicalSet.has(canonical)) fail(`canonical 重复: ${canonical}`);
@@ -195,31 +209,53 @@ for (const page of htmlPages) {
   const h1s = (html.match(/<h1[ >]/g) || []).length;
   if (h1s !== 1) fail(`${page.url}: H1 数量为 ${h1s}，应为 1`);
 
-  // 文章页正文：.prose 存在且有实质内容（不用全页固定字符数冒充）
+  // 文章页正文：读取真实 .prose 子树（排除 post-end/脚本/样式），检测空正文/只剩模板/主体截断
   const isPost = published.some((p) => p.slug === slug);
   if (isPost) {
-    const prose = (html.match(/<div class="prose">([\s\S]*?)<\/article>/) || [])[1] || '';
-    const proseText = prose.replace(/<[^>]+>/g, '').replace(/\s+/g, '');
-    if (!prose || proseText.length < 80) {
-      fail(`${page.url}: 正文 .prose 缺失或过短（${proseText.length} 字符），可能依赖 JS 或只剩模板`);
-    }
-  }
-
-  // og:image 以页面最终引用为准，校验文件真实存在且尺寸声明真实
-  if (ogImage && ogImage.startsWith('/')) {
-    const rel = ogImage.replace(/^\//, '');
-    const fp = join(DIST, decodeURIComponent(rel));
-    if (!existsSync(fp)) fail(`${page.url}: og:image 文件不存在 -> ${ogImage}`);
-    else {
-      const size = imageSize(fp);
-      if (!size) fail(`${page.url}: og:image 不是可识别的 PNG/JPEG -> ${ogImage}`);
-      else if (ogW && ogH && (String(size.width) !== ogW || String(size.height) !== ogH)) {
-        fail(`${page.url}: og:image 尺寸声明不真实（声明 ${ogW}x${ogH}，实际 ${size.width}x${size.height}）`);
+    const proseText = extractProse(html);
+    if (proseText === null) {
+      fail(`${page.url}: 正文 .prose 容器缺失（可能依赖 JS 或模板损坏）`);
+    } else if (proseText.length < 80) {
+      fail(`${page.url}: .prose 正文过短（${proseText.length} 字符），可能只剩模板或被截断`);
+    } else {
+      // 主体截断检测：正文以句号/问号/感叹号/引号等自然结尾更稳；
+      // 若以逗号、冒号或半个括号结尾，大概率被截断
+      const last = proseText[proseText.length - 1];
+      if (/[，：、（]$/.test(last)) {
+        fail(`${page.url}: 正文疑似被截断（以「${last}」结尾）`);
       }
     }
   }
 
-  // JSON-LD 可解析（404 不需要）
+  // og:image / twitter:image / JSON-LD image：以每页实际引用为准（支持绝对与相对 URL），
+  // 同站图映射到 dist 读取真实尺寸与格式，核对声明一致性
+  const ogRefs = [...new Set([ogImage, twitterImage].filter(Boolean))];
+  for (const ref of ogRefs) {
+    let distPath = null;
+    try {
+      const u = new URL(ref, DOMAIN);
+      if (u.origin === DOMAIN) distPath = u.pathname; // 同站图映射到 dist
+      else continue; // 外站图（本站不应出现，但校验器不误报）
+    } catch {
+      fail(`${page.url}: og/twitter image URL 非法 -> ${ref}`);
+      continue;
+    }
+    const fp = join(DIST, decodeURIComponent(distPath));
+    if (!existsSync(fp)) {
+      fail(`${page.url}: 引用的分享图不存在 -> ${ref}`);
+      continue;
+    }
+    const size = imageSize(fp);
+    if (!size) {
+      fail(`${page.url}: 引用的分享图不是可识别的 PNG/JPEG -> ${ref}`);
+      continue;
+    }
+    if (ogW && ogH && (String(size.width) !== ogW || String(size.height) !== ogH)) {
+      fail(`${page.url}: og:image 尺寸声明不真实（声明 ${ogW}x${ogH}，实际 ${size.width}x${size.height}）`);
+    }
+  }
+
+  // JSON-LD 可解析（404 不需要）；Article image 与页面实际引用一致
   const lds = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   if (!lds.length && !is404) fail(`${page.url}: 缺少 JSON-LD`);
   for (const [, raw] of lds) {
@@ -230,6 +266,20 @@ for (const page of htmlPages) {
         if (!o['@type']) fail(`${page.url}: JSON-LD 缺 @type`);
         if (o.url && canonical && o.url !== canonical && !isHome) {
           fail(`${page.url}: JSON-LD url(${o.url}) 与 canonical(${canonical}) 不一致`);
+        }
+        // Article 的 image 引用必须真实存在（同 og:image 校验规则）
+        if (o['@type'] === 'Article' && Array.isArray(o.image)) {
+          for (const imgRef of o.image) {
+            try {
+              const u = new URL(String(imgRef), DOMAIN);
+              if (u.origin !== DOMAIN) continue;
+              if (!existsSync(join(DIST, decodeURIComponent(u.pathname)))) {
+                fail(`${page.url}: JSON-LD image 不存在 -> ${imgRef}`);
+              }
+            } catch {
+              fail(`${page.url}: JSON-LD image URL 非法 -> ${imgRef}`);
+            }
+          }
         }
       }
     } catch (e) {
@@ -253,6 +303,35 @@ for (const page of htmlPages) {
     }
   }
 
+  // 正文信息性图片产物断言：文件存在 + 尺寸/比例有效 + 必要 alt
+  // （自动扫描实际文章集合，不硬编码图片数量；装饰图空 alt 不机械判错）
+  if (isPost) {
+    for (const m of html.matchAll(/<img\s[^>]*>/g)) {
+      const tag = m[0];
+      const src = (tag.match(/\ssrc\s*=\s*["']([^"']+)["']/) || [])[1];
+      if (!src || !src.startsWith('/') || src.startsWith('//')) continue; // 外链不查
+      let decoded;
+      try { decoded = decodeURIComponent(new URL(src, 'http://x').pathname); } catch { decoded = null; }
+      if (!decoded) { fail(`${page.url}: 图片 src 无法解码 -> ${src}`); continue; }
+      const fp = join(DIST, decoded.replace(/^\//, ''));
+      if (!existsSync(fp)) { fail(`${page.url}: 正文图片产物缺失 -> ${src}`); continue; }
+      if (/\.(png|jpe?g)$/i.test(decoded)) {
+        const size = imageSize(fp);
+        if (!size) fail(`${page.url}: 正文图片无法解析尺寸 -> ${src}`);
+        else if (size.width <= 0 || size.height <= 0 || size.width > 20000 || size.height > 20000) {
+          fail(`${page.url}: 正文图片尺寸异常（${size.width}x${size.height}）-> ${src}`);
+        }
+      }
+      // alt：信息性图片应有非空 alt；文件名式 alt（如 image.png）视为缺失
+      const alt = (tag.match(/\salt\s*=\s*["']([^"']*)["']/) || [])[1];
+      if (alt === undefined) {
+        fail(`${page.url}: 图片缺少 alt 属性 -> ${src}`);
+      } else if (alt.trim() && /^(image|img|screenshot|screen ?shot|图片|截图)[-.\d ]*\.(png|jpe?g|gif|webp)?$/i.test(alt.trim())) {
+        fail(`${page.url}: 图片 alt 是文件名占位（${alt}）-> ${src}`);
+      }
+    }
+  }
+
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
   for (const m of html.matchAll(/href="#([^"]+)"/g)) {
     if (!ids.has(m[1])) fail(`${page.url}: 锚点 #${m[1]} 在本页不存在`);
@@ -265,9 +344,10 @@ for (const page of htmlPages) {
   if (post?.wechat && !html.includes(post.wechat)) fail(`${page.url}: 缺少公众号原文链接`);
   if (post?.wechat && canonical === post.wechat) fail(`${page.url}: 微信原文地址被当成了 canonical`);
 
-  // 开发痕迹（正文之外）
+  // 开发痕迹（正文之外）：移除 .prose 子树后再检查
+  const proseRaw = extractProseHtml(html) ?? '';
   const nonProse = html
-    .replace(/<div class="prose">[\s\S]*?<\/article>/, '')
+    .replace(proseRaw, '')
     .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
   if (/localhost|127\.0\.0\.1|file:\/\/\/|[A-Za-z]:\\/.test(nonProse)) {
     fail(`${page.url}: 公共 HTML（正文之外）含本地地址或磁盘路径`);
@@ -281,7 +361,7 @@ for (const [d, urls] of descriptions) if (urls.length > 1) fail(`description 重
 for (const page of htmlPages) {
   if (page.url === '/404.html') continue;
   const html = readFileSync(page.file, 'utf-8');
-  const d = getMeta(html, /<meta name="description" content="([^"]*)"/);
+  const d = metaTag(html, 'description');
   if (d && (d.length < 40 || d.length > 170)) {
     warn(`${page.url}: description 长度 ${d.length}（建议 40-170）：编辑建议，不阻断构建`);
   }
