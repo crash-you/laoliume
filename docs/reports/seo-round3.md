@@ -1,4 +1,4 @@
-# laoliu.me SEO 收尾修复报告（第三轮，2026-09-12）
+# laoliu.me SEO 收尾修复报告（第三轮，2026-09-12 ~ 09-13）
 
 任务书：`laoliume-workbuddy-next-round-2026-09-12.md`
 仓库：`crash-you/laoliume`　站点：`https://laoliu.me`　分支：`seo-round1`（未合并、未部署）
@@ -16,7 +16,7 @@
 | 起始前新增提交 | 无（工作区仅未跟踪的任务书文档，已保留未动） |
 | **代码变更末端 SHA** | `27673fb25da073d44444e9679e85c022c239fec2`（第 5 号提交；**审代码差异请以此为终点**） |
 | 分支末端 | `seo-round1` 末端在其后还有 docs-only 提交（本报告及 §9 补充），不影响代码差异 |
-| 远端同步 | 与 `origin/seo-round1`：ahead 7、behind 0；未强推、未合并 main、未部署 |
+| 远端同步 | **已推送到 `origin/seo-round1`**，远端 SHA == 本地 HEAD（`8760d11`，`git ls-remote` 核对）；未强推、未合并 main、未部署 |
 
 **已存在并被验证后跳过的项**：h1–h6 降级越界（第二轮已修）、`_redirects` 自动生成（第二轮已修）、
 `published:false/noindex` 策略（第二轮已修）、smoke 退出码 0/1/2（第二轮已修）。
