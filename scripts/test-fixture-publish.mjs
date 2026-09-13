@@ -29,9 +29,9 @@ const check = (c, l, d = '') => (c ? ok(l) : bad(l, d));
 
 const validPost = `---
 title: "夹具发布测试文章"
-description: "隔离验证：只新增 Markdown 即可发布。"
+description: "隔离验证：只新增 Markdown 即可发布，分享图回退默认、重定向自动生成。"
 seoTitle: "夹具发布测试文章"
-seoDescription: "隔离验证新增文章即可发布、分享图回退默认、重定向自动生成。"
+seoDescription: "隔离验证新增文章即可发布、分享图回退默认图、重定向自动生成，且显式 noindex 策略不被误判。"
 date: 2026-09-10
 slug: "${FIX_VALID}"
 published: true
@@ -44,16 +44,24 @@ published: true
 正文内容足够长，确保 .prose 检查通过。包含足够多的文字来验证正文完整性校验不会误判短文。
 `;
 
+// 注意：noindex 夹具正文必须是一篇「正常长度的文章」。
+// seo-check 在第三轮改为只提取真实 .prose 子树后，正文门槛（80 字符）开始对
+// 真实正文生效——过短的夹具会被正确判为「正文过短」，从而让夹具测试失败。
+// 夹具代表的是「合格正常站点」，因此这里给足正常篇幅，而不是放宽检查阈值。
 const noindexPost = `---
 title: "夹具 noindex 文章"
-description: "验证显式 noindex 文章正常生成、不进 sitemap/RSS、不误判失败。"
+description: "验证显式 noindex 文章正常生成、不进 sitemap/RSS、不误判构建失败。"
 date: 2026-09-10
 slug: "${FIX_NOINDEX}"
 published: true
 noindex: true
 ---
 
-这是 noindex 夹具正文，用于验证显式 noindex 策略：页面生成、带 noindex、排除 sitemap 与 RSS。
+这是 noindex 夹具正文，用于验证显式 noindex 策略：页面正常生成、输出 noindex 指令、
+同时被排除在 sitemap 与 RSS 之外，并且不会因为 noindex 而被 SEO 校验误判为失败。
+
+正文长度与正常文章一致，确保 .prose 正文完整性检查（空正文 / 只剩模板 / 主体截断）
+不会把一篇合法的短文章误报为错误。
 `;
 
 function build() {
