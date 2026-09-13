@@ -1,1570 +1,618 @@
 [
   {
-    "slug": "blog-build-guide",
-    "line": 28,
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 36,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-1.png",
-    "ctx": "这篇就把我从买域名、做网站，到最后上线 laoliu.me 的完整过程重新走一遍。"
+    "src": "/images/chatgpt-plus-pro-codex/image-1.png",
+    "ctx": "你现在打开网页或者 App，和 AI 聊天、上传文件、生成图片、做 Deep Research，用的都是 ChatGPT"
   },
   {
-    "slug": "blog-build-guide",
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 42,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-2.png",
+    "ctx": "你花钱购买的不是一个更高级的 ChatGPT，而是一套会员权益，包括更多模型、更高的使用额度，以及 Codex、Deep"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 50,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-3.png",
+    "ctx": "不同模型的能力、速度和额度消耗都不一样。"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
     "line": 58,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-2.png",
-    "ctx": "没了！"
+    "src": "/images/chatgpt-plus-pro-codex/image-4.png",
+    "ctx": "所以这四个东西放在一起，大概是这样的："
   },
   {
-    "slug": "blog-build-guide",
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 78,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-5.png",
+    "ctx": "相比免费版，Plus 会提供更多模型和工具权限、更高的消息额度、文件上传、图片生成、Deep Research，以及更高"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 98,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-6.png",
+    "ctx": "100 美元/月和200 美元/月，也简称为 5x ， 20x"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 100,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-7.png",
+    "ctx": "100 美元/月和200 美元/月，也简称为 5x ， 20x"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 140,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-8.png",
+    "ctx": "比如你打开一个项目以后，可以直接告诉 Codex："
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 144,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-9.png",
+    "ctx": "Codex 可以自己读文件、改代码、执行命令，再根据执行结果继续工作。"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 152,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-10.png",
+    "ctx": "Codex 更偏向让 AI 进入一个真实的项目环境里完成任务。"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 170,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-11.png",
+    "ctx": "如果你在 Codex 里不用 ChatGPT 账户登录，而是自己配置OpenAI API Key，那么走的就是 API "
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 180,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-12.png",
+    "ctx": "Codex额度可在chatGPT主页面，点击左下角头像，点击设置，找到使用情况查看额度。"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 260,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-13.png",
+    "ctx": "当前用量、剩余额度以及下一次重置时间。"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 270,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-14.png",
+    "ctx": "查看当前会话对应的使用状态。"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 278,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-15.png",
+    "ctx": "另外，在前几天的一次更新后，Plus 用户又把新的 5小时限额给加上去了，而Pro用户则无5小时限额限制"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 280,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-16.png",
+    "ctx": "另外，在前几天的一次更新后，Plus 用户又把新的 5小时限额给加上去了，而Pro用户则无5小时限额限制"
+  },
+  {
+    "slug": "chatgpt-plus-pro-codex",
+    "line": 292,
+    "alt": "image",
+    "src": "/images/chatgpt-plus-pro-codex/image-17.png",
+    "ctx": "另外，OpenAI 现在也支持符合条件的 Plus 和 Pro 用户单独购买 Credits。"
+  },
+  {
+    "slug": "codex-cli-tutorial",
+    "line": 34,
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-1.png",
+    "ctx": "我们平时使用 Codex App，看到的是窗口、按钮、项目列表这些图形界面。"
+  },
+  {
+    "slug": "codex-cli-tutorial",
+    "line": 40,
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-2.png",
+    "ctx": "你打开终端，进入自己的项目文件夹，输入："
+  },
+  {
+    "slug": "codex-cli-tutorial",
+    "line": 46,
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-3.png",
+    "ctx": "比如我的项目在F盘里的某一个文件夹："
+  },
+  {
+    "slug": "codex-cli-tutorial",
+    "line": 60,
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-4.png",
+    "ctx": "云服务器里还没有安装，可以从0开始。"
+  },
+  {
+    "slug": "codex-cli-tutorial",
     "line": 70,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-3.png",
-    "ctx": "结果一搜价格，500 多一年。"
+    "src": "/images/codex-cli-tutorial/image-5.png",
+    "ctx": "如果机器里没有 Codex，会看到找不到命令之类的提示。"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 80,
+    "slug": "codex-cli-tutorial",
+    "line": 84,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-4.png",
-    "ctx": "首年价格不到 10 块钱。"
+    "src": "/images/codex-cli-tutorial/image-6.png",
+    "ctx": "复制进去，回车即可。"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 92,
+    "slug": "codex-cli-tutorial",
+    "line": 98,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-5.png",
-    "ctx": "laoliu.me 都还能接着用。"
+    "src": "/images/codex-cli-tutorial/image-7.png",
+    "ctx": "如果已经显示版本号，说明 Codex CLI 安装完成。"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 100,
+    "slug": "codex-cli-tutorial",
+    "line": 104,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-6.png",
-    "ctx": "不用那么麻烦，直接大白话说就行！"
+    "src": "/images/codex-cli-tutorial/image-8.png",
+    "ctx": "如果你用的是 Windows，不用照抄我上面的 Linux 命令，只需要在powershell中输入即可"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 116,
+    "slug": "codex-cli-tutorial",
+    "line": 122,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-7.png",
-    "ctx": "域名买好，需求确认完成之后，和GPT说，让 GPT 给我提示词。"
+    "src": "/images/codex-cli-tutorial/image-9.png",
+    "ctx": "看到版本号即可。"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 124,
+    "slug": "codex-cli-tutorial",
+    "line": 138,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-8.png",
-    "ctx": "众所周知，AI coding自己生成的UI，往往丑不拉几的，所以，我让 GPT Image 来帮我设计UI"
+    "src": "/images/codex-cli-tutorial/image-10.png",
+    "ctx": "如果是在自己的 Windows 或 Mac 上使用 Codex，可以输入："
   },
   {
-    "slug": "blog-build-guide",
-    "line": 128,
+    "slug": "codex-cli-tutorial",
+    "line": 142,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-9.png",
-    "ctx": "UI有问题，直接让AI改："
+    "src": "/images/codex-cli-tutorial/image-11.png",
+    "ctx": "然后会跳转到浏览器里，登录ChatGPT"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 136,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-10.png",
-    "ctx": "新建一个文件夹，我给它命名为blog"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 140,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-11.png",
-    "ctx": "在workbuddy中，打开这个文件夹"
-  },
-  {
-    "slug": "blog-build-guide",
+    "slug": "codex-cli-tutorial",
     "line": 146,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-12.png",
-    "ctx": "模型选择极致："
+    "src": "/images/codex-cli-tutorial/image-12.png",
+    "ctx": "选择你的账户"
   },
   {
-    "slug": "blog-build-guide",
+    "slug": "codex-cli-tutorial",
+    "line": 150,
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-13.png",
+    "ctx": "个人账户，然后继续"
+  },
+  {
+    "slug": "codex-cli-tutorial",
+    "line": 154,
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-14.png",
+    "ctx": "成功！"
+  },
+  {
+    "slug": "codex-cli-tutorial",
     "line": 158,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-13.png",
-    "ctx": "网址： github.com"
+    "src": "/images/codex-cli-tutorial/image-15.png",
+    "ctx": "成功之后，终端会显示“successfully logged in”"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 162,
+    "slug": "codex-cli-tutorial",
+    "line": 194,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-14.png",
-    "ctx": "点击New"
+    "src": "/images/codex-cli-tutorial/image-16.png",
+    "ctx": "我在我的F盘里，新建了一个test文件夹，然后找到后，右键点击复制文件地址"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 166,
+    "slug": "codex-cli-tutorial",
+    "line": 202,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-15.png",
-    "ctx": "设置好，仓库地址，仓库昵称，选择是否为公开仓库之后，点击Create repository"
+    "src": "/images/codex-cli-tutorial/image-17.png",
+    "ctx": "打开powershell，进入这个目录："
   },
   {
-    "slug": "blog-build-guide",
-    "line": 172,
+    "slug": "codex-cli-tutorial",
+    "line": 212,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-16.png",
-    "ctx": "复制一下仓库地址"
+    "src": "/images/codex-cli-tutorial/image-18.png",
+    "ctx": "Codex CLI 就会在这个项目目录里启动。如果是第一次的话，会提示是否信任，选择yes，然后回车"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 176,
+    "slug": "codex-cli-tutorial",
+    "line": 216,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-17.png",
-    "ctx": "接下来就不用动了，等待workbuddy写好代码。"
+    "src": "/images/codex-cli-tutorial/image-19.png",
+    "ctx": "启动完成"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 192,
+    "slug": "codex-cli-tutorial",
+    "line": 230,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-18.png",
-    "ctx": "在访问之前，我又问了一下GPT，让GPT给我一次上线前验收"
+    "src": "/images/codex-cli-tutorial/image-20.png",
+    "ctx": "因为这是个新目录，它应该会告诉你目前没有什么项目文件。"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 206,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-19.png",
-    "ctx": "所以把，GPT再次给我的上线前验收指令，与授权workbuddy让它帮我授权指令，全都给workbuddy"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 210,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-20.png",
-    "ctx": "部署成功以后，Cloudflare 会先生成一个 workers.dev 地址。"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 232,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-21.png",
-    "ctx": "同一个浏览器短时间重复刷新，不会一直加。"
-  },
-  {
-    "slug": "blog-build-guide",
+    "slug": "codex-cli-tutorial",
     "line": 244,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-22.png",
-    "ctx": "打开我们刚刚购买域名的网址，点击launchpad"
+    "src": "/images/codex-cli-tutorial/image-21.png",
+    "ctx": "可以输入："
   },
   {
-    "slug": "blog-build-guide",
+    "slug": "codex-cli-tutorial",
     "line": 248,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-23.png",
-    "ctx": "点击域名管理器"
+    "src": "/images/codex-cli-tutorial/image-22.png",
+    "ctx": "Codex 会创建文件，在test文件夹里，也有了一个 index.html 文件"
   },
   {
-    "slug": "blog-build-guide",
+    "slug": "codex-cli-tutorial",
     "line": 252,
     "alt": "image",
-    "src": "/images/blog-build-guide/image-24.png",
-    "ctx": "就可以看到我们刚刚买的域名"
+    "src": "/images/codex-cli-tutorial/image-23.png",
+    "ctx": "双击打开就是"
   },
   {
-    "slug": "blog-build-guide",
-    "line": 256,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-25.png",
-    "ctx": "点击域名，点击名称服务和DNS"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 260,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-26.png",
-    "ctx": "把这里的配置，更改为cloudflare中所显示要配置的"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 264,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-27.png",
-    "ctx": "这个在哪找呢，登录cloudflare，点击概览"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 268,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-28.png",
-    "ctx": "点击添加域名"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 272,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-29.png",
-    "ctx": "连接域名"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 276,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-30.png",
-    "ctx": "输入域名，其他保持默认，点击继续"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 280,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-31.png",
-    "ctx": "选择免费计划"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 284,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-32.png",
-    "ctx": "继续前往激活"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 288,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-33.png",
-    "ctx": "把这里现实的服务器名称，在 spaceship里更改"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 290,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-34.png",
-    "ctx": "把这里现实的服务器名称，在 spaceship里更改"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 296,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-35.png",
-    "ctx": "回到cloudflare，点击check nameservers now"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 300,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-36.png",
-    "ctx": "当前是等待状态"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 304,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-37.png",
-    "ctx": "过一会，发现有一个绿色的勾，说明我们刚刚的nameserver替换成功了"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 312,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-38.png",
-    "ctx": "进入cloudflare.com"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 316,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-39.png",
-    "ctx": "找到SSL/TLS encryption mode，选择Flexible"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 320,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-40.png",
-    "ctx": "B：开启 Always Use HTTPS"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 324,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-41.png",
-    "ctx": "C：root → www 重定向"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 340,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-42.png",
-    "ctx": "创建 worker"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 344,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-43.png",
-    "ctx": "选择使用 GitHub"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 348,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-44.png",
-    "ctx": "选择刚刚我们创建的GitHub仓库"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 352,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-45.png",
-    "ctx": "部署"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 356,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-46.png",
-    "ctx": "等待一段时间"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 360,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-47.png",
-    "ctx": "部署完成"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 404,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-48.png",
-    "ctx": "公众号：佬刘AI"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 414,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-49.png",
-    "ctx": "点击以后，会打开对应的微信公众号原文。"
-  },
-  {
-    "slug": "blog-build-guide",
-    "line": 418,
-    "alt": "image",
-    "src": "/images/blog-build-guide/image-50.png",
-    "ctx": "填哪篇公众号文章，它就跳到哪篇。文章底部我也保留了公众号原文入口。没有二维码，没有弹窗，没有关注浮窗。我还是想让这个网站"
-  },
-  {
-    "slug": "codex-buy",
-    "line": 40,
-    "alt": "image\\.png",
-    "src": "/images/codex-buy/image-6.png",
-    "ctx": "开通对应套餐后，用同一个 OpenAI 账号登录 Codex 就可以。"
-  },
-  {
-    "slug": "codex-buy",
-    "line": 48,
-    "alt": "image\\.png",
-    "src": "/images/codex-buy/image-3.png",
-    "ctx": "打开 ChatGPT 官网 ： chatgpt.com"
-  },
-  {
-    "slug": "codex-buy",
-    "line": 54,
-    "alt": "image\\.png",
-    "src": "/images/codex-buy/image-8.png",
-    "ctx": "点击头像，升级套餐"
-  },
-  {
-    "slug": "codex-buy",
-    "line": 58,
-    "alt": "image\\.png",
-    "src": "/images/codex-buy/image.png",
-    "ctx": "选择需要的套餐。Plus 或 Pro"
-  },
-  {
-    "slug": "codex-buy",
-    "line": 64,
-    "alt": "image\\.png",
-    "src": "/images/codex-buy/image-5.png",
-    "ctx": "网页端目前支持的基础付款方式是：信用卡和借记卡。"
-  },
-  {
-    "slug": "codex-buy",
-    "line": 82,
-    "alt": "image\\.png",
-    "src": "/images/codex-buy/image-2.png",
-    "ctx": "中国大陆发行的银行卡，即使支持境外消费，不能简单理解成“有 Visa 就一定能付”。"
-  },
-  {
-    "slug": "codex-buy",
-    "line": 100,
-    "alt": "image\\.png",
-    "src": "/images/codex-buy/image-4.png",
-    "ctx": "付款也走对应应用商店的支付体系，这个方式和网页端银行卡支付不是一个通道。"
-  },
-  {
-    "slug": "codex-buy",
-    "line": 112,
-    "alt": "image\\.png",
-    "src": "/images/codex-buy/image-1.png",
-    "ctx": "如果你每天让 Codex 跑大量任务，再考虑 Pro。"
-  },
-  {
-    "slug": "codex-buy",
-    "line": 130,
-    "alt": "image\\.png",
-    "src": "/images/codex-buy/image-7.png",
-    "ctx": "小店里有 ChatGPT对应的会员服务。"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 54,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-2.png",
-    "ctx": "最简单的方法，就是直接告诉Codex你要用中文："
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 96,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-8.png",
-    "ctx": "比如如果你喜欢当霸总，可以限制说“每次回答前先说一句霸总！”"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 126,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-11.png",
-    "ctx": "Windows版Codex App和Windows原生Codex默认共用这个目录。"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 136,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-6.png",
-    "ctx": "文件夹名称就是："
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 170,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-3.png",
-    "ctx": "可以在文件资源管理器顶部点击："
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 174,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-10.png",
-    "ctx": "确认最终文件名确实是：AGENTS.md"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 195,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image.png",
-    "ctx": "保存文件。"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 221,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-4.png",
-    "ctx": "同时，代码、文件名、命令和技术名词仍然保留英文。"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 239,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-12.png",
-    "ctx": "Codex能够正确说出全局AGENTS.md的路径，并复述出刚才设置的中文规则，基本就说明设置已经生效。"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 249,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-9.png",
-    "ctx": "官方文档预期Codex会复述~/.codex/AGENTS.md中的规则。"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 295,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-1.png",
-    "ctx": "这个简单一点，打开codex页面，点击右下角的设置"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 301,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-7.png",
-    "ctx": "把上方的提示词，复制到这里，点击保存即可。"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 311,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-13.png",
-    "ctx": "打开Codex App之后，进入Settings"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 315,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-5.png",
-    "ctx": "然后找到常规，往下滑，找到语言"
-  },
-  {
-    "slug": "codex-chinese-settings",
-    "line": 319,
-    "alt": "image\\.png",
-    "src": "/images/codex-chinese-settings/image-14.png",
-    "ctx": "将它修改成，Chinese（简体中文）"
-  },
-  {
-    "slug": "codex-custom-memory-skill",
-    "line": 43,
-    "alt": "image\\.png",
-    "src": "/images/codex-custom-memory-skill/image-6.png",
-    "ctx": "在 Codex 中调用 /skill installer："
-  },
-  {
-    "slug": "codex-custom-memory-skill",
-    "line": 55,
-    "alt": "image\\.png",
-    "src": "/images/codex-custom-memory-skill/image-7.png",
-    "ctx": "然后告诉它："
-  },
-  {
-    "slug": "codex-custom-memory-skill",
-    "line": 153,
-    "alt": "image\\.png",
-    "src": "/images/codex-custom-memory-skill/image-5.png",
-    "ctx": "然后，我在 Codex 中进入 Plan 模式，发了第一条指令。"
-  },
-  {
-    "slug": "codex-custom-memory-skill",
-    "line": 246,
-    "alt": "image\\.png",
-    "src": "/images/codex-custom-memory-skill/image-2.png",
-    "ctx": "输入完成等待一段时间之后，就给了一堆的计划md文档"
-  },
-  {
-    "slug": "codex-custom-memory-skill",
-    "line": 250,
-    "alt": "image\\.png",
-    "src": "/images/codex-custom-memory-skill/image-1.png",
-    "ctx": "仓库目录"
-  },
-  {
-    "slug": "codex-custom-memory-skill",
-    "line": 260,
-    "alt": "image\\.png",
-    "src": "/images/codex-custom-memory-skill/image-3.png",
-    "ctx": "我给 Codex 的第二条指令是："
-  },
-  {
-    "slug": "codex-custom-memory-skill",
-    "line": 382,
-    "alt": "image\\.png",
-    "src": "/images/codex-custom-memory-skill/image.png",
-    "ctx": "生成完成以后，第一版的目录大概是这样："
-  },
-  {
-    "slug": "codex-custom-memory-skill",
-    "line": 415,
-    "alt": "image\\.png",
-    "src": "/images/codex-custom-memory-skill/image-8.png",
-    "ctx": "真正使用 Skill 的时候，再读取完整的 SKILL.md 和相关资料。"
-  },
-  {
-    "slug": "codex-custom-memory-skill",
-    "line": 441,
-    "alt": "image\\.png",
-    "src": "/images/codex-custom-memory-skill/image-4.png",
-    "ctx": "接下来，我让 Codex 实现两个确定性脚本。"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 46,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-11.png",
-    "ctx": "旧教程里常见的deepseek-chat和deepseek-reasoner已经停止使用，当前接入时不要再填写这两个旧模"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 48,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-28.png",
-    "ctx": "旧教程里常见的deepseek-chat和deepseek-reasoner已经停止使用，当前接入时不要再填写这两个旧模"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 96,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-21.png",
-    "ctx": "打开PowerShell，如果不知道怎么找，可以直接在底部搜索框输入 powershell："
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 102,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-4.png",
-    "ctx": "codex --version"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 108,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-27.png",
-    "ctx": "如果你的版本低于0.144.0，打开chatGPT软件，左下角这里会有一个蓝色的更新按钮，更新一下，，再继续操作。"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 120,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-15.png",
-    "ctx": "打开deepseek官网：https://www.deepseek.com/"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 124,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image.png",
-    "ctx": "点击API开放平台，按照流程注册实名好之后，会看到一个这样的页面"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 128,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-23.png",
-    "ctx": "点击API Keys，点击创建 API Key"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 132,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-16.png",
-    "ctx": "输入一个可以正常识别的名称（方便你后续知道这个Key的工作内容是什么），比如 接入Codex"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 136,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-10.png",
-    "ctx": "点击创建，成功后，会返回给你一个sk开头的key，注意注意！这个key只会出现一次！！也不要让任何人拿到你的key！任何"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 150,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-26.png",
-    "ctx": "DeepSeek账户的可用余额由充值余额和未过期赠送余额组成。"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 170,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-2.png",
-    "ctx": "irm https://cdn.deepseek.com/api-docs/codex-deepseek-setup-e"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 178,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-18.png",
-    "ctx": "当前菜单对应关系如下："
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 182,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-9.png",
-    "ctx": "第一次接入，建议输入 1："
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 194,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-13.png",
-    "ctx": "切换也很简单！codex中直接选择就行！"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 200,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-1.png",
-    "ctx": "把刚刚创建的、以sk-开头的API Key粘贴进去。"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 204,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-6.png",
-    "ctx": "enter！"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 248,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-3.png",
-    "ctx": ""
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 258,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-20.png",
-    "ctx": "如果让你勾选是否信任此项目，选择信任即可"
-  },
-  {
-    "slug": "codex-deepseek",
+    "slug": "codex-cli-tutorial",
     "line": 270,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-17.png",
-    "ctx": "查看当前会话正在使用的模型、目录和权限设置。"
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-24.png",
+    "ctx": "进入 Codex 后输入："
   },
   {
-    "slug": "codex-deepseek",
-    "line": 274,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-5.png",
-    "ctx": "可以尝试问一下，你是什么模型？"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 282,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-30.png",
-    "ctx": "你就会惊奇的发现，codex下方模型选择处，已经变为deepsek模型了！"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 294,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-24.png",
-    "ctx": "只要余额发生变化，或者后台出现对应调用记录，就能确认这次任务确实通过DeepSeek API完成。"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 336,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-14.png",
-    "ctx": "然后codex，就会苦哈哈的执行任务了"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 340,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-19.png",
-    "ctx": "经过一段时间思考执行，最终输出"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 342,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-12.png",
-    "ctx": "经过一段时间思考执行，最终输出"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 376,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-25.png",
-    "ctx": "可以选择新建一个文件"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 410,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-29.png",
-    "ctx": "也可以直接在codex里选择  deepseek-v4-flash-vision-exp 选项。"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 442,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-22.png",
-    "ctx": "然后重新选择："
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 458,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-7.png",
-    "ctx": "选择 9"
-  },
-  {
-    "slug": "codex-deepseek",
-    "line": 516,
-    "alt": "image\\.png",
-    "src": "/images/codex-deepseek/image-8.png",
-    "ctx": "因此，接入成功不等于所有高级功能都能和OpenAI官方模型保持完全一致。"
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 28,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-4.png",
-    "ctx": "后来我换了一套思路，真的把问题解决掉了。昨天我还专门在群里分享了一下这件事情。"
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 34,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-11.png",
-    "ctx": "我去！模型真的越来越强了。"
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 50,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-3.png",
-    "ctx": "这个项目从Round 1一路跑到了 Round 31。"
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 64,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-10.png",
-    "ctx": "我的交接文档还停在 Round 26。"
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 66,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-9.png",
-    "ctx": "我的交接文档还停在 Round 26。"
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 82,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-2.png",
-    "ctx": "这些东西如果全部进入长期记忆，项目做不了多久，记忆自己就先爆啦。"
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 119,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-7.png",
-    "ctx": "六个问题全部回答完，再决定哪些信息写入长期记忆，这些规则存储在 agents.md 里："
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 173,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-6.png",
-    "ctx": "直接拆开存："
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 183,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-8.png",
-    "ctx": "历史记忆需要的时候再查。"
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 242,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-12.png",
-    "ctx": "我会直接在 AGENTS.md 里写："
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 250,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-5.png",
-    "ctx": "这一步最好放在每个任务完成、准备切换阶段、准备压缩上下文的时候自动执行。"
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 289,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-13.png",
-    "ctx": "每次新对话只按这个顺序读取："
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 305,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image-1.png",
-    "ctx": ""
-  },
-  {
-    "slug": "codex-long-term-memory",
-    "line": 454,
-    "alt": "image\\.png",
-    "src": "/images/codex-long-term-memory/image.png",
-    "ctx": "AI负责理解记忆，脚本负责检查 AI 有没有认真记。"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 38,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-10.png",
-    "ctx": "但是在 Codex 最新源码里，$CODEX_HOME/skills 已经明确被标成了 Deprecated user "
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 58,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-18.png",
-    "ctx": ""
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 131,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-6.png",
-    "ctx": "最后封装成了一个 Codex 能自己调用的能力包。"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 145,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-2.png",
-    "ctx": "Codex 会列出当前可以使用的 Skill。"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 151,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-24.png",
-    "ctx": "一种是你自己明确指定 Skill，比如图中，按键盘上下键可以自己选择某个skill"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 174,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-19.png",
-    "ctx": "打开软件在页面输入 /skill ，就会看到skill列表！"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 198,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-14.png",
-    "ctx": "执行以后，Codex 会帮你安装 Linear Skill。"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 202,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-5.png",
-    "ctx": "然后等待一段时间，就安装成功了！"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 220,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-1.png",
-    "ctx": "比如："
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 226,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-22.png",
-    "ctx": "等待一段时间后，skill安装成功！"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 238,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-11.png",
-    "ctx": "所以 GitHub 上看到一个 Skill，最好还是先看一下来源和代码（让codex看就行）"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 288,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-17.png",
-    "ctx": "这种 Skill 可以直接跟着 Git 仓库一起提交。"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 314,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-3.png",
-    "ctx": "这才是目前官方文档里的用户级 Skill 推荐位置。"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 352,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-21.png",
-    "ctx": "最直接，直接输入： /skill"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 358,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-23.png",
-    "ctx": "这样就属于明确告诉 Codex：这次任务，你给我按这个 Skill 来。"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 483,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-12.png",
-    "ctx": "比如我们现在现场做一个最简单的："
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 494,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-16.png",
-    "ctx": "完成以后，你会得到类似："
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 498,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-15.png",
-    "ctx": "打开 SKILL.md。"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 533,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-9.png",
-    "ctx": "第一轮明确调用："
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 542,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-7.png",
-    "ctx": "第二轮完全不写 Skill 名："
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 557,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-13.png",
-    "ctx": "直接把问题发给codex，把绝对路径给codex，让codex自己修复！"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 567,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-8.png",
-    "ctx": "还是和codex直接说，把skill安装的绝对路径发给AI！"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 583,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-4.png",
-    "ctx": "直接问codex："
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 627,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image.png",
-    "ctx": "而不是为了拥有 Skill 去安装 Skill。"
-  },
-  {
-    "slug": "codex-skill-usage",
-    "line": 651,
-    "alt": "image\\.png",
-    "src": "/images/codex-skill-usage/image-20.png",
-    "ctx": "这也是为什么我觉得 Skill 这个东西值得单独学一下。"
-  },
-  {
-    "slug": "de-ai-flavor-prompts",
-    "line": 83,
-    "alt": "image\\.png",
-    "src": "/images/de-ai-flavor-prompts/image-2.png",
-    "ctx": "这一句对汇报材料很好用。"
-  },
-  {
-    "slug": "de-ai-flavor-prompts",
-    "line": 107,
-    "alt": "image\\.png",
-    "src": "/images/de-ai-flavor-prompts/image-3.png",
-    "ctx": "组会汇报就够了。"
-  },
-  {
-    "slug": "de-ai-flavor-prompts",
-    "line": 129,
-    "alt": "image\\.png",
-    "src": "/images/de-ai-flavor-prompts/image.png",
-    "ctx": "重点是把空话换成信息。"
-  },
-  {
-    "slug": "de-ai-flavor-prompts",
-    "line": 167,
-    "alt": "image\\.png",
-    "src": "/images/de-ai-flavor-prompts/image-1.png",
-    "ctx": ""
-  },
-  {
-    "slug": "de-ai-flavor-prompts",
-    "line": 213,
-    "alt": "image\\.png",
-    "src": "/images/de-ai-flavor-prompts/image-4.png",
-    "ctx": "这里的已经不能乱删，因为它表达了状态。"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 34,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-11.png",
-    "ctx": "首先，下载或者直接在浏览器搜索“谷歌”"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 38,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-10.png",
-    "ctx": "点第一个，进去之后，会有这样的页面"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 42,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-28.png",
-    "ctx": "点击右上角登录"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 46,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-3.png",
-    "ctx": "点击左下角的创建账号"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 50,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-38.png",
-    "ctx": "选择个人用途"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 54,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-21.png",
-    "ctx": "点击之后，会让你去输入姓名，这里无所谓，我演示用，就输入"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 56,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-8.png",
-    "ctx": "点击之后，会让你去输入姓名，这里无所谓，我演示用，就输入"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 64,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-27.png",
-    "ctx": "这里也是随便填，注意的是大于20岁！"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 66,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-34.png",
-    "ctx": "这里也是随便填，注意的是大于20岁！"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 74,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-18.png",
-    "ctx": "这里邮箱，谷歌会根据你输入的姓名，给你推荐两个，可以选择也可以自定义"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 78,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-16.png",
-    "ctx": "我这里自定义一个"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 82,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-35.png",
-    "ctx": "然后点击下一步"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 86,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-13.png",
-    "ctx": "这里会让你输入密码，输一个你能记住的就行，演示用我就随便输入一个"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 90,
-    "alt": "bd8c10d5a9bfeb3c646c439edc7aa48f\\.jpg",
-    "src": "/images/from-0-to-1-chatgpt/bd8c10d5a9bfeb3c646c439edc7aa48f.jpg",
-    "ctx": "接下来这一步骤是让你输入手机号，或者用你当前的设备向谷歌提供的短信地址发送一条短信"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 98,
-    "alt": "47b5714a5fea675b060f52ccc1b7f2b7\\.jpg",
-    "src": "/images/from-0-to-1-chatgpt/47b5714a5fea675b060f52ccc1b7f2b7.jpg",
-    "ctx": "不过现在的手机一般都内置的有谷歌服务，在自己手机里创建也可以"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 104,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-1.png",
-    "ctx": "打开GPT的官网： chatgpt.com"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 110,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-30.png",
-    "ctx": "选择谷歌登录"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 114,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-20.png",
-    "ctx": "选择当前的谷歌账号，"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 118,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-17.png",
-    "ctx": "如果没有，点击使用其他账号，把你刚刚注册的谷歌号添加进去即可"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 122,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-7.png",
-    "ctx": "继续"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 126,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-5.png",
-    "ctx": "输入年龄全名"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 130,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-41.png",
-    "ctx": "注册完成"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 140,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-4.png",
-    "ctx": "打开GPT的官网： chatgpt.com"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 146,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-33.png",
-    "ctx": "选择使用电子邮箱地址"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 154,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-12.png",
-    "ctx": "我这里以qq邮箱举例"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 158,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-22.png",
-    "ctx": "接受验证码"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 160,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-39.png",
-    "ctx": "接受验证码"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 166,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-19.png",
-    "ctx": "依旧是输入年龄、姓名"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 170,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-23.png",
-    "ctx": "继续"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 186,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-32.png",
-    "ctx": "网址：https://chatgpt.com/zh-Hans-CN/codex/"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 194,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-29.png",
-    "ctx": "ChatGPT Installer.exe/images/from-0-to-1-chatgpt/ChatGPT-Ins"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 202,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-26.png",
-    "ctx": "如果在微软商店下载，记得看发布厂商"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 230,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-36.png",
-    "ctx": "注意：如果登录不上去，或者显示有误，打开 tun 模式即可"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 234,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-15.png",
-    "ctx": "点击使用GPT登录"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 240,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-25.png",
-    "ctx": "如果你的账号已经登录，那么就会和我的显示一样，使用个人账户点击继续就行"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 246,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-14.png",
-    "ctx": "完成"
-  },
-  {
-    "slug": "from-0-to-1-chatgpt",
+    "slug": "codex-cli-tutorial",
     "line": 280,
-    "alt": "d8ecd9f58f3310d5c31d5522cf2e2ac4\\.png",
-    "src": "/images/from-0-to-1-chatgpt/d8ecd9f58f3310d5c31d5522cf2e2ac4.png",
-    "ctx": "如果跳的话"
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-25.png",
+    "ctx": "输入：/status"
   },
   {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 286,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-31.png",
-    "ctx": "https://pay.ldxp.cn/shop/liu"
+    "slug": "codex-cli-tutorial",
+    "line": 288,
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-26.png",
+    "ctx": "输入： /model"
   },
   {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 294,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image.png",
-    "ctx": "然后会给你返回一个页面"
+    "slug": "codex-cli-tutorial",
+    "line": 292,
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-27.png",
+    "ctx": "可以选择当前会话使用的模型。"
   },
   {
-    "slug": "from-0-to-1-chatgpt",
+    "slug": "codex-cli-tutorial",
     "line": 298,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-2.png",
-    "ctx": "复制卡密，点击接码地址"
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-28.png",
+    "ctx": "输入： /resume"
   },
   {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 302,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-40.png",
-    "ctx": "把卡密输入进去即可"
+    "slug": "codex-cli-tutorial",
+    "line": 306,
+    "alt": "image",
+    "src": "/images/codex-cli-tutorial/image-29.png",
+    "ctx": "输入 /new"
   },
   {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 304,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-37.png",
-    "ctx": "把卡密输入进去即可"
+    "slug": "codex-ppt-skills",
+    "line": 67,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-1.png",
+    "ctx": "直接把下面这段扔给Codex："
   },
   {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 312,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-9.png",
-    "ctx": "over！"
+    "slug": "codex-ppt-skills",
+    "line": 73,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-2.png",
+    "ctx": "装完以后，就可以开始做PPT了。"
   },
   {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 328,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-6.png",
-    "ctx": "https://pay.ldxp.cn/shop/liu"
+    "slug": "codex-ppt-skills",
+    "line": 101,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-3.png",
+    "ctx": "我会这样说："
   },
   {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 340,
-    "alt": "image\\.png",
-    "src": "/images/from-0-to-1-chatgpt/image-24.png",
-    "ctx": "然后到对应网址  https://plus.whh985.xyz/https://plus.whh985.xyz/ "
+    "slug": "codex-ppt-skills",
+    "line": 109,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-4.png",
+    "ctx": "先让它把页面结构给你，你先看这个故事讲得顺不顺。"
   },
   {
-    "slug": "from-0-to-1-chatgpt",
-    "line": 344,
-    "alt": "e262df5788ae8b17540dc6652f4d18aa\\.jpg",
-    "src": "/images/from-0-to-1-chatgpt/e262df5788ae8b17540dc6652f4d18aa.jpg",
-    "ctx": "把卡密复制进去"
+    "slug": "codex-ppt-skills",
+    "line": 127,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-5.png",
+    "ctx": "结构没问题，再决定是否生成说："
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 18,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-4.png",
-    "ctx": "这几天社群一直有人问我，能不能分享一期Vibe coding技巧"
+    "slug": "codex-ppt-skills",
+    "line": 131,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-6.png",
+    "ctx": "这样出来的东西，才是一个可以继续修改的PPT。"
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 88,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-14.png",
-    "ctx": "整个流程大概是这样："
+    "slug": "codex-ppt-skills",
+    "line": 135,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-7.png",
+    "ctx": "还启动了一个页面，可以在内部修改对应元素标签。"
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 92,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-18.png",
-    "ctx": "而且我去翻了一下 GPT 最新的官方 Prompting 建议，方向其实也差不多：比起给模型塞一大堆机械步骤，更重要的是"
+    "slug": "codex-ppt-skills",
+    "line": 174,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-8.png",
+    "ctx": "还是一样："
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 138,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-6.png",
-    "ctx": ""
+    "slug": "codex-ppt-skills",
+    "line": 199,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-9.png",
+    "ctx": "等待计划："
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 152,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-3.png",
-    "ctx": "所以这一轮，我只让它问。"
+    "slug": "codex-ppt-skills",
+    "line": 210,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-10.png",
+    "ctx": "然后确认："
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 158,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-5.png",
-    "ctx": "最后慢慢把这个产品确定下来。"
+    "slug": "codex-ppt-skills",
+    "line": 212,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-11.png",
+    "ctx": "然后确认："
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 200,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-8.png",
-    "ctx": "所以第一版最后被我砍成了几个东西。"
+    "slug": "codex-ppt-skills",
+    "line": 246,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-12.png",
+    "ctx": " 怎么安装？"
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 244,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-12.png",
-    "ctx": ""
+    "slug": "codex-ppt-skills",
+    "line": 280,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-13.png",
+    "ctx": "我之前写了一篇个人博客网站搭建，我会这样说："
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 294,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-7.png",
-    "ctx": ""
+    "slug": "codex-ppt-skills",
+    "line": 292,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-14.png",
+    "ctx": "这才是PPT。"
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 300,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-19.png",
-    "ctx": "让 Pro 先决定页面应该长什么样。"
+    "slug": "codex-ppt-skills",
+    "line": 347,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-15.png",
+    "ctx": " 怎么安装？"
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 308,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-17.png",
-    "ctx": "效果图："
-  },
-  {
-    "slug": "vibe-coding-practice",
-    "line": 358,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-9.png",
-    "ctx": ""
-  },
-  {
-    "slug": "vibe-coding-practice",
-    "line": 364,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-1.png",
-    "ctx": "然后 Codex 拿到需求之后，再让它自己当一次技术负责人。"
-  },
-  {
-    "slug": "vibe-coding-practice",
-    "line": 372,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-16.png",
-    "ctx": " 九、计划确认后，再让 Codex 一段一段做"
-  },
-  {
-    "slug": "vibe-coding-practice",
-    "line": 378,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-10.png",
-    "ctx": "第一版成品！"
-  },
-  {
-    "slug": "vibe-coding-practice",
-    "line": 380,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-15.png",
-    "ctx": "第一版成品！"
-  },
-  {
-    "slug": "vibe-coding-practice",
+    "slug": "codex-ppt-skills",
     "line": 382,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-13.png",
-    "ctx": "第一版成品！"
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-16.png",
+    "ctx": "然后它给你规划完。"
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 448,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-2.png",
+    "slug": "codex-ppt-skills",
+    "line": 399,
+    "alt": "image",
+    "src": "/images/codex-ppt-skills/image-17.png",
+    "ctx": "确认："
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 18,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-1.png",
+    "ctx": "如果你最近在用 Codex，大概率已经见过那个额度条了。"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 36,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-2.png",
+    "ctx": "比如你是 Plus，就使用 Plus 对应的 Codex 权益；你是 Pro，则会拥有比 Plus 更高的使用量。"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 46,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-3.png",
+    "ctx": "当你的套餐自带额度耗尽以后，如果账号支持购买 Credits，就可以继续按使用量消耗 Credits，不需要为了多用一点"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 54,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-4.png",
+    "ctx": "Reset 的作用，是把你的 Codex 使用窗口重新刷新。"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 62,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-5.png",
+    "ctx": "现在可以在：Settings → Usage"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 64,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-6.png",
+    "ctx": "现在可以在：Settings → Usage"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 80,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-7.png",
+    "ctx": "Codex 会把当前会话和使用情况显示出来。"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 122,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-8.png",
+    "ctx": "如果是项目做到一半，今天就要继续干，可以看看自己的账号有没有 邀请好友。"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 124,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-9.png",
+    "ctx": "如果是项目做到一半，今天就要继续干，可以看看自己的账号有没有 邀请好友。"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 142,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-10.png",
+    "ctx": "官方已经非常贴心的，把购买额度放到主页了，不过需要海外银行卡这些。"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 144,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-11.png",
+    "ctx": "官方已经非常贴心的，把购买额度放到主页了，不过需要海外银行卡这些。"
+  },
+  {
+    "slug": "codex-quota-buy",
+    "line": 154,
+    "alt": "image",
+    "src": "/images/codex-quota-buy/image-12.png",
+    "ctx": "https://wzyp.cn/shop/liu"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 50,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-1.png",
+    "ctx": "就这一句。"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 66,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-2.png",
+    "ctx": "它先把我的研究问题转换成适合检索的英文表达，再扩展相关关键词。"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 72,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-3.png",
+    "ctx": "我只需要等结果。"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 94,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-4.png",
+    "ctx": "在codex中安装"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 98,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-5.png",
+    "ctx": "下载项目以后，codex还贴心的告诉你，怎么使用"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 116,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-6.png",
+    "ctx": "然后开始自己跑检索流程。"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 126,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-7.png",
+    "ctx": "所以最后看到的不是一堆乱七八糟的搜索记录，而是一张整理好的文献表。"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 132,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-8.png",
+    "ctx": "随便点击一个链接"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 158,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-9.png",
+    "ctx": "待核验"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 176,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-10.png",
+    "ctx": "它就继续筛。"
+  },
+  {
+    "slug": "literature-search-skill",
+    "line": 184,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-11.png",
     "ctx": ""
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 480,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image.png",
+    "slug": "literature-search-skill",
+    "line": 192,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-12.png",
     "ctx": ""
   },
   {
-    "slug": "vibe-coding-practice",
-    "line": 546,
-    "alt": "image\\.png",
-    "src": "/images/vibe-coding-practice/image-11.png",
-    "ctx": "跑完第一个之后，很多东西自然就懂了。"
+    "slug": "literature-search-skill",
+    "line": 216,
+    "alt": "image",
+    "src": "/images/literature-search-skill/image-13.png",
+    "ctx": "如果能拿到公开全文，Codex 可以继续往下读取。"
   }
 ]
