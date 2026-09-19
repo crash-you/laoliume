@@ -1,618 +1,422 @@
 [
   {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 36,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-1.png",
-    "ctx": "你现在打开网页或者 App，和 AI 聊天、上传文件、生成图片、做 Deep Research，用的都是 ChatGPT"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 42,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-2.png",
-    "ctx": "你花钱购买的不是一个更高级的 ChatGPT，而是一套会员权益，包括更多模型、更高的使用额度，以及 Codex、Deep"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 50,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-3.png",
-    "ctx": "不同模型的能力、速度和额度消耗都不一样。"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 58,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-4.png",
-    "ctx": "所以这四个东西放在一起，大概是这样的："
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 78,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-5.png",
-    "ctx": "相比免费版，Plus 会提供更多模型和工具权限、更高的消息额度、文件上传、图片生成、Deep Research，以及更高"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 98,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-6.png",
-    "ctx": "100 美元/月和200 美元/月，也简称为 5x ， 20x"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 100,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-7.png",
-    "ctx": "100 美元/月和200 美元/月，也简称为 5x ， 20x"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 140,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-8.png",
-    "ctx": "比如你打开一个项目以后，可以直接告诉 Codex："
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 144,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-9.png",
-    "ctx": "Codex 可以自己读文件、改代码、执行命令，再根据执行结果继续工作。"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 152,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-10.png",
-    "ctx": "Codex 更偏向让 AI 进入一个真实的项目环境里完成任务。"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 170,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-11.png",
-    "ctx": "如果你在 Codex 里不用 ChatGPT 账户登录，而是自己配置OpenAI API Key，那么走的就是 API "
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 180,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-12.png",
-    "ctx": "Codex额度可在chatGPT主页面，点击左下角头像，点击设置，找到使用情况查看额度。"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 260,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-13.png",
-    "ctx": "当前用量、剩余额度以及下一次重置时间。"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 270,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-14.png",
-    "ctx": "查看当前会话对应的使用状态。"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 278,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-15.png",
-    "ctx": "另外，在前几天的一次更新后，Plus 用户又把新的 5小时限额给加上去了，而Pro用户则无5小时限额限制"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 280,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-16.png",
-    "ctx": "另外，在前几天的一次更新后，Plus 用户又把新的 5小时限额给加上去了，而Pro用户则无5小时限额限制"
-  },
-  {
-    "slug": "chatgpt-plus-pro-codex",
-    "line": 292,
-    "alt": "image",
-    "src": "/images/chatgpt-plus-pro-codex/image-17.png",
-    "ctx": "另外，OpenAI 现在也支持符合条件的 Plus 和 Pro 用户单独购买 Credits。"
-  },
-  {
-    "slug": "codex-cli-tutorial",
+    "slug": "chatgpt-ppt-powerpoint",
     "line": 34,
     "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-1.png",
-    "ctx": "我们平时使用 Codex App，看到的是窗口、按钮、项目列表这些图形界面。"
+    "src": "/images/chatgpt-ppt-powerpoint/image-1.png",
+    "ctx": "在上方找到 开始 → 加载项，英文界面对应 Home → Add-ins，然后搜索 ChatGPT。"
   },
   {
-    "slug": "codex-cli-tutorial",
-    "line": 40,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 38,
     "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-2.png",
-    "ctx": "你打开终端，进入自己的项目文件夹，输入："
+    "src": "/images/chatgpt-ppt-powerpoint/image-2.png",
+    "ctx": "这里注意认准发布者 OpenAI, LLC。微软商店里的应用名称就叫 ChatGPT，页面会同时介绍它在 Excel 和"
   },
   {
-    "slug": "codex-cli-tutorial",
+    "slug": "chatgpt-ppt-powerpoint",
     "line": 46,
     "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-3.png",
-    "ctx": "比如我的项目在F盘里的某一个文件夹："
+    "src": "/images/chatgpt-ppt-powerpoint/image-3.png",
+    "ctx": "添加完成后，点击 PowerPoint 上方功能区里的 ChatGPT，打开侧边栏，"
   },
   {
-    "slug": "codex-cli-tutorial",
-    "line": 60,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 52,
     "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-4.png",
-    "ctx": "云服务器里还没有安装，可以从0开始。"
+    "src": "/images/chatgpt-ppt-powerpoint/image-4.png",
+    "ctx": "再登录自己的 ChatGPT 账号。"
   },
   {
-    "slug": "codex-cli-tutorial",
-    "line": 70,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 56,
     "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-5.png",
-    "ctx": "如果机器里没有 Codex，会看到找不到命令之类的提示。"
+    "src": "/images/chatgpt-ppt-powerpoint/image-5.png",
+    "ctx": "登陆后，点击我明白了"
   },
   {
-    "slug": "codex-cli-tutorial",
-    "line": 84,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-6.png",
-    "ctx": "复制进去，回车即可。"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 98,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-7.png",
-    "ctx": "如果已经显示版本号，说明 Codex CLI 安装完成。"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 104,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-8.png",
-    "ctx": "如果你用的是 Windows，不用照抄我上面的 Linux 命令，只需要在powershell中输入即可"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 122,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-9.png",
-    "ctx": "看到版本号即可。"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 138,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-10.png",
-    "ctx": "如果是在自己的 Windows 或 Mac 上使用 Codex，可以输入："
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 142,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-11.png",
-    "ctx": "然后会跳转到浏览器里，登录ChatGPT"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 146,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-12.png",
-    "ctx": "选择你的账户"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 150,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-13.png",
-    "ctx": "个人账户，然后继续"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 154,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-14.png",
-    "ctx": "成功！"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 158,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-15.png",
-    "ctx": "成功之后，终端会显示“successfully logged in”"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 194,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-16.png",
-    "ctx": "我在我的F盘里，新建了一个test文件夹，然后找到后，右键点击复制文件地址"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 202,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-17.png",
-    "ctx": "打开powershell，进入这个目录："
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 212,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-18.png",
-    "ctx": "Codex CLI 就会在这个项目目录里启动。如果是第一次的话，会提示是否信任，选择yes，然后回车"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 216,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-19.png",
-    "ctx": "启动完成"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 230,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-20.png",
-    "ctx": "因为这是个新目录，它应该会告诉你目前没有什么项目文件。"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 244,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-21.png",
-    "ctx": "可以输入："
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 248,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-22.png",
-    "ctx": "Codex 会创建文件，在test文件夹里，也有了一个 index.html 文件"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 252,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-23.png",
-    "ctx": "双击打开就是"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 270,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-24.png",
-    "ctx": "进入 Codex 后输入："
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 280,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-25.png",
-    "ctx": "输入：/status"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 288,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-26.png",
-    "ctx": "输入： /model"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 292,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-27.png",
-    "ctx": "可以选择当前会话使用的模型。"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 298,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-28.png",
-    "ctx": "输入： /resume"
-  },
-  {
-    "slug": "codex-cli-tutorial",
-    "line": 306,
-    "alt": "image",
-    "src": "/images/codex-cli-tutorial/image-29.png",
-    "ctx": "输入 /new"
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 67,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-1.png",
-    "ctx": "直接把下面这段扔给Codex："
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 73,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-2.png",
-    "ctx": "装完以后，就可以开始做PPT了。"
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 101,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-3.png",
-    "ctx": "我会这样说："
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 109,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-4.png",
-    "ctx": "先让它把页面结构给你，你先看这个故事讲得顺不顺。"
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 127,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-5.png",
-    "ctx": "结构没问题，再决定是否生成说："
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 131,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-6.png",
-    "ctx": "这样出来的东西，才是一个可以继续修改的PPT。"
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 135,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-7.png",
-    "ctx": "还启动了一个页面，可以在内部修改对应元素标签。"
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 174,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-8.png",
-    "ctx": "还是一样："
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 199,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-9.png",
-    "ctx": "等待计划："
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 210,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-10.png",
-    "ctx": "然后确认："
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 212,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-11.png",
-    "ctx": "然后确认："
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 246,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-12.png",
-    "ctx": " 怎么安装？"
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 280,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-13.png",
-    "ctx": "我之前写了一篇个人博客网站搭建，我会这样说："
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 292,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-14.png",
-    "ctx": "这才是PPT。"
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 347,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-15.png",
-    "ctx": " 怎么安装？"
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 382,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-16.png",
-    "ctx": "然后它给你规划完。"
-  },
-  {
-    "slug": "codex-ppt-skills",
-    "line": 399,
-    "alt": "image",
-    "src": "/images/codex-ppt-skills/image-17.png",
-    "ctx": "确认："
-  },
-  {
-    "slug": "codex-quota-buy",
-    "line": 18,
-    "alt": "image",
-    "src": "/images/codex-quota-buy/image-1.png",
-    "ctx": "如果你最近在用 Codex，大概率已经见过那个额度条了。"
-  },
-  {
-    "slug": "codex-quota-buy",
-    "line": 36,
-    "alt": "image",
-    "src": "/images/codex-quota-buy/image-2.png",
-    "ctx": "比如你是 Plus，就使用 Plus 对应的 Codex 权益；你是 Pro，则会拥有比 Plus 更高的使用量。"
-  },
-  {
-    "slug": "codex-quota-buy",
-    "line": 46,
-    "alt": "image",
-    "src": "/images/codex-quota-buy/image-3.png",
-    "ctx": "当你的套餐自带额度耗尽以后，如果账号支持购买 Credits，就可以继续按使用量消耗 Credits，不需要为了多用一点"
-  },
-  {
-    "slug": "codex-quota-buy",
-    "line": 54,
-    "alt": "image",
-    "src": "/images/codex-quota-buy/image-4.png",
-    "ctx": "Reset 的作用，是把你的 Codex 使用窗口重新刷新。"
-  },
-  {
-    "slug": "codex-quota-buy",
+    "slug": "chatgpt-ppt-powerpoint",
     "line": 62,
     "alt": "image",
-    "src": "/images/codex-quota-buy/image-5.png",
-    "ctx": "现在可以在：Settings → Usage"
+    "src": "/images/chatgpt-ppt-powerpoint/image-6.png",
+    "ctx": "最终界面"
   },
   {
-    "slug": "codex-quota-buy",
-    "line": 64,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 86,
     "alt": "image",
-    "src": "/images/codex-quota-buy/image-6.png",
-    "ctx": "现在可以在：Settings → Usage"
+    "src": "/images/chatgpt-ppt-powerpoint/image-7.png",
+    "ctx": "这里最重要的，是先把汇报几页、讲多久、重点讲什么说清楚。"
   },
   {
-    "slug": "codex-quota-buy",
-    "line": 80,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 90,
     "alt": "image",
-    "src": "/images/codex-quota-buy/image-7.png",
-    "ctx": "Codex 会把当前会话和使用情况显示出来。"
+    "src": "/images/chatgpt-ppt-powerpoint/image-8.png",
+    "ctx": "ChatGPT 的演示文稿使用指南里也提到，受众、资料和需要保留的内容，最好在一开始就交代清楚。这样 ChatGPT 后"
   },
   {
-    "slug": "codex-quota-buy",
-    "line": 122,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 104,
     "alt": "image",
-    "src": "/images/codex-quota-buy/image-8.png",
-    "ctx": "如果是项目做到一半，今天就要继续干，可以看看自己的账号有没有 邀请好友。"
+    "src": "/images/chatgpt-ppt-powerpoint/image-9.png",
+    "ctx": ""
   },
   {
-    "slug": "codex-quota-buy",
-    "line": 124,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 112,
     "alt": "image",
-    "src": "/images/codex-quota-buy/image-9.png",
-    "ctx": "如果是项目做到一半，今天就要继续干，可以看看自己的账号有没有 邀请好友。"
+    "src": "/images/chatgpt-ppt-powerpoint/image-10.png",
+    "ctx": "点击始终允许"
   },
   {
-    "slug": "codex-quota-buy",
-    "line": 142,
-    "alt": "image",
-    "src": "/images/codex-quota-buy/image-10.png",
-    "ctx": "官方已经非常贴心的，把购买额度放到主页了，不过需要海外银行卡这些。"
-  },
-  {
-    "slug": "codex-quota-buy",
-    "line": 144,
-    "alt": "image",
-    "src": "/images/codex-quota-buy/image-11.png",
-    "ctx": "官方已经非常贴心的，把购买额度放到主页了，不过需要海外银行卡这些。"
-  },
-  {
-    "slug": "codex-quota-buy",
-    "line": 154,
-    "alt": "image",
-    "src": "/images/codex-quota-buy/image-12.png",
-    "ctx": "https://wzyp.cn/shop/liu"
-  },
-  {
-    "slug": "literature-search-skill",
-    "line": 50,
-    "alt": "image",
-    "src": "/images/literature-search-skill/image-1.png",
-    "ctx": "就这一句。"
-  },
-  {
-    "slug": "literature-search-skill",
-    "line": 66,
-    "alt": "image",
-    "src": "/images/literature-search-skill/image-2.png",
-    "ctx": "它先把我的研究问题转换成适合检索的英文表达，再扩展相关关键词。"
-  },
-  {
-    "slug": "literature-search-skill",
-    "line": 72,
-    "alt": "image",
-    "src": "/images/literature-search-skill/image-3.png",
-    "ctx": "我只需要等结果。"
-  },
-  {
-    "slug": "literature-search-skill",
-    "line": 94,
-    "alt": "image",
-    "src": "/images/literature-search-skill/image-4.png",
-    "ctx": "在codex中安装"
-  },
-  {
-    "slug": "literature-search-skill",
-    "line": 98,
-    "alt": "image",
-    "src": "/images/literature-search-skill/image-5.png",
-    "ctx": "下载项目以后，codex还贴心的告诉你，怎么使用"
-  },
-  {
-    "slug": "literature-search-skill",
+    "slug": "chatgpt-ppt-powerpoint",
     "line": 116,
     "alt": "image",
-    "src": "/images/literature-search-skill/image-6.png",
-    "ctx": "然后开始自己跑检索流程。"
+    "src": "/images/chatgpt-ppt-powerpoint/image-11.png",
+    "ctx": "也可以随时查看任务进度"
   },
   {
-    "slug": "literature-search-skill",
-    "line": 126,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 128,
     "alt": "image",
-    "src": "/images/literature-search-skill/image-7.png",
-    "ctx": "所以最后看到的不是一堆乱七八糟的搜索记录，而是一张整理好的文献表。"
+    "src": "/images/chatgpt-ppt-powerpoint/image-12.png",
+    "ctx": "第一版出来以后，我建议先通读一遍，再指出具体问题。"
   },
   {
-    "slug": "literature-search-skill",
-    "line": 132,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 144,
     "alt": "image",
-    "src": "/images/literature-search-skill/image-8.png",
-    "ctx": "随便点击一个链接"
+    "src": "/images/chatgpt-ppt-powerpoint/image-13.png",
+    "ctx": ""
   },
   {
-    "slug": "literature-search-skill",
-    "line": 158,
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 154,
     "alt": "image",
-    "src": "/images/literature-search-skill/image-9.png",
-    "ctx": "待核验"
+    "src": "/images/chatgpt-ppt-powerpoint/image-14.png",
+    "ctx": ""
   },
   {
-    "slug": "literature-search-skill",
+    "slug": "chatgpt-ppt-powerpoint",
     "line": 176,
     "alt": "image",
-    "src": "/images/literature-search-skill/image-10.png",
-    "ctx": "它就继续筛。"
-  },
-  {
-    "slug": "literature-search-skill",
-    "line": 184,
-    "alt": "image",
-    "src": "/images/literature-search-skill/image-11.png",
+    "src": "/images/chatgpt-ppt-powerpoint/image-15.png",
     "ctx": ""
   },
   {
-    "slug": "literature-search-skill",
+    "slug": "chatgpt-ppt-powerpoint",
+    "line": 180,
+    "alt": "image",
+    "src": "/images/chatgpt-ppt-powerpoint/image-16.png",
+    "ctx": "生成以后，点一下标题，试着改几个字；再点一下中间的图形，看看能不能单独移动。这样才能确认它有没有满足这次的需求。"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 28,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-1.png",
+    "ctx": "提前告诉 ChatGPT 一次，让它每天到了时间以后，自己开始执行。"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 34,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-2.png",
+    "ctx": "而且这个玩法远远不止学习，今天我们就把这个功能真正跑一遍。"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 52,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-3.png",
+    "ctx": "发送以后，ChatGPT 会识别这是一个需要重复执行的任务，然后创建对应的日程。"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 58,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-4.png",
+    "ctx": "目前 ChatGPT 的 Scheduled Tasks 支持一次性任务、重复任务以及监控变化的任务。符合条件的付费套餐"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 64,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-5.png",
+    "ctx": "不想用了可以暂停，时间不合适也可以直接修改。"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 70,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-6.png",
+    "ctx": "打开codex，找到定时任务"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 74,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-7.png",
+    "ctx": "点击右上角创建，"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 78,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-8.png",
+    "ctx": "这里有两种方式，第一种是，使用ChatGPT创建，第二种是手动创建"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 80,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-9.png",
+    "ctx": "这里有两种方式，第一种是，使用ChatGPT创建，第二种是手动创建"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 86,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-10.png",
+    "ctx": "云端表示，设置完成之后，每天自动化执行这个任务然后返回结果给你；本地则表示，只能在本地codex打开时，才能正常运行"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 90,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-11.png",
+    "ctx": "运行位置则表示，你要选择哪个项目去承接这个每天运行的任务聊天"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 94,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-12.png",
+    "ctx": "频率可以设置间隔多久，每天工作等等"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 128,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-13.png",
+    "ctx": ""
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 134,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-14.png",
+    "ctx": "今天应该学什么，它已经准备好了。"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 136,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-15.png",
+    "ctx": "今天应该学什么，它已经准备好了。"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 156,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-16.png",
+    "ctx": ""
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 199,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-17.png",
+    "ctx": ""
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 321,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-18.png",
+    "ctx": ""
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 325,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-19.png",
+    "ctx": "这样每天早上，它就会自动帮你跑一遍。"
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 361,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-20.png",
+    "ctx": ""
+  },
+  {
+    "slug": "chatgpt-scheduled-tasks",
+    "line": 367,
+    "alt": "image",
+    "src": "/images/chatgpt-scheduled-tasks/image-21.png",
+    "ctx": "它可以反复检查变化，在真正出现符合条件的更新以后再通知你，而且可以利用之前运行的信息判断变化。"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 97,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-1.png",
+    "ctx": "然后让 Pro 先把整个项目想明白。"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 107,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-2.png",
+    "ctx": "在等待的过程中，新建一个文件夹，用于项目的存放地，名字就叫resetAI"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 117,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-3.png",
+    "ctx": "点击前往注册"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 123,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-4.png",
+    "ctx": "填写完成之后，点击注册，然后我这里选择其他，个人，然后填写完对应的身份信息之后，点击继续"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 127,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-5.png",
+    "ctx": "信息提交之后，前往小程序主页"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 131,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-6.png",
+    "ctx": "这里的信息填写完之后，找到对应的APPID，打开微信开发者平台需要"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 135,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-7.png",
+    "ctx": "复制APPID"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 141,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-8.png",
+    "ctx": "打开微信开发者平台，用微信登录"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 145,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-9.png",
+    "ctx": "点击加号"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 149,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-10.png",
+    "ctx": "云开发，小程序，把刚刚复制的AppID复制进去，选择我们刚刚创建的文件夹地址：resetAI"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 153,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-11.png",
+    "ctx": "创建，基础页面"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 159,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-12.png",
+    "ctx": "等前面的东西确认差不多以后，给 Codex 的提示词反而很短。"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 182,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-13.png",
+    "ctx": "然后就可以让它干了。"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
     "line": 192,
     "alt": "image",
-    "src": "/images/literature-search-skill/image-12.png",
+    "src": "/images/vibe-coding-miniprogram/image-14.png",
+    "ctx": "然后codex就开始苦哈哈的干活（顺便测试一下70%的额度，用Astra Ultra，能坚持多久）"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 202,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-15.png",
+    "ctx": "就让它按照 TASKS.md 往下执行。"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 206,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-16.png",
+    "ctx": "打开微信开发者平台，如果前面没有出问题，这个时候应该已经可以看到第一版页面了。"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 216,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-17.png",
     "ctx": ""
   },
   {
-    "slug": "literature-search-skill",
-    "line": 216,
+    "slug": "vibe-coding-miniprogram",
+    "line": 220,
     "alt": "image",
-    "src": "/images/literature-search-skill/image-13.png",
-    "ctx": "如果能拿到公开全文，Codex 可以继续往下读取。"
+    "src": "/images/vibe-coding-miniprogram/image-18.png",
+    "ctx": "为什么要这样呢？因为太费额度了！不够用的，只能上备用的 Workbuddy里的deepseek 4.1了！"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 230,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-19.png",
+    "ctx": "workbuddy执行完成之后，会生成一份回执涵"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 238,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-20.png",
+    "ctx": "复制这个文件路径，到codex里，给codex说"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 244,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-21.png",
+    "ctx": "直到，codex说所有测试用例通过"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 256,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-22.png",
+    "ctx": "就这些。"
+  },
+  {
+    "slug": "vibe-coding-miniprogram",
+    "line": 272,
+    "alt": "image",
+    "src": "/images/vibe-coding-miniprogram/image-23.png",
+    "ctx": "等【重置来了】备案通过、正式上线以后，我也会把小程序放出来。"
   }
 ]
