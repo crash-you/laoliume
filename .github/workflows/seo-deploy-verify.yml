@@ -26,6 +26,11 @@ jobs:
   deploy-verify:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout commit to verify
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit }}
+
       - name: Validate inputs
         env:
           COMMIT: ${{ inputs.commit }}
@@ -34,18 +39,13 @@ jobs:
           # 输入通过环境变量传入 scripts/verify-inputs.mjs（单一实现源，测试共用同一逻辑）：
           # - commit 必须是完整 40 位 SHA
           # - canonical-origin 用 WHATWG URL 解析做结构化校验后归一化（无尾斜杠 origin）
-          # 校验失败即 exit 1，非法配置在网络访问前明确失败。
+          # 校验失败即 exit 1，非法配置在依赖安装和线上请求前明确失败。
           if ! node scripts/verify-inputs.mjs; then
             exit 1
           fi
           # 归一化结果写入 GITHUB_ENV，后续步骤不再重复解析
           ORIGIN="$(node scripts/verify-inputs.mjs | grep '^ORIGIN=' | cut -d= -f2-)"
           echo "ORIGIN=$ORIGIN" >> "$GITHUB_ENV"
-
-      - name: Checkout commit to verify
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.commit }}
 
       - name: Verify checkout matches expected commit
         run: |

@@ -5,7 +5,7 @@
  *   1. 从 .github/workflows/seo-deploy-verify.yml 解析真实的 canonical-origin 默认值，
  *      断言该默认值能通过校验（默认配置可通过——旧正则会拒绝自己的默认值）。
  *   2. 直接调用 scripts/verify-inputs.mjs 导出的校验函数（与工作流运行的是同一实现）。
- *   3. 用 CLI 子进程验证非法输入 exit 1（工作流里在网络访问前明确失败）。
+ *   3. 用 CLI 子进程验证非法输入 exit 1（工作流里在依赖安装和线上请求前明确失败）。
  *
  * 覆盖：
  *   - 默认值（工作流文件里解析）与 https://www.laoliu.me/ 均合法且归一化为 https://www.laoliu.me
@@ -56,7 +56,7 @@ console.log('# 2. 合法输入变体');
   check(c.ok && c.origin === 'https://www.laoliu.me', '大写主机归一化后合法');
 }
 
-console.log('# 3. 非法输入必须拒绝（在网络访问前失败）');
+console.log('# 3. 非法输入必须拒绝（在依赖安装和线上请求前失败）');
 {
   const cases = [
     ['http://www.laoliu.me', '非 HTTPS'],
