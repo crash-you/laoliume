@@ -17,7 +17,7 @@ export function absoluteUrl(path: string): string {
   return SITE_CONFIG.domain + path;
 }
 
-/** 规范文章绝对地址：https://laoliu.me/<slug>/（用于 canonical / og:url / JSON-LD / RSS / sitemap） */
+/** 规范文章绝对地址：https://www.laoliu.me/<slug>/（用于 canonical / og:url / JSON-LD / RSS / sitemap） */
 export function canonicalPostUrl(slug: string): string {
   return absoluteUrl(postPath(slug));
 }

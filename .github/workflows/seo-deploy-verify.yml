@@ -18,9 +18,9 @@ on:
         required: true
         default: ''
       canonical-origin:
-        description: '预期 canonical 站点（默认 https://laoliu.me）'
+        description: '预期 canonical 站点（默认 https://www.laoliu.me）'
         required: false
-        default: 'https://laoliu.me'
+        default: 'https://www.laoliu.me'
 
 jobs:
   deploy-verify:

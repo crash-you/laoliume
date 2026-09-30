@@ -96,16 +96,16 @@ try {
 
   // 2. 分享图回退默认（新文章未手动生图）
   const html = readDist(`${FIX_VALID}/index.html`);
-  check(html.includes('property="og:image" content="https://laoliu.me/og/default.png"'), '新文章 og:image 回退默认图');
-  check(html.includes(`rel="canonical" href="https://laoliu.me/${FIX_VALID}/"`), '新文章 canonical 正确');
+  check(html.includes('property="og:image" content="https://www.laoliu.me/og/default.png"'), '新文章 og:image 回退默认图');
+  check(html.includes(`rel="canonical" href="https://www.laoliu.me/${FIX_VALID}/"`), '新文章 canonical 正确');
 
   // 3. 进入 sitemap 与 RSS（合法文章）；noindex 排除
   const sitemap = readDist('sitemap.xml');
   const rss = readDist('rss.xml');
-  check(sitemap.includes(`https://laoliu.me/${FIX_VALID}/`), '新文章进入 sitemap');
-  check(!sitemap.includes(`https://laoliu.me/${FIX_NOINDEX}/`), 'noindex 文章不进 sitemap');
-  check(rss.includes(`https://laoliu.me/${FIX_VALID}/`), '新文章进入 RSS');
-  check(!rss.includes(`https://laoliu.me/${FIX_NOINDEX}/`), 'noindex 文章不进 RSS');
+  check(sitemap.includes(`https://www.laoliu.me/${FIX_VALID}/`), '新文章进入 sitemap');
+  check(!sitemap.includes(`https://www.laoliu.me/${FIX_NOINDEX}/`), 'noindex 文章不进 sitemap');
+  check(rss.includes(`https://www.laoliu.me/${FIX_VALID}/`), '新文章进入 RSS');
+  check(!rss.includes(`https://www.laoliu.me/${FIX_NOINDEX}/`), 'noindex 文章不进 RSS');
 
   // 4. noindex 文章页面存在且带 noindex meta
   const noindexHtml = readDist(`${FIX_NOINDEX}/index.html`);

@@ -54,7 +54,7 @@ try {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://laoliu.me',
+  site: 'https://www.laoliu.me',
   adapter: cloudflare(),
   // 构建期 SEO 集成：自动生成 _redirects（见 src/lib/seo-integration.mjs）
   integrations: [seoIntegration()],

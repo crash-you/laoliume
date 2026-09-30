@@ -6,22 +6,22 @@
  * 输出（stdout）两行归一化结果供 shell 捕获；非法输入 exit 1 并把原因写到 stderr。
  *
  * 测试（scripts/test-verify-inputs.mjs）从本仓库工作流文件解析出真实的
- * canonical-origin 默认值（https://laoliu.me），再调用本模块校验——
+ * canonical-origin 默认值（https://www.laoliu.me），再调用本模块校验——
  * 保证「默认配置可通过」始终针对工作流当前真实默认值，不与工作流脱节。
  *
  * 约束（canonical-origin）：
- *   - https 协议；主机必须是 laoliu.me；无用户信息；无显式端口
+ *   - https 协议；主机必须是 www.laoliu.me；无用户信息；无显式端口
  *   - 路径只能为空或 "/"（纯 origin）；无 query；无 fragment
- *   - https://laoliu.me 与 https://laoliu.me/ 均合法，统一归一化为 https://laoliu.me
+ *   - https://www.laoliu.me 与 https://www.laoliu.me/ 均合法，统一归一化为 https://www.laoliu.me
  *
  * 约束（commit）：完整 40 位十六进制小写 SHA（短 SHA 无法与线上完整 build-commit 比较）。
  */
 
-const EXPECTED_HOST = 'laoliu.me';
+const EXPECTED_HOST = 'www.laoliu.me';
 
 /**
  * 校验并归一化 canonical-origin。
- * 合法返回 { ok: true, origin: 'https://laoliu.me' }；
+ * 合法返回 { ok: true, origin: 'https://www.laoliu.me' }；
  * 非法返回 { ok: false, problems: string[] }。
  */
 export function validateCanonicalOrigin(raw) {

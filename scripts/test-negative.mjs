@@ -34,8 +34,8 @@ function articleHtml({ prose = PROSE_FULL, canonicalSlug = 'post1', noindexMeta 
   return `<!doctype html><html lang="zh-CN"><head>
 <meta charset="UTF-8"><title>${TITLE}</title>
 <meta name="description" content="测试描述">
-${noindex}${googlebot}<link rel="canonical" href="https://laoliu.me/${canonicalSlug}/" />
-<meta property="og:image" content="https://laoliu.me/og/post1.png">
+${noindex}${googlebot}<link rel="canonical" href="https://www.laoliu.me/${canonicalSlug}/" />
+<meta property="og:image" content="https://www.laoliu.me/og/post1.png">
 </head><body><main>
 <article>
 <h1>测试文章标题</h1>
@@ -48,12 +48,12 @@ ${noindex}${googlebot}<link rel="canonical" href="https://laoliu.me/${canonicalS
 const homeHtml = `<!doctype html><html lang="zh-CN"><head>
 <meta charset="UTF-8"><title>${HOME_TITLE}</title>
 <meta name="description" content="首页描述">
-<link rel="canonical" href="https://laoliu.me/" />
+<link rel="canonical" href="https://www.laoliu.me/" />
 </head><body><a href="https://wzyp.cn/shop/liu">代充</a></body></html>`;
 
-const SITEMAP = '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://laoliu.me/</loc></url><url><loc>https://laoliu.me/post1/</loc></url></urlset>';
-const RSS = '<?xml version="1.0"?><rss version="2.0"><channel><title>佬刘AI</title><item><title>测试</title><link>https://laoliu.me/post1/</link></item></channel></rss>';
-const ROBOTS = 'User-agent: *\nAllow: /\nSitemap: https://laoliu.me/sitemap.xml';
+const SITEMAP = '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://www.laoliu.me/</loc></url><url><loc>https://www.laoliu.me/post1/</loc></url></urlset>';
+const RSS = '<?xml version="1.0"?><rss version="2.0"><channel><title>佬刘AI</title><item><title>测试</title><link>https://www.laoliu.me/post1/</link></item></channel></rss>';
+const ROBOTS = 'User-agent: *\nAllow: /\nSitemap: https://www.laoliu.me/sitemap.xml';
 // 最小 PNG（1x1）：魔数 89504E47
 const MINI_PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64');
 
@@ -104,7 +104,7 @@ async function smokeOn(server, opts = {}) {
   const port = server.address().port;
   return runSmoke({
     baseUrl: `http://127.0.0.1:${port}`,
-    canonicalOrigin: 'https://laoliu.me',
+    canonicalOrigin: 'https://www.laoliu.me',
     env: 'production',
     slugs: ['post1'],
     getArticle: mockGetArticle,
@@ -128,7 +128,7 @@ console.log('# 0. 合格正常站点 → 整站 exit 0（所有必需项通过�
 /* ---------- 1. 断网 ---------- */
 console.log('# 1. 全部请求断网 → 应退出 2（未验证），不是 0');
 {
-  const res = await runSmoke({ baseUrl: 'http://127.0.0.1:1', canonicalOrigin: 'https://laoliu.me', env: 'production', slugs: ['post1'], getArticle: mockGetArticle });
+  const res = await runSmoke({ baseUrl: 'http://127.0.0.1:1', canonicalOrigin: 'https://www.laoliu.me', env: 'production', slugs: ['post1'], getArticle: mockGetArticle });
   check(res.exitCode === 2, '断网退出码为 2', `实际 ${res.exitCode}`);
   check(res.passed === 0 && res.unverified > 0, '断网全部标记未验证且无通过', `passed=${res.passed}`);
 }
@@ -169,7 +169,7 @@ console.log('# 4a. 删除正文保留侧栏与 post-end → 失败（.prose 缺�
 {
   const srv = startServer({
     '/post1/': (req, res) => res.writeHead(200, { 'content-type': 'text/html' }).end(
-      `<html><head><title>${TITLE}</title><link rel="canonical" href="https://laoliu.me/post1/" /></head><body><article><h1>标题</h1><div class="post-end"><p>文末模块保留</p></div></article><div class="sidebar">侧栏保留</div><a href="https://wzyp.cn/shop/liu">代充</a></body></html>`
+      `<html><head><title>${TITLE}</title><link rel="canonical" href="https://www.laoliu.me/post1/" /></head><body><article><h1>标题</h1><div class="post-end"><p>文末模块保留</p></div></article><div class="sidebar">侧栏保留</div><a href="https://wzyp.cn/shop/liu">代充</a></body></html>`
     ),
   });
   await listen(srv);
@@ -237,7 +237,7 @@ console.log('# 6a. canonical 写 apex，最终请求落到 www → 失败');
   // canonical 指向 https://laoliu.me/post1/，但页面实际在 www 域下提供
   const srv = startServer({
     '/post1/': (req, res) => res.writeHead(200, { 'content-type': 'text/html' }).end(
-      articleHtml({ canonicalSlug: 'post1' }).replace('https://laoliu.me/post1/', 'https://laoliu.me/post1/')
+      articleHtml({ canonicalSlug: 'post1' }).replace('https://www.laoliu.me/post1/', 'https://laoliu.me/post1/')
     ),
   });
   await listen(srv);
@@ -285,7 +285,7 @@ console.log('# 7b. sitemap XML 根正确但文章集合错 → 失败');
 {
   const srv = startServer({
     '/sitemap.xml': (req, res) => res.writeHead(200, { 'content-type': 'application/xml' }).end(
-      '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://laoliu.me/</loc></url><url><loc>https://laoliu.me/other-post/</loc></url></urlset>'
+      '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://www.laoliu.me/</loc></url><url><loc>https://www.laoliu.me/other-post/</loc></url></urlset>'
     ),
   });
   await listen(srv);
@@ -312,7 +312,7 @@ console.log('# 8a. Googlebot 被某一分组禁抓取，其他组仍有 Allow:/ 
 {
   const srv = startServer({
     '/robots.txt': (req, res) => res.writeHead(200, { 'content-type': 'text/plain' }).end(
-      'User-agent: Googlebot\nDisallow: /\n\nUser-agent: *\nAllow: /\nSitemap: https://laoliu.me/sitemap.xml'
+      'User-agent: Googlebot\nDisallow: /\n\nUser-agent: *\nAllow: /\nSitemap: https://www.laoliu.me/sitemap.xml'
     ),
   });
   await listen(srv);
@@ -326,7 +326,7 @@ console.log('# 8b. AI 训练爬虫被禁但 Googlebot/Bingbot 正常 → 搜索�
 {
   const srv = startServer({
     '/robots.txt': (req, res) => res.writeHead(200, { 'content-type': 'text/plain' }).end(
-      'User-agent: GPTBot\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: *\nAllow: /\nSitemap: https://laoliu.me/sitemap.xml'
+      'User-agent: GPTBot\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nUser-agent: *\nAllow: /\nSitemap: https://www.laoliu.me/sitemap.xml'
     ),
   });
   await listen(srv);
@@ -394,7 +394,7 @@ console.log('# 9e. 预览环境正确带 noindex → 通过');
   const port = srv.address().port;
   const res = await runSmoke({
     baseUrl: `http://127.0.0.1:${port}`,
-    canonicalOrigin: 'https://laoliu.me',
+    canonicalOrigin: 'https://www.laoliu.me',
     env: 'preview',
     slugs: ['post1'],
     getArticle: mockGetArticle,
@@ -415,7 +415,7 @@ console.log('# 9f. 公开预览没有 noindex → 未验证或失败（不能静
   const port = srv.address().port;
   const res = await runSmoke({
     baseUrl: `http://127.0.0.1:${port}`,
-    canonicalOrigin: 'https://laoliu.me',
+    canonicalOrigin: 'https://www.laoliu.me',
     env: 'preview',
     slugs: ['post1'],
     getArticle: mockGetArticle,

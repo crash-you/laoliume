@@ -27,7 +27,7 @@ const distArg = args.includes('--dist') ? args[args.indexOf('--dist') + 1] : 'di
 const DIST = join(root, distArg);
 const SRC_POSTS = join(root, 'src', 'content', 'posts');
 
-const DOMAIN = 'https://laoliu.me';
+const DOMAIN = 'https://www.laoliu.me';
 const MEMBERSHIP_URL = 'https://wzyp.cn/shop/liu';
 const RESERVED = new Set(['api', 'images', 'og', '_astro', '_worker.js', '404']);
 

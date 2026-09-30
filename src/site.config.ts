@@ -20,7 +20,7 @@ export const SITE_CONFIG = {
   /** 默认分享图（首页 / 404 等无文章配图页面的 OG 回退，1200x630） */
   ogImageDefault: '/og/default.png',
   /** 线上域名（不要带结尾斜杠），canonical / sitemap / RSS 都用它 */
-  domain: 'https://laoliu.me',
+  domain: 'https://www.laoliu.me',
   /** X (Twitter) 主页地址。占位地址，换成你自己的即可，全站自动生效 */
   xUrl: 'https://x.com/laoliuai',
   /** X 用户名（仅用于展示，例如 "@laoliuai"；留空则只显示 "X"） */

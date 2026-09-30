@@ -8,7 +8,7 @@
  *   3. 用 CLI 子进程验证非法输入 exit 1（工作流里在网络访问前明确失败）。
  *
  * 覆盖：
- *   - 默认值（工作流文件里解析）与 https://laoliu.me/ 均合法且归一化为 https://laoliu.me
+ *   - 默认值（工作流文件里解析）与 https://www.laoliu.me/ 均合法且归一化为 https://www.laoliu.me
  *   - 非 HTTPS / 其他域名 / 用户信息 / 非根路径 / query / fragment / 异常端口 → 拒绝
  *   - commit：完整 40 位 SHA 合法（大小写归一）；短 SHA / 非 hex / 空 → 拒绝
  *
@@ -42,31 +42,31 @@ console.log('# 1. 工作流真实默认值必须能通过校验（回归旧 bug�
   console.log(`  （从工作流解析的默认值: ${def}）`);
   const res = validateCanonicalOrigin(def);
   check(res.ok, `工作流默认值 ${def} 通过校验`, `问题: ${res.problems?.join('; ')}`);
-  check(res.ok && res.origin === 'https://laoliu.me', '归一化为 https://laoliu.me', `实际 ${res.origin}`);
+  check(res.ok && res.origin === 'https://www.laoliu.me', '归一化为 https://www.laoliu.me', `实际 ${res.origin}`);
 }
 
 console.log('# 2. 合法输入变体');
 {
-  const a = validateCanonicalOrigin('https://laoliu.me');
-  const b = validateCanonicalOrigin('https://laoliu.me/');
-  check(a.ok && a.origin === 'https://laoliu.me', '无尾斜杠 origin 合法');
-  check(b.ok && b.origin === 'https://laoliu.me', '带尾斜杠 origin 合法且归一化');
+  const a = validateCanonicalOrigin('https://www.laoliu.me');
+  const b = validateCanonicalOrigin('https://www.laoliu.me/');
+  check(a.ok && a.origin === 'https://www.laoliu.me', '无尾斜杠 origin 合法');
+  check(b.ok && b.origin === 'https://www.laoliu.me', '带尾斜杠 origin 合法且归一化');
   // 大写主机（URL 解析会归一化 hostname 为小写）
-  const c = validateCanonicalOrigin('https://LAOLIU.ME');
-  check(c.ok && c.origin === 'https://laoliu.me', '大写主机归一化后合法');
+  const c = validateCanonicalOrigin('https://WWW.LAOLIU.ME');
+  check(c.ok && c.origin === 'https://www.laoliu.me', '大写主机归一化后合法');
 }
 
 console.log('# 3. 非法输入必须拒绝（在网络访问前失败）');
 {
   const cases = [
-    ['http://laoliu.me', '非 HTTPS'],
-    ['https://www.laoliu.me', '其他域名（www）'],
+    ['http://www.laoliu.me', '非 HTTPS'],
+    ['https://laoliu.me', '其他域名（apex）'],
     ['https://example.com', '其他域名'],
-    ['https://user:pass@laoliu.me', '用户信息'],
-    ['https://laoliu.me/some/path/', '非根路径'],
-    ['https://laoliu.me:8443', '显式端口'],
-    ['https://laoliu.me/?q=1', 'query'],
-    ['https://laoliu.me/#frag', 'fragment'],
+    ['https://user:pass@www.laoliu.me', '用户信息'],
+    ['https://www.laoliu.me/some/path/', '非根路径'],
+    ['https://www.laoliu.me:8443', '显式端口'],
+    ['https://www.laoliu.me/?q=1', 'query'],
+    ['https://www.laoliu.me/#frag', 'fragment'],
     ['not-a-url', '非 URL'],
     ['', '空字符串'],
   ];
@@ -99,15 +99,15 @@ console.log('# 4. commit 校验：完整 40 位 SHA');
 console.log('# 5. CLI 行为：合法 exit 0 输出归一化结果；非法 exit 1');
 {
   const script = join(root, 'scripts', 'verify-inputs.mjs');
-  const env = { ...process.env, COMMIT: '87cc8f8a6b71b5d44c99dbe61ea613b7374c5bd7', CANONICAL_ORIGIN: 'https://laoliu.me/' };
+  const env = { ...process.env, COMMIT: '87cc8f8a6b71b5d44c99dbe61ea613b7374c5bd7', CANONICAL_ORIGIN: 'https://www.laoliu.me/' };
   // 合法：exit 0，输出两行 KEY=VALUE
   const out = execFileSync('node', [script], { env, encoding: 'utf-8' });
-  check(out.includes('ORIGIN=https://laoliu.me'), 'CLI 输出归一化 ORIGIN', `实际 ${JSON.stringify(out)}`);
+  check(out.includes('ORIGIN=https://www.laoliu.me'), 'CLI 输出归一化 ORIGIN', `实际 ${JSON.stringify(out)}`);
   check(out.includes('COMMIT=87cc8f8a6b71b5d44c99dbe61ea613b7374c5bd7'), 'CLI 输出 COMMIT');
   // 非法 origin：exit 1
   let code = 0;
   try {
-    execFileSync('node', [script], { env: { ...env, CANONICAL_ORIGIN: 'https://laoliu.me/some/path/' }, encoding: 'utf-8', stdio: 'pipe' });
+    execFileSync('node', [script], { env: { ...env, CANONICAL_ORIGIN: 'https://www.laoliu.me/some/path/' }, encoding: 'utf-8', stdio: 'pipe' });
   } catch (e) {
     code = e.status ?? 1;
   }

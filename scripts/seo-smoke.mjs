@@ -3,8 +3,8 @@
  *
  * 用法:
  *   node scripts/seo-smoke.mjs \
- *     --base-url https://laoliu.me \            # 访问地址（可指向预览/本地）
- *     --canonical-origin https://laoliu.me \    # 预期 canonical 站点（默认生产域）
+ *     --base-url https://www.laoliu.me \            # 访问地址（可指向预览/本地）
+ *     --canonical-origin https://www.laoliu.me \    # 预期 canonical 站点（默认生产域）
  *     --env production|preview|local \          # 目标环境，决定 noindex 预期
  *     --expected-commit <sha>                   # 部署提交核验（可选）
  *     --out docs/reports/smoke-<ts>.md
@@ -23,7 +23,7 @@ import { XMLParser, XMLValidator } from 'fast-xml-parser';
 import { extractProseParts, metaTag, titleTag } from './html-prose.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const PROD = 'https://laoliu.me';
+const PROD = 'https://www.laoliu.me';
 const DIST = join(root, 'dist');
 
 /** 发起 GET，返回 { status, headers, body, bodyBuffer, finalUrl, chain, error, errorKind }
