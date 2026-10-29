@@ -99,6 +99,7 @@ const jsonLdHtml = JSON.stringify(jsonLd)
               <h2>两表数据整理</h2>
               <p>先确认每行含义、关联编号、日期范围和已知正确关系，再判断能否交付匹配明细、待核记录及来源行号。一单多条售后、订单没有售后，都不直接当成错误。</p>
               <p class="muted">不代登录导出，不猜回受损编号，也不据两份表认定退款完成或财务结果。</p>
+              <a class="text-link" href="/order-after-sale-matching/">先看合成案例、源CSV和结果说明 <span aria-hidden="true">↗</span></a>
             </article>
           </section>
           <p class="sample-note">页面里的样例均为自制演示，只展示处理方式。是否适用，仍需查看实际材料。</p>
@@ -154,6 +155,7 @@ PPT补充：页码、哪些区域必须能编辑。
                 <input id="wechatName" class="wechat-name" type="text" value={SITE_CONFIG.wechatName} readonly aria-describedby="wechatCopyStatus" />
                 <button id="copyWechat" class="button secondary" type="button" hidden>复制公众号名称</button>
                 <p id="wechatCopyStatus" class="status" role="status" aria-live="polite"></p>
+                <p><a href="https://mp.weixin.qq.com/s/v6gqmLi7n21jBisV_8RCPA" target="_blank" rel="noopener noreferrer">打开已发表的公众号文章 <span aria-hidden="true">↗</span></a><br />可先核对文章作者“佬刘AI”，再在微信内进入公众号。</p>
                 <p>主动发送需求文字，先不发文件。样本如何提供，待人工回复后再确认。</p>
                 <p class="muted">复制或发送清单是在说明需求，不代表已接单。是否接收、报价和交期，以单独回复并确认为准。</p>
                 <div class="notice"><strong>本页只提供说明与文字整理</strong><p>不收款、不提交订单，也没有接收客户文件的上传接口。</p></div>
