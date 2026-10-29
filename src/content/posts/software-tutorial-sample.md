@@ -43,6 +43,8 @@ published: true
 
 ## 配套材料可以一起检查
 
+也可以一次下载[样片审阅包](/downloads/software-tutorial-sample-kit-v1.zip)：含视频、中英文字幕、三份演示PPT、英文说明与文件清单。它是自制样品的审阅材料，不含原始录制/剪辑工程或工具程序。
+
 - <a href="/media/software-tutorial-sample/ppt-check-demo.mp4" download="ppt-check-demo.mp4">下载1080p视频</a>，约 3.2 MB。
 - <a href="/media/software-tutorial-sample/captions-zh.srt" download="captions-zh.srt">下载中文字幕 SRT</a>。
 - <a href="/media/software-tutorial-sample/captions-en.srt" download="captions-en.srt">下载英文字幕 SRT</a>，英文内容由 AI 辅助翻译，时间段与中文版本一致。
