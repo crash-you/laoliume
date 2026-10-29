@@ -6,6 +6,7 @@ seoDescription: "ChatGPT for PowerPoint 安装与使用：加载项安装、把�
 image: "/og/chatgpt-ppt-powerpoint.png"
 imageAlt: "佬刘AI 文章分享图：ChatGPT 接入 PowerPoint 生成可编辑 PPT"
 date: 2026-09-17
+updated: "2026-10-30"
 slug: "chatgpt-ppt-powerpoint"
 published: true
 wechat_url: "https://mp.weixin.qq.com/s/xTWQGB4o3rhUxhUxGQN-OQ"
@@ -180,6 +181,10 @@ ChatGPT 的演示文稿使用指南里也提到，受众、资料和需要保留
 ![由截图重建出的可编辑 PPT 页面，含手机与电脑图示](/images/chatgpt-ppt-powerpoint/image-16.png)
 
 截图里的照片可以继续作为图片保留，但需要经常修改的文字，最好明确要求单独重建。第一次可以从文字清晰、结构简单的一页开始，不用上来就挑战一张挤满小字的复杂图表。
+
+**10月30日补充：生成后的验收案例。** 想进一步检查，可以看[可编辑 PPT 的结构检查与修改验收](/ppt-editability-check/)。里面有三份自制对照文件，可以先看每页结构，再实际改字、移动对象、保存重开；结构报告不能代替最后的编辑验收。
+
+这次补充的是结果验收案例；上面的加载项操作步骤仍为原文记录。
 
 ## 05 几个常见问题
 

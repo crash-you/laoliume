@@ -2,6 +2,7 @@
 title: "Excel表格制作教程：ChatGPT直接接入Excel，公式、数据分析、图表都能做"
 description: "把 ChatGPT 接入 Excel，直接在工作簿里处理公式、数据清理、数据分析和图表，附安装步骤、实际操作与常见问题。"
 date: "2026-09-23"
+updated: "2026-10-30"
 slug: "chatgpt-excel-tutorial"
 published: true
 ---
@@ -145,6 +146,10 @@ Excel 还有一个很麻烦的地方。
 ![三、数据乱了，让 ChatGPT 自己检查，原文配图 12](/images/chatgpt-excel-tutorial/image-12.png)
 
 这样就算 ChatGPT 判断错了，原始数据还在。
+
+**10月30日补充：两张表的关联案例。** 如果你处理的是订单和售后两张表，同一个订单号出现多行，不一定就是重复数据。可以看这个[订单与售后关联的合成案例](/order-after-sale-matching/)，下载源 CSV 和报告，对照检查一对多关系、待复核记录和长订单号。
+
+这次补充的是结果核查案例；上面的加载项操作步骤仍为原文记录。
 
 ## 四、不会做数据分析，也直接问
 
