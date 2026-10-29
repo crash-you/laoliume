@@ -1,0 +1,178 @@
+---
+import { SITE_CONFIG } from '../site.config';
+import { absoluteUrl } from '../lib/url';
+
+// Standalone layout: this page intentionally does not import BaseLayout or analytics.
+const title = `文件处理范围与需求说明 · ${SITE_CONFIG.name}`;
+const description = 'PPT指定页重建与两表数据整理，先看样本再确认是否适合处理。了解人工评估范围，在当前页面生成需求文字，自行到公众号询问；本页不接收文件、不提交订单、不收款。';
+const canonical = absoluteUrl('/assist/');
+const image = absoluteUrl(SITE_CONFIG.ogImageDefault);
+const buildCommit = typeof __BUILD_COMMIT__ !== 'undefined' ? __BUILD_COMMIT__ : 'unknown';
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${canonical}#webpage`,
+    url: canonical,
+    name: title,
+    description,
+    inLanguage: 'zh-CN',
+    isPartOf: { '@id': absoluteUrl('/#website') },
+    mainEntity: { '@id': `${canonical}#service` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${canonical}#service`,
+    url: canonical,
+    name: 'PPT指定页与两表数据整理人工评估',
+    description: '先人工评估材料和目标，是否接收、范围、报价和时间以单独回复并确认为准。页面只生成需求文字。',
+    serviceType: ['PPT指定页重建与修改评估', '两表数据整理评估'],
+    provider: { '@id': absoluteUrl('/#author') },
+  },
+];
+const jsonLdHtml = JSON.stringify(jsonLd)
+  .replace(/</g, '\\u003c')
+  .replace(/>/g, '\\u003e')
+  .replace(/&/g, '\\u0026');
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assist/style.css" />
+    <meta name="build-commit" content={buildCommit} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_CONFIG.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={SITE_CONFIG.name} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={SITE_CONFIG.name} />
+    <script type="application/ld+json" set:html={jsonLdHtml} />
+    <script src="/assist/intake.js" defer is:inline />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <div class="wrap">
+      <header class="topbar">
+        <a class="brand" href="/">{SITE_CONFIG.name}<span> / 人工评估范围</span></a>
+        <nav aria-label="主导航"><a href="/tools/ppt-check/">免费检查PPT</a><a href="/">博客首页</a></nav>
+      </header>
+
+      <main id="main">
+        <section class="hero" aria-labelledby="pageTitle">
+          <p class="eyebrow">先看具体问题，再确认是否适合处理</p>
+          <h1 id="pageTitle">有文件需要处理，<br />先把需求说清楚。</h1>
+          <p class="lead">PPT里的字改不了，或两份导出表总是对不上，可以先说明你希望完成什么，再判断是否适合人工处理。</p>
+          <a class="button primary" href="#intake">整理我的需求 <span aria-hidden="true">↓</span></a>
+          <p class="small">所有材料先人工评估。是否接收、处理范围、报价和预计时间，以单独回复并确认的内容为准。</p>
+        </section>
+
+        <div class="prose">
+          <section class="scope-grid" aria-label="可以先询问的处理方向">
+            <article class="scope-card">
+              <span class="number">01 / PPT</span>
+              <h2>PPT指定页重建与修改</h2>
+              <p>先看一页清晰、脱敏的预览，确认哪些文字、形状或流程节点需要继续编辑。照片可以保留为图片；复杂图表、公式和模糊内容需要另行判断。</p>
+              <p class="muted">文字框加线条不等于原生表格，结构检查也不代表内容已经准确还原。</p>
+              <a class="text-link" href="/tools/ppt-check/">先用免费检查器，看自制样例 <span aria-hidden="true">↗</span></a>
+            </article>
+            <article class="scope-card">
+              <span class="number">02 / 数据</span>
+              <h2>两表数据整理</h2>
+              <p>先确认每行含义、关联编号、日期范围和已知正确关系，再判断能否交付匹配明细、待核记录及来源行号。一单多条售后、订单没有售后，都不直接当成错误。</p>
+              <p class="muted">不代登录导出，不猜回受损编号，也不据两份表认定退款完成或财务结果。</p>
+            </article>
+          </section>
+          <p class="sample-note">页面里的样例均为自制演示，只展示处理方式。是否适用，仍需查看实际材料。</p>
+
+          <section id="intake" class="intake-section" aria-labelledby="intakeTitle">
+            <div class="section-heading"><p class="eyebrow">只生成文字，由你主动询问</p><h2 id="intakeTitle">先说明需求，不必先发文件</h2></div>
+            <div class="intake-grid">
+              <div class="intake-main">
+                <p class="intake-note">不要填写姓名、手机号、地址、账号密码或其他不需要的信息。生成内容只留在当前页面，不自动保存或提交。</p>
+                <form id="intakeForm" hidden novalidate autocomplete="off">
+                  <div class="field"><label for="service">想处理什么</label><select id="service"><option value="ppt">PPT指定页</option><option value="data">两表数据整理</option></select></div>
+                  <div class="field"><label for="goal">希望拿到什么结果 <span>必填</span></label><textarea id="goal" rows="3" maxlength="800" required placeholder="例如：让第2页的标题和流程节点可以分别修改"></textarea></div>
+                  <div class="field"><label for="scale">材料类型与规模 <span>必填</span></label><input id="scale" type="text" maxlength="160" required placeholder="例如：PPT截图，共3页；先评估第2页" /></div>
+                  <div class="field"><label id="detailsLabel" for="details">页码与需要修改的区域 <span>必填</span></label><textarea id="details" rows="4" maxlength="1200" required aria-describedby="detailsHint" placeholder="例如：第2页，标题要能改字，四个流程框要能移动"></textarea><p id="detailsHint" class="field-hint">说明哪些区域必须能编辑；没有图表底层数据时请写明。</p></div>
+                  <div id="matchesField" class="field" hidden><label for="knownMatches">已知正确的对应关系 <span>选填</span></label><textarea id="knownMatches" rows="2" maxlength="600" disabled placeholder="例如：左表第2行对应右表第3、4行。不要填写真实个人信息。"></textarea></div>
+                  <div class="field"><label for="deadline">希望使用结果的时间 <span>选填</span></label><input id="deadline" type="text" maxlength="100" placeholder="可填写大致时间；不代表已经确认交期" /></div>
+                  <label class="check"><input id="authorized" type="checkbox" /><span>选填：我已确认有权提供这些材料。尚未确认时，可以先说明需求，暂不发送材料。</span></label>
+                  <p id="formStatus" class="status" role="status" aria-live="polite"></p>
+                  <button id="generateBrief" class="button primary" type="button">生成需求文字 <span aria-hidden="true">↗</span></button>
+                  <p class="field-hint">来源：<span id="sourceLabel">服务说明页（直接访问）</span>。生成、复制都不代表下单。</p>
+                </form>
+
+                <noscript><div class="notice"><strong>当前浏览器未启用JavaScript。</strong><p>服务说明和公众号名称仍可阅读。请展开下面的空白清单，手动复制、填写，再自行询问；无需在本站提交材料。</p></div></noscript>
+
+                <section id="generatedPanel" class="generated" hidden aria-labelledby="generatedTitle">
+                  <h3 id="generatedTitle">需求文字已在本页生成</h3>
+                  <p>先检查内容，再自行复制到公众号询问。此页面不会发送给任何人。</p>
+                  <label class="sr-only" for="briefText">生成的需求文字，可手动选中复制</label>
+                  <textarea id="briefText" rows="15" readonly spellcheck="false"></textarea>
+                  <button id="copyBrief" class="button secondary" type="button">复制需求文字</button>
+                  <p id="briefCopyStatus" class="status" role="status" aria-live="polite"></p>
+                </section>
+
+                <details class="manual-guide">
+                  <summary>也可以手动复制空白清单</summary>
+                  <pre tabindex="0" aria-label="可手动复制的空白需求清单">来源：服务说明页
+想处理：PPT指定页 / 两表数据
+希望拿到的结果：
+材料类型与规模：
+目前具体卡在哪里：
+希望使用结果的时间：
+PPT补充：页码、哪些区域必须能编辑。
+两表补充：每行含义、关联列、日期与状态范围、已知正确对应关系。
+我有权提供这些材料：是 / 尚需确认</pre>
+                  <p>先发文字即可。收到人工回复后，再确认样本提供方式。</p>
+                </details>
+              </div>
+
+              <aside class="contact-card" aria-labelledby="contactTitle">
+                <span class="number">下一步 / 自行询问</span>
+                <h3 id="contactTitle">微信内搜索公众号</h3>
+                <label class="sr-only" for="wechatName">公众号名称</label>
+                <input id="wechatName" class="wechat-name" type="text" value={SITE_CONFIG.wechatName} readonly aria-describedby="wechatCopyStatus" />
+                <button id="copyWechat" class="button secondary" type="button" hidden>复制公众号名称</button>
+                <p id="wechatCopyStatus" class="status" role="status" aria-live="polite"></p>
+                <p>主动发送需求文字，先不发文件。样本如何提供，待人工回复后再确认。</p>
+                <p class="muted">复制或发送清单是在说明需求，不代表已接单。是否接收、报价和交期，以单独回复并确认为准。</p>
+                <div class="notice"><strong>本页只提供说明与文字整理</strong><p>不收款、不提交订单，也没有接收客户文件的上传接口。</p></div>
+              </aside>
+            </div>
+          </section>
+
+          <section class="samples" aria-labelledby="samplesTitle">
+            <h2 id="samplesTitle">人工确认后，怎样准备最小样本</h2>
+            <div class="sample-grid">
+              <div><h3>PPT：先看一页</h3><p>准备一页可读的脱敏预览，圈出要改的位置；说明需要改字、移动节点，还是编辑表格或图表数据。没有底层数据时如实说明。</p></div>
+              <div><h3>两表：每份约20条</h3><p>保留CSV表头，包含正常匹配、一对多、单侧记录和当前疑问。编号按文本保留；脱敏时，两表使用同一替换关系，并附两三条已知正确对应。</p></div>
+            </div>
+            <p class="small">样本清单用于评估，不是自动接收范围。无法确认的内容应保留待核，不猜补成已完成结果。</p>
+          </section>
+        </div>
+      </main>
+
+      <footer><a href="/">{SITE_CONFIG.name}</a><span>先查证，再实测，讲清步骤。</span></footer>
+    </div>
+  </body>
+</html>
