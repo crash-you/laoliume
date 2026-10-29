@@ -1,0 +1,71 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.990 line:35%
+A PPTX file does not mean everything inside is editable.
+
+2
+00:00:04.990 --> 00:00:08.166 line:35%
+This tool checks the file structure.
+
+3
+00:00:08.166 --> 00:00:13.837 line:35%
+We will use two original demo slides.
+All business figures are synthetic.
+
+4
+00:00:14.837 --> 00:00:16.792 line:35%
+Start with the image-only file.
+
+5
+00:00:16.792 --> 00:00:20.947 line:35%
+Both slides contain pictures, with no separate text objects.
+
+6
+00:00:20.947 --> 00:00:26.814 line:35%
+The file opens, but you cannot directly edit the titles inside those pictures.
+
+7
+00:00:27.814 --> 00:00:30.077 line:35%
+Now check the native-object version.
+
+8
+00:00:30.077 --> 00:00:37.116 line:35%
+Across two slides: 44 text-bearing objects,
+18 structural shapes, and 3 connectors.
+
+9
+00:00:37.116 --> 00:00:41.139 line:35%
+Download this sample to try selecting and editing its objects.
+
+10
+00:00:42.139 --> 00:00:48.308 line:35%
+The mixed file has a picture on slide one and native objects on slide two.
+Check each slide.
+
+11
+00:00:48.308 --> 00:00:54.478 line:35%
+More objects do not prove text accuracy.
+Table and chart data need separate checks.
+
+12
+00:00:55.478 --> 00:01:02.566 line:35%
+For a rebuild, specify the pages
+and which text and shapes must remain editable.
+
+13
+00:01:02.566 --> 00:01:08.710 line:35%
+This form creates a written brief only. It does not submit an order.
+
+14
+00:01:09.710 --> 00:01:12.544 line:35%
+You can save the structure report to your computer.
+
+15
+00:01:12.544 --> 00:01:16.323 line:35%
+The file you select is processed in the current browser.
+
+16
+00:01:16.323 --> 00:01:24.117 line:35%
+Finally, make an edit in your presentation app.
+Save and reopen it to check the content and layout.
