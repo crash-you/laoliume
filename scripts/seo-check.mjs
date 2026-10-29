@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { XMLValidator, XMLParser } from 'fast-xml-parser';
 import { extractProse, extractProseHtml, metaTag, linkRel, titleTag } from './html-prose.mjs';
+import { SITEMAP_STATIC_PATHS } from '../src/lib/sitemap-pages.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -411,15 +412,23 @@ else {
     const urls = Array.isArray(parsed.urlset?.url) ? parsed.urlset.url : [parsed.urlset?.url];
     const locs = urls.map((u) => u?.loc).filter(Boolean);
     if (!locs.length) fail('sitemap 无 <loc>');
+    const expectedLocs = new Set([
+      DOMAIN + '/',
+      ...SITEMAP_STATIC_PATHS.map((path) => DOMAIN + path),
+      ...indexable.map((p) => `${DOMAIN}/${p.slug}/`),
+    ]);
+    for (const loc of expectedLocs) {
+      if (!locs.includes(loc)) fail(`sitemap 缺少预期 URL: ${loc}`);
+    }
+    const duplicates = locs.filter((loc, i) => locs.indexOf(loc) !== i);
+    if (duplicates.length) fail(`sitemap 有重复 URL: ${[...new Set(duplicates)].join(', ')}`);
     for (const loc of locs) {
+      if (!expectedLocs.has(loc)) fail(`sitemap 有预期外 URL: ${loc}`);
       if (!loc.startsWith(DOMAIN + '/')) fail(`sitemap loc 非生产绝对地址: ${loc}`);
       if (!canonicalSet.has(loc)) fail(`sitemap loc 与任何 canonical 不一致: ${loc}`);
     }
     for (const d of drafts) if (locs.some((l) => l.endsWith(`/${d.slug}/`))) fail(`sitemap 含草稿: ${d.slug}`);
     for (const n of noindexPosts) if (locs.some((l) => l.endsWith(`/${n.slug}/`))) fail(`sitemap 含 noindex 文章: ${n.slug}`);
-    for (const p of indexable) {
-      if (!locs.includes(`${DOMAIN}/${p.slug}/`)) fail(`sitemap 缺少正式文章: /${p.slug}/`);
-    }
     for (const loc of locs) {
       const u = loc.replace(DOMAIN, '');
       if (!byUrl.has(u.replace(/\/$/, '')) && !byUrl.has(u)) fail(`sitemap 有 URL 但无对应页面: ${loc}`);

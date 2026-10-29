@@ -12,6 +12,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { SITEMAP_STATIC_PATHS } from '../src/lib/sitemap-pages.mjs';
 
 let passed = 0;
 let failed = 0;
@@ -51,7 +52,12 @@ const homeHtml = `<!doctype html><html lang="zh-CN"><head>
 <link rel="canonical" href="https://www.laoliu.me/" />
 </head><body><a href="https://wzyp.cn/shop/liu">代充</a></body></html>`;
 
-const SITEMAP = '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://www.laoliu.me/</loc></url><url><loc>https://www.laoliu.me/post1/</loc></url></urlset>';
+const staticHtml = (path) => `<!doctype html><html lang="zh-CN"><head>
+<meta charset="UTF-8"><title>公开静态页</title>
+<link rel="canonical" href="https://www.laoliu.me${path}" />
+</head><body><main><h1>公开静态页</h1></main></body></html>`;
+
+const SITEMAP = `<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://www.laoliu.me/</loc></url><url><loc>https://www.laoliu.me/post1/</loc></url>${SITEMAP_STATIC_PATHS.map((path) => `<url><loc>https://www.laoliu.me${path}</loc></url>`).join('')}</urlset>`;
 const RSS = '<?xml version="1.0"?><rss version="2.0"><channel><title>佬刘AI</title><item><title>测试</title><link>https://www.laoliu.me/post1/</link></item></channel></rss>';
 const ROBOTS = 'User-agent: *\nAllow: /\nSitemap: https://www.laoliu.me/sitemap.xml';
 // 最小 PNG（1x1）：魔数 89504E47
@@ -68,6 +74,7 @@ function startServer(overrides = {}) {
     if (p === '/') return res.writeHead(200, { 'content-type': 'text/html' }).end(homeHtml);
     if (p === '/post1') return res.writeHead(308, { location: '/post1/' }).end();
     if (p === '/post1/') return res.writeHead(200, { 'content-type': 'text/html' }).end(articleHtml());
+    if (SITEMAP_STATIC_PATHS.includes(p)) return res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' }).end(staticHtml(p));
     if (p === '/robots.txt') return res.writeHead(200, { 'content-type': 'text/plain' }).end(ROBOTS);
     if (p === '/sitemap.xml') return res.writeHead(200, { 'content-type': 'application/xml' }).end(SITEMAP);
     if (p === '/rss.xml') return res.writeHead(200, { 'content-type': 'application/xml' }).end(RSS);
@@ -123,6 +130,30 @@ console.log('# 0. 合格正常站点 → 整站 exit 0（所有必需项通过�
   check(res.failed === 0, '正常站点零失败', `failed=${res.failed}`);
   check(res.unverified === 0, '正常站点零未验证', `unverified=${res.unverified}`);
   check(res.passed >= 10, '正常站点通过数充足', `passed=${res.passed}`);
+  for (const path of SITEMAP_STATIC_PATHS) {
+    check(res.results.find((r) => r.name === `静态页 ${path}`)?.status === '已通过', `公开静态页 ${path} 单独验收通过`);
+  }
+}
+
+console.log('# 0-static. 公开静态页 404 / canonical / noindex / 非HTML → 失败');
+const staticCases = [
+  { path: SITEMAP_STATIC_PATHS[0], label: '404', status: 404, pattern: /HTTP 404/ },
+  { path: SITEMAP_STATIC_PATHS[1], label: '错误 canonical', canonicalPath: '/', pattern: /canonical/ },
+  { path: SITEMAP_STATIC_PATHS[0], label: 'meta none', meta: '<meta name="robots" content="none">', pattern: /noindex/ },
+  { path: SITEMAP_STATIC_PATHS[1], label: 'HTTP noindex', headers: { 'x-robots-tag': 'noindex' }, pattern: /noindex/ },
+  { path: SITEMAP_STATIC_PATHS[0], label: '非 HTML 响应', headers: { 'content-type': 'application/json' }, pattern: /不是 HTML/ },
+];
+for (const test of staticCases) {
+  const srv = startServer({
+    [test.path]: (req, res) => res.writeHead(test.status ?? 200, { 'content-type': 'text/html', ...test.headers }).end(
+      staticHtml(test.canonicalPath ?? test.path).replace('</head>', `${test.meta ?? ''}</head>`)
+    ),
+  });
+  await listen(srv);
+  const res = await smokeOn(srv);
+  srv.close();
+  const r = res.results.find((x) => x.name === `静态页 ${test.path}`);
+  check(r?.status === '失败' && test.pattern.test(r.detail), `静态页 ${test.label} 判失败`, JSON.stringify(r));
 }
 
 /* ---------- 1. 断网 ---------- */
@@ -293,6 +324,36 @@ console.log('# 7b. sitemap XML 根正确但文章集合错 → 失败');
   srv.close();
   const r = res.results.find((x) => x.name === 'sitemap.xml');
   check(r && r.status === '失败' && /缺少|预期外/.test(r.detail), 'sitemap 集合错判失败', JSON.stringify(r));
+}
+
+console.log('# 7b-static. sitemap 缺少公开静态页 → 失败');
+for (const path of SITEMAP_STATIC_PATHS) {
+  const loc = `https://www.laoliu.me${path}`;
+  const srv = startServer({
+    '/sitemap.xml': (req, res) => res.writeHead(200, { 'content-type': 'application/xml' }).end(
+      SITEMAP.replace(`<url><loc>${loc}</loc></url>`, '')
+    ),
+  });
+  await listen(srv);
+  const res = await smokeOn(srv);
+  srv.close();
+  const r = res.results.find((x) => x.name === 'sitemap.xml');
+  check(r?.status === '失败' && r.detail.includes(`缺少预期 URL: ${loc}`), `sitemap 缺少 ${path} 判失败`, JSON.stringify(r));
+}
+
+console.log('# 7b-extra. sitemap 不接受白名单外静态页 → 失败');
+{
+  const unknown = 'https://www.laoliu.me/unknown-static-page/';
+  const srv = startServer({
+    '/sitemap.xml': (req, res) => res.writeHead(200, { 'content-type': 'application/xml' }).end(
+      SITEMAP.replace('</urlset>', `<url><loc>${unknown}</loc></url></urlset>`)
+    ),
+  });
+  await listen(srv);
+  const res = await smokeOn(srv);
+  srv.close();
+  const r = res.results.find((x) => x.name === 'sitemap.xml');
+  check(r?.status === '失败' && r.detail.includes(`预期外 URL: ${unknown}`), 'sitemap 未知静态 URL 判失败', JSON.stringify(r));
 }
 
 console.log('# 7c. sitemap MIME 错误 → 失败');

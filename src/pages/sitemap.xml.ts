@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getPublishedPosts, postSlug, isoDate } from '../lib/posts';
 import { postPath, absoluteUrl } from '../lib/url';
+import { SITEMAP_STATIC_PATHS } from '../lib/sitemap-pages.mjs';
 
 export const GET: APIRoute = async () => {
   const posts = await getPublishedPosts();
@@ -16,6 +17,7 @@ export const GET: APIRoute = async () => {
 
   const urls = [
     { loc: absoluteUrl('/'), lastmod: latest ? isoDate(latest) : undefined },
+    ...SITEMAP_STATIC_PATHS.map((path) => ({ loc: absoluteUrl(path), lastmod: undefined })),
     ...indexable.map((p) => ({
       loc: absoluteUrl(postPath(postSlug(p))),
       lastmod: isoDate(p.data.updated ?? p.data.date),

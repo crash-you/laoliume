@@ -20,7 +20,8 @@ import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { XMLParser, XMLValidator } from 'fast-xml-parser';
-import { extractProseParts, metaTag, titleTag } from './html-prose.mjs';
+import { extractProseParts, metaTag, titleTag, linkRel } from './html-prose.mjs';
+import { SITEMAP_STATIC_PATHS } from '../src/lib/sitemap-pages.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const PROD = 'https://www.laoliu.me';
@@ -300,6 +301,30 @@ export async function runSmoke({ baseUrl, canonicalOrigin, env, slugs, getArticl
     }
   }
 
+  // 已公开静态页：仅 GET 文档，不执行脚本或调用页面业务接口。
+  for (const path of SITEMAP_STATIC_PATHS) {
+    const name = `静态页 ${path}`;
+    const r = await get(BASE + path);
+    if (r.error) record(name, r.errorKind === 'protocol' ? '失败' : '未验证', r.error);
+    else if (r.status !== 200) record(name, '失败', `HTTP ${r.status}`);
+    else {
+      const issues = [];
+      const ct = r.headers['content-type'] || '';
+      if (!/^text\/html(?:\s*;|$)/i.test(ct) || !/<html(?:\s|>)/i.test(r.body)) {
+        issues.push(`不是 HTML 页面（Content-Type: ${ct || '(空)'}）`);
+      }
+      const canonical = linkRel(r.body, 'canonical');
+      if (canonical !== ORIGIN + path) issues.push(`canonical 不是 ${ORIGIN + path}（实际 ${canonical}）`);
+      if (env === 'production') {
+        const eff = effectiveNoindex(r.body, r.headers);
+        if (eff.noindex) issues.push(`生产静态页 noindex（来源: ${eff.source}）`);
+      }
+      if (r.finalUrl !== BASE + path) issues.push(`最终 URL ${r.finalUrl} 异常`);
+      if (issues.length) record(name, '失败', issues.join('；'));
+      else record(name, '已通过', '200 + HTML + canonical + 索引指令 + 规范地址');
+    }
+  }
+
   // 非规范入口（全部 slug，不只前 3 个）
   for (const slug of slugs) {
     const checkName = `非规范入口 /${slug}`;
@@ -384,7 +409,11 @@ export async function runSmoke({ baseUrl, canonicalOrigin, env, slugs, getArticl
           const locs = urls.map((u) => u?.loc).filter(Boolean);
           if (!locs.length) issues.push('sitemap 无 <loc>');
           // URL 集合与本地预期一致
-          const expectedLocs = [ORIGIN + '/', ...slugs.map((s) => `${ORIGIN}/${s}/`)];
+          const expectedLocs = [
+            ORIGIN + '/',
+            ...SITEMAP_STATIC_PATHS.map((path) => ORIGIN + path),
+            ...slugs.map((s) => `${ORIGIN}/${s}/`),
+          ];
           const missing = expectedLocs.filter((l) => !locs.includes(l));
           const extra = locs.filter((l) => !expectedLocs.includes(l));
           if (missing.length) issues.push(`sitemap 缺少预期 URL: ${missing.join(', ')}`);
@@ -494,6 +523,7 @@ function distExpectations() {
     .filter(Boolean);
   const slugs = locs
     .filter((l) => l.startsWith(PROD + '/') && l !== PROD + '/')
+    .filter((l) => !SITEMAP_STATIC_PATHS.some((path) => l === PROD + path))
     .map((l) => l.replace(PROD + '/', '').replace(/\/$/, ''));
   const getArticle = (slug) => {
     const file = join(DIST, slug, 'index.html');
