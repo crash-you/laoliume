@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { officeRoutes, officeTopicName, officeTopicPath } from '../../lib/ai-office';
+import { officeResources, officeRoutes, officeTopicName, officeTopicPath } from '../../lib/ai-office';
 import { getPublishedPosts, postSlug } from '../../lib/posts';
 import { absoluteUrl, postPath } from '../../lib/url';
 import { SITE_CONFIG } from '../../site.config';
@@ -35,77 +35,72 @@ const jsonLd = [
 
 <BaseLayout title={title} description={description} canonicalPath={officeTopicPath} jsonLd={jsonLd}>
   <main class="topic">
-    <nav class="crumbs" aria-label="面包屑">
-      <a href="/">{SITE_CONFIG.name}首页</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">{officeTopicName}</span>
-    </nav>
-
     <header>
+      <a href="/" class="home-link">佬刘首页</a>
       <h1>{officeTopicName}</h1>
-      <p>手里有一张改不了字的幻灯片，或是两张对不上的表？按你要处理的文件选教程，跟着样例核对自己的结果。</p>
-      <nav class="jump-links" aria-label="本页内容">
-        {officeRoutes.map((route) => <a href={'#' + route.id}>{route.name}</a>)}
-      </nav>
     </header>
 
-    {officeRoutes.map((route) => (
-      <section id={route.id} aria-labelledby={route.id + '-title'}>
-        <h2 id={route.id + '-title'}>{route.name}</h2>
-        <p class="intro">{route.intro}</p>
-        <div class="route-body">
-          <ul class="articles">
+    <div class="tutorials">
+      {officeRoutes.map((route) => (
+        <section id={route.id} aria-labelledby={route.id + '-title'}>
+          <h2 id={route.id + '-title'}>{route.name}</h2>
+          <ul>
             {route.articles.filter((article) => publishedSlugs.has(article.slug)).map((article) => (
-              <li>
-                <a href={postPath(article.slug)}>{article.label}</a>
-                <p>{article.detail}</p>
-              </li>
+              <li><a href={postPath(article.slug)}>{article.label}</a></li>
             ))}
           </ul>
-          <div class="example">
-            <figure>
-              <img src={route.image.src} width={route.image.width}
-                height={route.image.height} alt={route.image.alt} loading="lazy" decoding="async" />
-              <figcaption>{route.image.caption}</figcaption>
-            </figure>
-            <ul class="resources">
-              {route.resources.map((resource) => <li><a href={resource.href}>{resource.label}</a></li>)}
-            </ul>
-          </div>
-        </div>
-      </section>
-    ))}
+        </section>
+      ))}
+    </div>
+
+    <section class="resources" aria-labelledby="resources-title">
+      <h2 id="resources-title">工具与样例</h2>
+      <ul>
+        {officeResources.map((resource) => <li><a href={resource.href}>{resource.label}</a></li>)}
+      </ul>
+    </section>
   </main>
 </BaseLayout>
 
 <style>
-  .topic { max-width: 1000px; margin: 0 auto; padding: 42px 32px 72px; }
-  .crumbs, .jump-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
-  .crumbs { font-size: 14px; color: var(--muted); }
-  .topic a { text-decoration: underline; text-underline-offset: 0.22em; text-decoration-color: #b99a40; }
-  .topic a:hover { text-decoration-color: currentColor; }
-  header { margin: 44px 0 32px; }
-  h1, h2, p, figure, ul { margin: 0; }
-  h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.3; }
-  header p { max-width: 40em; margin: 16px 0; color: var(--text-soft); }
-  .jump-links { column-gap: 26px; font-size: 15px; font-weight: 600; }
-  section { padding: 30px 0; border-top: 1px solid var(--border); scroll-margin-top: 16px; }
-  h2 { font-size: clamp(1.45rem, 3vw, 1.8rem); line-height: 1.4; }
-  .intro { margin: 8px 0 24px; color: var(--text-soft); }
-  .route-body { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 38px; }
+  .topic {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 64px 32px;
+  }
+  h1, h2, ul { margin: 0; }
   ul { padding: 0; list-style: none; }
-  .articles li + li { margin-top: 18px; }
-  .articles a { font-weight: 650; }
-  .articles p, figcaption { color: var(--muted); line-height: 1.65; }
-  .articles p { margin-top: 3px; font-size: 15px; }
-  figure img { width: 100%; height: auto; display: block; border: 1px solid var(--border); }
-  figcaption { margin-top: 8px; font-size: 13px; }
-  .resources { margin-top: 14px; font-size: 15px; }
-  .resources li + li { margin-top: 4px; }
-  @media (max-width: 680px) {
-    .topic { padding: 24px 20px 48px; }
-    header { margin: 28px 0; }
-    .route-body { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-    .example { max-width: 28rem; }
+  a {
+    color: var(--text-soft);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--muted);
+    text-underline-offset: 4px;
+  }
+  a:hover, a:focus-visible { color: var(--text); text-decoration-color: currentColor; }
+  .home-link { font-size: 14px; }
+  h1 { margin-top: 18px; font-size: 32px; line-height: 1.3; }
+  .tutorials {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    margin-top: 36px;
+  }
+  section { scroll-margin-top: 20px; }
+  h2 { font-size: 21px; line-height: 1.4; }
+  .tutorials ul { margin-top: 10px; }
+  li a { display: inline-block; padding-block: 6px; font-size: 16px; line-height: 1.6; }
+  .resources { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .resources h2 { font-size: 15px; color: var(--text-soft); }
+  .resources ul { display: flex; flex-wrap: wrap; column-gap: 24px; margin-top: 6px; }
+  .resources a { font-size: 14px; }
+  @media (max-width: 700px) {
+    .topic { padding: 28px 20px 48px; }
+    h1 { margin-top: 12px; font-size: 27px; }
+    h2 { font-size: 20px; }
+    .tutorials { grid-template-columns: minmax(0, 1fr); gap: 22px; margin-top: 24px; }
+    .tutorials ul { margin-top: 6px; }
+    .resources { margin-top: 24px; padding-top: 16px; }
+    .resources ul { display: block; }
   }
 </style>
