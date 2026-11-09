@@ -116,7 +116,7 @@
 
 反重力一篇使用账号原有的公众号排版稿。其余两篇沿用知识库正文，与公开发布版本逐段对照配图。大肥鱼的动作和聊天两组截图在发布版中各合为一张。三篇合计 80 处插图引用、72 个独立图片文件。截图未提供这三篇的微信原文地址，文章保留该字段为空。
 
-以下 11 篇确认发过且博客缺少，知识库中能对应正文，但导出未包含完整图片文件，暂未上线。
+首轮核对时还有以下 11 篇确认发过且博客缺少。压缩包没有附带完整配图，首轮暂缓；后续处理见下方「飞书知识库图文补录」。
 
 | 公众号发表日期 | 文章 |
 | --- | --- |
@@ -137,3 +137,27 @@
 本地验收在项目内的隔离副本执行 `npm ci` 和 `npm run seo:check`。构建通过，38 篇正式文章，SEO 校验 0 个警告。另检查三个生成页面的标题、日期、站内图片、首页、RSS 和 sitemap，80 处图片引用均能解析到本地图片；暂缓文章未生成路由。
 
 正式站于 2026-11-09 验收内容提交 `0b1571a9cfc08eded26c59bec3f369716c49ded6`。使用 `node scripts/seo-smoke.mjs --base-url https://www.laoliu.me --canonical-origin https://www.laoliu.me --env production --expected-commit 0b1571a9cfc08eded26c59bec3f369716c49ded6`，88 项全部通过。另逐篇比对正式站与本地构建的完整正文和图片顺序，并通过正常文章图片地址下载 72 个独立文件，与 Git 内容哈希全部一致。Cloudflare Workers 构建及 GitHub 的 build-and-test 均已通过。
+
+
+## 2026-11-09 飞书知识库图文补录
+
+公众号发表记录用于确认是否发过及发表日期，作者公开的「佬刘AI」飞书知识库和本次 Markdown 导出用于核对正文、插图位置和视频。图集顺序与导出中的图片编号逐一核准，博客直接提供文件，不依赖飞书登录或临时图片地址。
+
+| 原发表日期 | 博客文章 | 正文插图 |
+| --- | --- | ---: |
+| 2026-11-05 | [解决Codex的【Selected model is at capacity】问题](https://www.laoliu.me/codex-selected-model-at-capacity/) | 14 |
+| 2026-11-04 | [Claude又封号？我在谷歌Antigravity里用上了Opus 5.5！附完整教程](https://www.laoliu.me/antigravity-claude-opus-setup/) | 45 |
+| 2026-10-24 | [图片转可编辑PPT ｜ 用 Codex 还原文字、图形和排版](https://www.laoliu.me/codex-image-to-editable-ppt/) | 13 |
+| 2026-10-20 | [VS Code 接入 ChatGPT 教程：安装 OpenAI 官方 Codex 插件，登录账号就能用](https://www.laoliu.me/vscode-chatgpt-codex-extension/) | 8 |
+| 2026-10-14 | [Codex 怎么连接 GitHub？谷歌验证器、双重验证、仓库授权完整教程](https://www.laoliu.me/codex-connect-github-2fa/) | 15 |
+| 2026-10-12 | [Codex做视频教程：从0开始，手把手教你用Remotion生成动画！（附通用提示词）](https://www.laoliu.me/codex-remotion-animation/) | 31 |
+| 2026-10-09 | [ChatGPT 新功能教程：一句话生成计算器、交互图表，GPT-6 这次更新有点意思！](https://www.laoliu.me/chatgpt-interactive-calculators-charts/) | 13 |
+| 2026-10-08 | [ChatGPT终于能直接上传音频了！录音转文字、会议纪要、访谈总结，一次搞定](https://www.laoliu.me/chatgpt-audio-upload-transcription/) | 11 |
+| 2026-10-07 | [DeepSeek Harness 长期记忆教程｜让 AI 记住你的项目，不用每次重新解释](https://www.laoliu.me/deepseek-harness-project-memory/) | 13 |
+| 2026-10-06 | [Claude Code 接入 DeepSeek 教程｜Windows / Mac 配置，直接使用 DeepSeek API](https://www.laoliu.me/claude-code-deepseek-setup/) | 15 |
+
+共补录 10 篇、178 张原图。Remotion 教程还包含原稿中的 15 秒、1920 × 1080 演示视频；使用飞书附件下载的原文件，大小与导出记录一致（1,879,292 字节）。10 月 11 日已撤回的首发没有重复收录。正文来源为已确认对应的知识库文章；没有从公众号原文取得的微信链接留空。
+
+10 月 6 日的《ChatGPT Plus 自助充值教程》按作者要求暂不上线，文章和图片均未加入仓库。10 月 28 日的《GPT Plus怎么充值｜一篇文章带你搞懂！》与 10 月 10 日的《记录一下自己用AI做科研踩过的坑》仅有已发表的记录，尚未找到能确认对应的完整稿。Codex 额度重置消息继续排除。两轮合计处理截图范围内的 16 篇：13 篇已补录、1 篇暂缓、2 篇待原稿。此次未取得完整 59 次发表记录。
+
+本地验收：在隔离副本执行 `npm ci`、`npm run seo:check`，48 篇正式文章，0 个警告。逐篇核对标题、原发表日期、正文图片顺序、首页、RSS 和 sitemap；178 张图片均可解码，所有图片及 MP4 与源文件逐字节一致（合计 31,600,975 字节）。
