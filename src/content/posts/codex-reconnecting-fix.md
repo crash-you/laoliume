@@ -36,10 +36,10 @@ published: true
 ```Plain Text
 帮我修复 Codex Desktop 一直 Reconnecting 的问题。
 
-请定位我本机正在使用的代理端口和代理协议，然后创建或更新 ~/.codex/.env，写入以下代理配置。不要写死端口，请替换成实际端口；如果文件已经存在，保留其他配置。
+请先确认我本机代理的协议和实际端口。如果有 HTTP 或 mixed 端口，把下面两行里的 PORT 换成查到的端口号，再写入 ~/.codex/.env。保留文件里的其他配置。如果只找到 SOCKS 端口，请告诉我，不要套用下面的 HTTP 配置。
 
-HTTP_PROXY=“http://127.0.0.1:<HTTP 或 mixed 端口>”
-HTTPS_PROXY=“http://127.0.0.1:<HTTP 或 mixed 端口>”
+HTTP_PROXY=http://127.0.0.1:PORT
+HTTPS_PROXY=http://127.0.0.1:PORT
 
 写入后检查配置是否正确，并告诉我需要如何重启 Codex Desktop。
 ```

@@ -6,7 +6,7 @@ seoDescription: "ChatGPT for PowerPoint 安装与使用：加载项安装、把�
 image: "/og/chatgpt-ppt-powerpoint.png"
 imageAlt: "佬刘AI 文章分享图：ChatGPT 接入 PowerPoint 生成可编辑 PPT"
 date: 2026-09-17
-updated: "2026-10-30"
+updated: "2026-11-09"
 slug: "chatgpt-ppt-powerpoint"
 published: true
 wechat_url: "https://mp.weixin.qq.com/s/xTWQGB4o3rhUxhUxGQN-OQ"
@@ -14,9 +14,9 @@ wechat_url: "https://mp.weixin.qq.com/s/xTWQGB4o3rhUxhUxGQN-OQ"
 
 大家好，我是佬刘。
 
-我相信大家肯定都被PPT折磨过！在之前，我也写过如何用codex调用skill去做PPT
+我相信大家肯定都被 PPT 折磨过！之前我试过[用 4 个 Codex Skill 做不同风格的 PPT](/codex-ppt-skills/)。
 
-但是有一个问题，就是codex太重了，我怎么直接在pointpower里做呢？
+但我有时候只是想改一页，怎么直接在 PowerPoint 里做呢？
 
 **ChatGPT 做 PPT，现在可以直接在 PowerPoint 里面操作了。**
 

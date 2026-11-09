@@ -354,7 +354,11 @@ for (const page of htmlPages) {
 
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
   for (const m of html.matchAll(/href="#([^"]+)"/g)) {
-    if (!ids.has(m[1])) fail(`${page.url}: 锚点 #${m[1]} 在本页不存在`);
+    if (ids.has(m[1])) continue;
+    // Markdown 链接的中文片段会用 UTF-8 百分号编码，目标元素的 id 保留原文。
+    let id = m[1];
+    try { id = decodeURIComponent(id); } catch { /* 无法解码时沿用原值报错 */ }
+    if (!ids.has(id)) fail(`${page.url}: 锚点 #${m[1]} 在本页不存在`);
   }
 
   if (isHome || isPost) {

@@ -6,6 +6,7 @@ seoDescription: "Codex 额度指南：套餐自带额度、付费 Credits、Rese
 image: "/og/codex-quota-buy.png"
 imageAlt: "佬刘AI 文章分享图：Codex 额度用完怎么买"
 date: 2026-09-12
+updated: 2026-11-09
 slug: "codex-quota-buy"
 published: true
 wechat_url: "https://mp.weixin.qq.com/s/jzGY5x2kBSXXEzkWgxckXA"
@@ -159,17 +160,13 @@ https://wzyp.cn/shop/liu
 
 ## 六、 Plus和Pro的Codex额度差多少？
 
-这个我上一篇已经单独讲过了。
-
 按[官方 Codex 定价页](https://developers.openai.com/codex/pricing)，Pro 有相对 Plus 5 倍或 20 倍的使用量档位；页面列的是每 5 小时的用量估算，也提醒周限额可能适用。**这不等于 Plus 每周固定多少亿 token、Pro 再乘一个倍数。**模型、上下文、推理强度和任务内容都会影响实际消耗，想知道自己还能用多少，还是看 Usage。
 
 所以如果你只是偶尔用 Codex，Plus 够不够，要看你的工作强度。
 
 但如果你每天拿大项目跑，连续开 Agent，频繁使用高消耗模型，Pro 的意义就出来了。
 
-关于 Plus、Pro、Codex之间到底是什么关系，我前边已经写过：
-
-这里不再重复。
+如果还在选套餐，可以看我写的[ChatGPT Plus、Pro 和 Codex 有什么区别](/chatgpt-plus-pro-codex/)，里面把会员、模型和开发工具分开讲了。
 
 ## 七、 怎么让Codex额度用得久一点？
 

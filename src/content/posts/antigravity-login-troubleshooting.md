@@ -79,7 +79,7 @@ Post错误（带daily-cloudcode字样）
 
 打开魔法的tun模式/虚拟网卡模式
 
-如果还不跳转，再尝试1.2
+如果浏览器还是没有跳回桌面端，可以接着看[用 Antigravity Tools 登录的步骤](#下载antigravity-tools)。
 
 ## 下载antigravity tools
 
@@ -196,7 +196,7 @@ Post错误（带daily-cloudcode字样）
 
 ![Google 身份验证后的结果页面](/images/antigravity-login-troubleshooting/step-34.png)
 
-这时候返回反重力，选择 sign in again，再次登录该谷歌账号即可。**如果重新登录，仍显示需要verify，参考3.2的解决方案**
+这时候返回反重力，选择 sign in again，重新登录该谷歌账号。如果仍然反复提示 verify，可以接着看[验证成功却一直要求重新登录怎么办](#反复verify-sign-in-again循环)。
 
 ![Verify 和 Sign in again 反复出现](/images/antigravity-login-troubleshooting/step-35.png)
 
