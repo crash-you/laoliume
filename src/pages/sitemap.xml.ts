@@ -8,16 +8,9 @@ export const GET: APIRoute = async () => {
   // noindex 文章不进 sitemap（本站发布策略：不希望被索引的页面也不主动分发）
   const indexable = posts.filter((p) => !p.data.noindex);
 
-  // 首页 lastmod 取最新一篇文章的发布/更新时间，反映首页列表的实际变化；
-  // 没有文章时省略，不用构建时间冒充内容变化。
-  const latest = posts.reduce<Date | null>((acc, p) => {
-    const d = p.data.updated ?? p.data.date;
-    return !acc || d > acc ? d : acc;
-  }, null);
-
   const urls = [
-    { loc: absoluteUrl('/'), lastmod: latest ? isoDate(latest) : undefined },
-    ...SITEMAP_STATIC_PATHS.map((path) => ({ loc: absoluteUrl(path), lastmod: undefined })),
+    // 目录、导航和补录会单独变更，只给有可靠内容日期的文章填写 lastmod。
+    ...['/', ...SITEMAP_STATIC_PATHS].map((path) => ({ loc: absoluteUrl(path), lastmod: undefined })),
     ...indexable.map((p) => ({
       loc: absoluteUrl(postPath(postSlug(p))),
       lastmod: isoDate(p.data.updated ?? p.data.date),

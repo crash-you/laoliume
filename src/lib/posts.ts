@@ -15,14 +15,12 @@ export async function getPublishedPosts(): Promise<Post[]> {
 
 /** 格式化为 2026.09.03 */
 export function formatDate(d: Date): string {
-  const p = (n: number) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}.${p(d.getMonth() + 1)}.${p(d.getDate())}`;
+  return isoDate(d).replaceAll('-', '.');
 }
 
-/** 格式化为 ISO 日期 2026-09-03（用于 SEO / JSON-LD） */
+/** 稿件使用 YYYY-MM-DD，按 UTC 读取，避免构建机所在时区改变日历日期。 */
 export function isoDate(d: Date): string {
-  const p = (n: number) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  return d.toISOString().slice(0, 10);
 }
 
 /** 更新时间与发布时间是否为同一天 */

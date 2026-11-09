@@ -27,6 +27,8 @@
     "astro": "^5.13.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "5.20260902.1",
+    "@types/node": "^22.20.5",
     "fast-xml-parser": "^5.11.1",
     "gray-matter": "^4.0.3",
     "parse5": "^8.0.1",

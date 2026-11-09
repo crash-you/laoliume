@@ -5,7 +5,7 @@ import { SITE_CONFIG } from '../site.config';
 import { getPublishedPosts, postSlug, formatDate } from '../lib/posts';
 import { postPath } from '../lib/url';
 import { absoluteUrl } from '../lib/url';
-import { officeTopicPath } from '../lib/ai-office';
+import { officeTopicName, officeTopicPath } from '../lib/ai-office';
 
 const posts = await getPublishedPosts();
 const year = new Date().getFullYear();
@@ -42,7 +42,7 @@ const jsonLd = [
 >
   <div class="home-shell">
     <!-- 左栏：个人信息（桌面端 sticky，平板/手机变为顶部品牌行） -->
-    <header class="home-brand">
+    <header class="home-brand" id="author">
       <div class="brand-main">
         <h1 class="site-title"><a href="/">{SITE_CONFIG.displayName}</a></h1>
         <p class="site-desc">{SITE_CONFIG.description}</p>
@@ -62,7 +62,7 @@ const jsonLd = [
         <a class="x-link" href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">
           X{SITE_CONFIG.xHandle ? ' / ' + SITE_CONFIG.xHandle : ''}
         </a>
-        <a class="guide-link" href={officeTopicPath}>PPT 和 Excel 教程</a>
+        <a class="guide-link" href={officeTopicPath}>{officeTopicName}</a>
       </div>
       <p class="brand-footer">
         © {year} {SITE_CONFIG.displayName}<br />

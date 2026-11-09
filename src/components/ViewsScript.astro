@@ -15,40 +15,83 @@ const { slug, increment = false } = Astro.props;
 <span class="views" data-views-slug={slug} data-views-increment={increment ? '1' : undefined}>— 次阅读</span>
 
 <script>
-  const VIEW_COOLDOWN_MS = 6 * 60 * 60 * 1000; // 同一浏览器 6 小时内只记一次
+  import { MAX_VIEW_LIST_LENGTH, viewBatches } from '../lib/view-batches';
 
-  async function handleViews(el: HTMLElement) {
-    const slug = el.dataset.viewsSlug;
-    if (!slug) return;
+  const VIEW_COOLDOWN_MS = 6 * 60 * 60 * 1000;
+
+  async function loadArticle(el: HTMLElement, slug: string) {
+    const url = '/api/views/' + encodeURIComponent(slug);
     const key = 'viewed:' + slug;
 
+    async function countOnce() {
+      const last = Number(localStorage.getItem(key) || 0);
+      if (Date.now() - last < VIEW_COOLDOWN_MS) return false;
+      const response = await fetch(url, { method: 'POST' });
+      if (!response.ok) return false;
+      const data = await response.json();
+      if (typeof data.views !== 'number') return false;
+      el.textContent = data.views + ' 次阅读';
+      localStorage.setItem(key, String(Date.now()));
+      return true;
+    }
+
     try {
-      // 文章页：先计数（带防刷冷却）
-      if (el.dataset.viewsIncrement === '1') {
-        const last = Number(localStorage.getItem(key) || 0);
-        if (Date.now() - last > VIEW_COOLDOWN_MS) {
-          const res = await fetch('/api/views/' + encodeURIComponent(slug), { method: 'POST' });
-          if (res.ok) {
-            localStorage.setItem(key, String(Date.now()));
-            const data = await res.json();
-            if (typeof data.views === 'number') {
-              el.textContent = data.views + ' 次阅读';
-              return;
+      // 同源标签同时打开同一篇文章时，第二个标签可以看到第一个刚写入的冷却时间。
+      const counted = navigator.locks
+        ? await navigator.locks.request(key, countOnce)
+        : await countOnce();
+      if (counted) return;
+    } catch {
+      // 存储被禁用或计数请求失败，仍可只读获取阅读量。不要自动重试 POST。
+    }
+    try {
+      const response = await fetch(url);
+      if (!response.ok) return;
+      const data = await response.json();
+      if (typeof data.views === 'number') el.textContent = data.views + ' 次阅读';
+    } catch { /* 保留占位 */ }
+  }
+
+  async function loadBatch(slugs: string[], elements: Map<string, HTMLElement[]>) {
+    // 单个历史 slug 超过批量接口的长度限制时，沿用原单篇接口。
+    const single = slugs.length === 1 && slugs[0].length > MAX_VIEW_LIST_LENGTH;
+    const url = single
+      ? '/api/views/' + encodeURIComponent(slugs[0])
+      : '/api/views/?slugs=' + encodeURIComponent(slugs.join(','));
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          const data = await response.json();
+          const counts = single ? { [slugs[0]]: data.views } : data.views;
+          for (const slug of slugs) {
+            const views = counts?.[slug];
+            if (typeof views === 'number') {
+              for (const el of elements.get(slug)!) el.textContent = views + ' 次阅读';
             }
           }
+          return;
         }
-      }
-      // 列表页或冷却期内：只读取
-      const res = await fetch('/api/views/' + encodeURIComponent(slug));
-      if (!res.ok) return;
-      const data = await res.json();
-      if (typeof data.views === 'number') {
-        el.textContent = data.views + ' 次阅读';
-      }
-    } catch {
-      // 静默失败：保持 “— 次阅读”
+        if (response.status < 500) return;
+      } catch { /* 只读请求可以安全重试 */ }
+      if (attempt === 0) await new Promise((resolve) => setTimeout(resolve, 400));
     }
   }
 
-  document.querySelectorAll<HTMLElement>('[data-views-slug]').forEach(handleViews);
+  async function loadViews() {
+    const list = new Map<string, HTMLElement[]>();
+    for (const el of document.querySelectorAll<HTMLElement>('[data-views-slug]')) {
+      const slug = el.dataset.viewsSlug;
+      if (!slug) continue;
+      if (el.dataset.viewsIncrement === '1') {
+        void loadArticle(el, slug);
+      } else {
+        if (!list.has(slug)) list.set(slug, []);
+        list.get(slug)!.push(el);
+      }
+    }
+    for (const batch of viewBatches(list.keys())) await loadBatch(batch, list);
+  }
+
+  void loadViews();
 </script>

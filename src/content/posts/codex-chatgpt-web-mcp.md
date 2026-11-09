@@ -1,7 +1,8 @@
 ---
-title: "Codex究极省额度教程：把ChatGPT网页版接入Codex，节省90%的额度"
-description: "把 ChatGPT 网页版接入 Codex 的实操记录：从部署项目、初始化和配置 MCP，到验证调用与实际体验，减少任务中的 Codex 额度消耗。"
+title: "怎么在 Codex 里调用 ChatGPT 网页版？MCP 配置与调用验证"
+description: "记录 codex-chatgpt-web 的部署和使用过程，包括初始化、选择 Web 模型、配置 MCP，再验证一条消息能否发到 ChatGPT 网页端。"
 date: "2026-09-25"
+updated: "2026-11-09"
 slug: "codex-chatgpt-web-mcp"
 published: true
 ---
@@ -10,11 +11,9 @@ published: true
 
 最近一直在折腾 Codex，但是codex额度实在不够用，前几天刚重置，今天就已经快没了！
 
-![Codex究极省额度教程：把ChatGPT网页版接入Codex，节省90%的额度，原文配图 1](/images/codex-chatgpt-web-mcp/image-1.png)
+![用量设置页红框标出每周限额，截图中显示剩余 45%](/images/codex-chatgpt-web-mcp/image-1.png)
 
-但是，网页版的额度又几乎是无限的！
-
-那么能不能让网页版当成codex内置的一个模型呢？
+我平时也用 ChatGPT 网页版，就想试试：能不能在 Codex 里把一部分任务交给网页版？
 
 刚好最近发现了一个 GitHub 开源项目：**codex\-chatgpt\-web**
 
@@ -28,7 +27,7 @@ published: true
 
 - Codex 模型 
 
-![Codex究极省额度教程：把ChatGPT网页版接入Codex，节省90%的额度，原文配图 2](/images/codex-chatgpt-web-mcp/image-2.png)
+![模型菜单同时列出网页版模型和其他模型，当前选中带 Web 标记的一项](/images/codex-chatgpt-web-mcp/image-2.png)
 
 然后根据不同任务选择不同模型。
 
@@ -210,7 +209,7 @@ Creat
 
 真正需要修改项目文件的时候，再交给 Codex。
 
-这样可以减少一些不必要的 Codex 调用。
+这次我验证了网页版模型能收到消息，MCP 连接也能跑通。文中没有记录同一批任务接入前后的额度用量，所以没法从这次体验算出节省比例。
 
 ## 四、最后
 
@@ -219,8 +218,6 @@ Creat
 让 ChatGPT 网页端和 Codex 不再是两个独立工具，而是组成一个开发工作流。
 
 如果你经常使用 Codex 开发项目，这种多模型协作方式，值得体验一下。
-
-极度省token！！！
 
 【叠个甲，网传该方式可能会导致账号封禁，仅供娱乐使用，大家选择而为！】
 

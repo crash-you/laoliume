@@ -6,7 +6,7 @@
  *
  * 说明:
  * - 使用 playwright-core + 本机已缓存的 Chromium（不额外下载浏览器）。
- * - 拦截 /api/views/* 并返回固定 {"views": 42}，避免动态阅读量造成假差异，
+ * - 拦截单篇和批量阅读量接口，每篇固定返回 42，避免动态阅读量造成假差异，
  *   也避免截图过程污染阅读量计数。
  * - 视口: 桌面 1440x900 / 平板 1024x768 / 手机 390x844（任务书规定尺寸）。
  */
@@ -78,13 +78,18 @@ let failed = 0;
 for (const [vpName, width, height] of VIEWPORTS) {
   const context = await browser.newContext({ viewport: { width, height } });
   // 固定阅读量，屏蔽动态数据
-  await context.route('**/api/views/**', (route) =>
-    route.fulfill({
+  await context.route('**/api/views/**', (route) => {
+    const url = new URL(route.request().url());
+    const slugs = url.searchParams.get('slugs')?.split(',') ?? [];
+    const views = url.pathname === '/api/views/'
+      ? Object.fromEntries(slugs.map((slug) => [slug, 42]))
+      : 42;
+    return route.fulfill({
       status: 200,
       contentType: 'application/json; charset=utf-8',
-      body: JSON.stringify({ views: 42 }),
-    })
-  );
+      body: JSON.stringify({ views }),
+    });
+  });
   const page = await context.newPage();
   for (const [pageName, path] of PAGES) {
     const url = baseUrl + path;

@@ -2,6 +2,7 @@
 title: "ChatGPT怎么接入Word？官方插件安装与使用完整教程"
 description: "ChatGPT 接入 Word 的安装与使用过程：添加官方加载项、打开侧边栏、修改选中文字、总结文档，以及论文和工作报告的提示词。"
 date: "2026-09-22"
+updated: "2026-11-09"
 slug: "chatgpt-word-tutorial"
 published: true
 ---
@@ -50,13 +51,11 @@ OpenAI 官方给出的能力包括根据笔记起草内容、总结当前文档�
 
 所以如果你平时经常写论文、报告、方案、总结，这个功能其实非常实用。
 
-【这里放图：Word 右侧 ChatGPT 界面】
-
 ## 二、怎么把 ChatGPT 接入 Word？
 
 安装其实很简单。
 
-如果你前面已经按照我的教程把 ChatGPT 装进 PowerPoint 了，理论上不需要再找一个所谓的Word 版 ChatGPT 插件。
+如果你前面已经跟着[把 ChatGPT 装进 PowerPoint 的教程](/chatgpt-ppt-powerpoint/)装过加载项，可以先到 Word 的加载项列表里找它。
 
 还是同一个，如果你之前没有安装过，我们从头来。
 
@@ -228,15 +227,9 @@ ChatGPT for Word 虽然是在 Word 里面打开的，但它和我们平时 ChatG
 
 而且 Word、Excel、PowerPoint 现在使用的是同一个加载项。
 
-前几天我已经写过 ChatGPT 接入 PowerPoint，今天 Word 也补上了。
+如果报告里的数字还要汇总，我也写了[用 ChatGPT 在 Excel 里检查数据、做汇总和图表](/chatgpt-excel-tutorial/)的过程。
 
-后面我再继续研究一下 Excel 到底能怎么玩。
-
-如果你连 ChatGPT 账号都还没有，我之前也写过一篇完整的 ChatGPT 注册教程，可以直接按照教程一步一步操作。
-
-至于 ChatGPT Plus、Pro、Codex 到底是什么关系，我前面也专门写过一篇。
-
-有需要的可以往前翻一下。
+还没有账号，可以从[注册并登录 ChatGPT](/from-0-to-1-chatgpt/)开始。想了解几个名字之间的关系，可以看我写的[ChatGPT Plus、Pro 和 Codex 有什么区别](/chatgpt-plus-pro-codex/)。
 
 ### 常见问题
 

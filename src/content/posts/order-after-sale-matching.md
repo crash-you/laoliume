@@ -3,6 +3,8 @@ title: "订单和售后表对不上？先看一对多、重复记录和长订单
 description: "用一组可下载的自制 CSV 和实际报告，说明订单与多条售后怎样关联、无售后为什么不一定是异常、重复记录为什么要复核。保留原始编号和来源行号，不把记录归类当成完成财务对账。"
 date: "2026-10-30"
 slug: "order-after-sale-matching"
+image: "/images/order-after-sale-matching/01-source.png"
+imageAlt: "订单表和售后表节选，订单 000001 对应两条售后记录，退款金额分别为 10 元和 5 元。"
 published: true
 ---
 

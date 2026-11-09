@@ -6,6 +6,7 @@ seoDescription: "换对话后让 Codex 接着做复杂项目：长期记忆的�
 image: "/og/codex-long-term-memory.png"
 imageAlt: "佬刘AI 文章分享图：Codex 长期记忆怎么做？记、分、写、读、忘、真六步循环"
 date: 2026-08-29
+updated: 2026-11-09
 slug: "codex-long-term-memory"
 published: true
 wechat_url: "https://mp.weixin.qq.com/s/lji3zWDmPp8ClY49PLGgfA"
@@ -461,10 +462,8 @@ AI负责理解记忆，脚本负责检查 AI 有没有认真记。
 
 既然都是固定动作，为什么不直接把它做成一个 Skill？
 
-所以，我准备直接动手，名字就叫，【项目不失忆 skill】
+后来我把它做成了 Project Memory，开发和开源过程都在[把这套项目记忆做成 Codex Skill](/codex-custom-memory-skill/)里。想拿自己的项目试试，可以从那篇的安装和初始化步骤开始。
 
-如果你还不知道什么是codex，那么推荐你阅读我这篇文章！
-
-
+第一次用 Codex 的朋友，可以先跟着[Codex CLI 安装、登录和第一个任务教程](/codex-cli-tutorial/)把环境跑通。
 
 我是佬刘，下期见！

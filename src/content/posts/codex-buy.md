@@ -37,7 +37,12 @@ Codex 是包含在 ChatGPT 订阅里的！
 
 开通对应套餐后，用同一个 OpenAI 账号登录 Codex 就可以。
 
-![信息图：Codex 包含在 ChatGPT 订阅里](/images/codex-buy/image-6.png)
+<p>
+  <picture>
+    <source type="image/webp" srcset="/images/codex-buy/image-6.webp">
+    <img src="/images/codex-buy/image-6.png" width="1230" height="693" alt="信息图：Codex 包含在 ChatGPT 订阅里" decoding="async">
+  </picture>
+</p>
 
 ## 二、Codex怎么购买？
 

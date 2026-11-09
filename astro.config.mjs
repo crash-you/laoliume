@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import cloudflare from '@astrojs/cloudflare';
 import { execSync } from 'node:child_process';
-import { rehypeDemoteBodyHeadings, rehypeImageMeta } from './src/lib/rehype-seo.mjs';
+import { rehypeDemoteBodyHeadings, rehypeImageMeta, rehypeTableScroll } from './src/lib/rehype-seo.mjs';
 import { seoIntegration } from './src/lib/seo-integration.mjs';
 
 // 构建提交标记：用于部署后验收确认「线上产物对应哪个提交」。
@@ -48,7 +48,7 @@ try {
   buildCommit = resolveBuildCommit();
 } catch (e) {
   // 构建期硬失败：标记与实际版本不符时不能带错误标记继续
-  console.error(`[build-commit] ${e.message}`);
+  console.error(`[build-commit] ${e instanceof Error ? e.message : String(e)}`);
   process.exit(1);
 }
 
@@ -67,8 +67,8 @@ export default defineConfig({
       theme: 'github-light',
       wrap: false,
     },
-    // 构建期 AST 转换：正文标题降级（保视觉）+ 图片尺寸/懒加载（见 src/lib/rehype-seo.mjs）
-    rehypePlugins: [rehypeDemoteBodyHeadings, rehypeImageMeta],
+    // 构建时处理正文的标题层级、图片尺寸及宽表滚动。
+    rehypePlugins: [rehypeDemoteBodyHeadings, rehypeImageMeta, rehypeTableScroll],
   },
   vite: {
     define: {

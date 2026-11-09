@@ -2,6 +2,7 @@
 title: "Claude又封号？我在谷歌Antigravity里用上了Opus 5.5！附完整教程"
 description: "从下载和安装 Google Antigravity 开始，记录账号登录、扫码和年龄验证的处理过程，以及在模型菜单里选择 Claude Opus 5.5 的步骤。"
 date: "2026-11-04"
+updated: "2026-11-09"
 slug: "antigravity-claude-opus-setup"
 published: true
 ---
@@ -198,7 +199,7 @@ Tun
 
 ![扫码后的短信验证提示](/images/antigravity-claude-opus-setup/step-27.jpg)
 
-焚决！：用手机/ipad下载Google app，打开手机设置里的谷歌服务选项，在Google app里登录一个正常的谷歌账号，用google app内部的扫码功能扫码即可。
+我当时是在 Google app 里登录自己的谷歌账号，再用里面的扫码功能扫页面上的二维码。如果你看到的是账号地区提示，或者浏览器登录成功后桌面端还在转圈，可以按屏幕提示看[Antigravity 登录问题排查](/antigravity-login-troubleshooting/)。
 
 在手机设置里搜索“谷歌基础服务管理”，打开选项
 

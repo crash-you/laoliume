@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ViewsScript from '../components/ViewsScript.astro';
+import ArticleContents from '../components/ArticleContents.astro';
 import { SITE_CONFIG } from '../site.config';
 import {
   getPublishedPosts,
@@ -20,21 +21,22 @@ export async function getStaticPaths() {
     params: { slug: postSlug(post) },
     props: {
       post,
-      allPosts: posts,
       prev: posts[i + 1] as Post | undefined, // 上一篇（更早发布）
       next: posts[i - 1] as Post | undefined, // 下一篇（更晚发布）
     },
   }));
 }
 
-const { post, allPosts, prev, next } = Astro.props;
-const { Content } = await render(post);
+const { post, prev, next } = Astro.props;
+const { Content, headings } = await render(post);
+const sectionDepth = Math.min(...headings.map((heading) => heading.depth));
+const sections = headings.filter((heading) => heading.depth === sectionDepth && heading.slug);
+const showContents = sections.length >= 3;
 
 const slug = postSlug(post);
 const url = canonicalPostUrl(slug);
 const description = post.data.seoDescription || post.data.description || post.data.title;
 const hasUpdate = post.data.updated && !isSameDay(post.data.date, post.data.updated);
-const currentSlug = slug;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -47,14 +49,11 @@ const jsonLd = {
   dateModified: isoDate(post.data.updated ?? post.data.date),
   author: {
     '@type': 'Person',
+    '@id': absoluteUrl('/#author'),
     name: SITE_CONFIG.author,
-    url: SITE_CONFIG.domain + '/#author',
+    url: absoluteUrl('/#author'),
   },
-  publisher: {
-    '@type': 'Organization',
-    name: SITE_CONFIG.name,
-    url: SITE_CONFIG.domain,
-  },
+  publisher: { '@id': absoluteUrl('/#author') },
   isPartOf: { '@id': SITE_CONFIG.domain + '/#website' },
   image: [absoluteUrl(post.data.image ?? SITE_CONFIG.ogImageDefault)],
   url,
@@ -77,23 +76,20 @@ const year = new Date().getFullYear();
   noindex={post.data.noindex}
   jsonLd={jsonLd}
 >
+  <a class="skip-link" href="#article-start">跳到正文</a>
   <div class="layout">
     <aside class="sidebar">
       <div class="sidebar-inner">
         <a class="sidebar-title" href="/">{SITE_CONFIG.displayName}</a>
         <p class="sidebar-desc">{SITE_CONFIG.description}</p>
 
-        <nav class="sidebar-nav" aria-label="文章列表">
-          <h2>文章</h2>
-          <ul>
-            {allPosts.map((p) => (
-              <li class={postSlug(p) === currentSlug ? 'active' : undefined}>
-                <a href={postPath(postSlug(p))}>{p.data.title}</a>
-                <span class="sidebar-meta">{formatDate(p.data.date)}</span>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <a class="archive-link" href="/">全部文章</a>
+        {showContents && (
+          <nav class="sidebar-nav" aria-label="本文目录">
+            <h2>本文目录</h2>
+            <ArticleContents headings={sections} />
+          </nav>
+        )}
 
         <div class="sidebar-footer">
           © {year} {SITE_CONFIG.displayName}<br />
@@ -110,14 +106,14 @@ const year = new Date().getFullYear();
             <span aria-hidden="true">/</span>
             <a href={officeTopicPath}>{officeTopicName}</a>
           </nav>
-        ) : <a class="back-home" href="/">{SITE_CONFIG.displayName}</a>}
+        ) : <a class="back-home" href="/">佬刘首页</a>}
         <a class="x-link" href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">
           X{SITE_CONFIG.xHandle ? ' / ' + SITE_CONFIG.xHandle : ''}
         </a>
       </div>
 
       <article>
-        <h1 class="article-title">{post.data.title}</h1>
+        <h1 class="article-title" id="article-start" tabindex="-1">{post.data.title}</h1>
         <p class="article-meta">
           <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
           {hasUpdate && <span>更新于 {formatDate(post.data.updated!)}</span>}
@@ -133,21 +129,29 @@ const year = new Date().getFullYear();
           </p>
         )}
 
+        {showContents && (
+          <details class="mobile-toc">
+            <summary>本文目录</summary>
+            <nav aria-label="本文目录"><ArticleContents headings={sections} /></nav>
+          </details>
+        )}
         <div class="prose">
           <Content />
         </div>
 
         <div class="post-end">
-          {post.data.wechat_url && (
-            <div class="end-block">
-              <p>
-                本文首发于微信公众号「{SITE_CONFIG.wechatName}」。<br />
-                <a href={post.data.wechat_url} target="_blank" rel="noopener noreferrer">
-                  查看微信原文 →
-                </a>
-              </p>
-            </div>
-          )}
+          <nav class="post-nav" aria-label="上一篇 / 下一篇">
+            {prev && (
+              <a href={postPath(postSlug(prev))}>
+                <span class="nav-label">← 上一篇</span>{prev.data.title}
+              </a>
+            )}
+            {next && (
+              <a class="nav-next" href={postPath(postSlug(next))}>
+                <span class="nav-label">下一篇 →</span>{next.data.title}
+              </a>
+            )}
+          </nav>
 
           <div class="end-author" data-nosnippet>
             <p class="end-author-name">{SITE_CONFIG.displayName}</p>
@@ -172,18 +176,6 @@ const year = new Date().getFullYear();
             </p>
           </div>
 
-          <nav class="post-nav" aria-label="上一篇 / 下一篇">
-            {prev ? (
-              <a href={postPath(postSlug(prev))}>
-                <span class="nav-label">← 上一篇</span>{prev.data.title}
-              </a>
-            ) : <span />}
-            {next ? (
-              <a class="nav-next" href={postPath(postSlug(next))}>
-                <span class="nav-label">下一篇 →</span>{next.data.title}
-              </a>
-            ) : <span />}
-          </nav>
         </div>
       </article>
     </main>

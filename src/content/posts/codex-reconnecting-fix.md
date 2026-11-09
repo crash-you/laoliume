@@ -1,7 +1,8 @@
 ---
-title: "Codex重连5次怎么办？一段提示词自动修复 Reconnecting 问题（2026最新）"
-description: "Codex Desktop 一直 Reconnecting 或 request timed out 时，通过提示词定位本机代理端口与协议，更新代理配置，再退出后台并重启。"
+title: "Codex 反复 Reconnecting 或重连 5 次怎么办？排查本机代理配置"
+description: "Codex Desktop 能登录，发消息却多次重连并提示 request timed out。本文记录使用本机代理时如何定位端口和协议、更新代理配置，再重启客户端。"
 date: "2026-09-26"
+updated: "2026-11-09"
 slug: "codex-reconnecting-fix"
 published: true
 ---
@@ -24,19 +25,13 @@ published: true
 
 
 
-![Codex重连5次怎么办？一段提示词自动修复 Reconnecting 问题（2026最新），原文配图 1](/images/codex-reconnecting-fix/image-1.png)
+![发送消息后，Codex 显示“正在重新连接 5/5”和 request timed out](/images/codex-reconnecting-fix/image-1.png)
 
-大部分情况下，大概率是 **Codex 和本地配置之间的连接出现了问题。**
+如果你用的是本机代理，可以先查 **Codex 用的代理端口和协议**。下面是我排查这个场景时用的提示词。
 
 ## 解决方法
 
-不要自己手动找。
-
-直接复制下面这段话：
-
-
-
-复制这段指令新开个codex窗口发给它就行，让codex自己修复
+如果新开的 Codex 窗口可以收发消息，把这段提示词贴进去，让它先找出本机实际使用的端口，再更新配置。
 
 ```Plain Text
 帮我修复 Codex Desktop 一直 Reconnecting 的问题。

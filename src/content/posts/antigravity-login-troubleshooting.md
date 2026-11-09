@@ -1,12 +1,13 @@
 ---
-title: "反重力地区错误，扫码以及其他登录问题焚决"
+title: "Antigravity（反重力）登录失败怎么办？地区、扫码验证与登录后不跳转"
 description: "按现象梳理反重力登录不跳转、账号资格与地区、扫码验证、反复 verify、EOF 和 invalid_grant 等问题，并附 Gemini 不可用的检查入口与 Gem 提示词示例。"
 date: "2026-11-07"
+updated: "2026-11-09"
 slug: "antigravity-login-troubleshooting"
 published: true
 ---
 
-反重力登录问题解决办法
+我把登录时遇到的问题按屏幕上看到的现象整理在下面。浏览器已经提示成功、桌面端却还在转圈，和页面明确提示账号不符合资格，要看的地方不同。
 
 # Antigravity2.0 像Codex一样的桌面智能体
 
@@ -36,7 +37,9 @@ published: true
 
 ![桌面端仍停留在欢迎页](/images/antigravity-login-troubleshooting/step-04.png)
 
-## count ineligible（账号不符合资格）
+<span id="count-ineligible账号不符合资格"></span>
+
+## This account is ineligible（账号不符合资格）
 
 ![Antigravity 提示账号不符合使用资格](/images/antigravity-login-troubleshooting/step-05.png)
 
@@ -116,7 +119,9 @@ Post错误（带daily-cloudcode字样）
 
 ![设置中使用其他账号的入口](/images/antigravity-login-troubleshooting/step-20.png)
 
-# count ineligible（账号不符合资格）
+<span id="count-ineligible账号不符合资格-1"></span>
+
+# This account is ineligible（账号不符合资格）
 
 ![Antigravity 提示账号不符合使用资格](/images/antigravity-login-troubleshooting/step-05.png)
 
@@ -163,7 +168,7 @@ Post错误（带daily-cloudcode字样）
 
 ![手机收到的验证短信示例](/images/antigravity-login-troubleshooting/step-28.png)
 
-焚决！：用手机/ipad下载Google app，打开手机设置里的谷歌服务选项，在Google app里登录一个正常的谷歌账号，用google app内部的扫码功能扫码即可。
+我当时是在手机上打开 Google app，登录自己的谷歌账号，再用 app 里的扫码功能扫描页面上的二维码。
 
 在手机设置里搜索“谷歌基础服务管理”，打开选项
 

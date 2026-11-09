@@ -15,7 +15,12 @@ wechat_url: "https://mp.weixin.qq.com/s/e2KfQCUe6GBXsfmnC2tTTg"
 
 GPT-6，终于来了！ 终于在北京时间凌晨3点33，正式亮相！
 
-![GPT-6 发布](/images/gpt6-codex-context/image-1.png)
+<p>
+  <picture>
+    <source type="image/webp" srcset="/images/gpt6-codex-context/image-1.webp">
+    <img src="/images/gpt6-codex-context/image-1.png" width="1920" height="945" alt="GPT-6 发布" decoding="async">
+  </picture>
+</p>
 
 官方还有个很振奋的口号：
 

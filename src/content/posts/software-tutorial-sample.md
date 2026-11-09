@@ -3,6 +3,8 @@ title: "一段85秒软件教程样片：把操作、结果和限制讲清楚"
 description: "用自制PPT结构检查器展示一段真实录屏：选择文件、检查逐页结构、整理需求和保存报告。提供1080p视频、中英文字幕、对应图文步骤与演示文件，明确系统配音和合成样例边界。"
 date: "2026-10-30"
 slug: "software-tutorial-sample"
+image: "/media/software-tutorial-sample/poster.png"
+imageAlt: "PPT 结构检查器的录屏画面，右侧对比整页图片和可单独修改对象两种幻灯片。"
 published: true
 ---
 

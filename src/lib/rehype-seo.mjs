@@ -18,8 +18,6 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname, normalize, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const PUBLIC_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'public');
-
 /**
  * 把站内 src（如 /images/x/%E4%B8%AD.png?query#frag）安全解析为 public/ 下的真实文件路径。
  * 返回 null 表示不是本地 public 资源（外链、协议相对、非法编码、越出 public）。
@@ -29,7 +27,7 @@ const PUBLIC_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'pu
  * - 查询串/片段不参与文件定位；无效百分号编码（如 %zz、截断的 %e4）返回 null。
  * - 解码后必须仍是站内绝对路径，且 resolve 后不能越出 public/（防 ../ 越界）。
  */
-export function resolvePublicFile(src) {
+export function resolvePublicFile(src, publicDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'public')) {
   if (typeof src !== 'string' || !src.startsWith('/') || src.startsWith('//')) return null; // 外链/相对/协议相对
   let pathname;
   try {
@@ -49,14 +47,14 @@ export function resolvePublicFile(src) {
   // 解码后的路径段不能包含 . / ..（防 %2e%2e%2f 越界）
   const segments = decoded.split('/');
   if (segments.some((s) => s === '..' || s === '.')) return null;
-  const filePath = normalize(join(PUBLIC_DIR, decoded));
-  const publicRoot = normalize(PUBLIC_DIR) + sep;
-  if (filePath !== normalize(PUBLIC_DIR) && !filePath.startsWith(publicRoot)) return null;
+  const filePath = normalize(join(publicDir, decoded));
+  const publicRoot = normalize(publicDir) + sep;
+  if (filePath !== normalize(publicDir) && !filePath.startsWith(publicRoot)) return null;
   return filePath;
 }
 
 /** 读取 PNG / JPEG 固有尺寸 */
-function imageSize(file) {
+export function imageSize(file) {
   const buf = readFileSync(file);
   if (buf.length > 24 && buf[0] === 0x89 && buf[1] === 0x50) {
     return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
@@ -137,11 +135,27 @@ export function rehypeImageMeta() {
   };
 }
 
-function walk(node, visit) {
-  if (!node || node.type !== 'element') {
-    if (node?.children) node.children.forEach((c) => walk(c, visit));
-    return;
-  }
-  visit(node);
-  if (node.children) node.children.forEach((c) => walk(c, visit));
+// 外层容器处理窄屏滚动，表头和数据行继续使用同一份原生表格列宽。
+export function rehypeTableScroll() {
+  return (tree) => {
+    walk(tree, (node, parent, index) => {
+      if (node.tagName !== 'table' || !parent || parent.properties?.className?.includes('table-scroll')) return;
+      parent.children[index] = {
+        type: 'element',
+        tagName: 'div',
+        properties: {
+          className: ['table-scroll'],
+          tabIndex: 0,
+          role: 'group',
+          ariaLabel: '表格，宽表可横向滚动',
+        },
+        children: [node],
+      };
+    });
+  };
+}
+
+function walk(node, visit, parent, index) {
+  if (node?.type === 'element') visit(node, parent, index);
+  node?.children?.forEach((child, i) => walk(child, visit, node, i));
 }
