@@ -135,3 +135,5 @@
 另有两篇已发表文章未能核准同一篇的完整图文，即 10 月 28 日的《GPT Plus怎么充值｜一篇文章带你搞懂！》及 10 月 10 日的《记录一下自己用AI做科研踩过的坑》。10 月 6 日的自助充值稿与 10 月 28 日的标题分别登记。
 
 本地验收在项目内的隔离副本执行 `npm ci` 和 `npm run seo:check`。构建通过，38 篇正式文章，SEO 校验 0 个警告。另检查三个生成页面的标题、日期、站内图片、首页、RSS 和 sitemap，80 处图片引用均能解析到本地图片；暂缓文章未生成路由。
+
+正式站于 2026-11-09 验收内容提交 `0b1571a9cfc08eded26c59bec3f369716c49ded6`。使用 `node scripts/seo-smoke.mjs --base-url https://www.laoliu.me --canonical-origin https://www.laoliu.me --env production --expected-commit 0b1571a9cfc08eded26c59bec3f369716c49ded6`，88 项全部通过。另逐篇比对正式站与本地构建的完整正文和图片顺序，并通过正常文章图片地址下载 72 个独立文件，与 Git 内容哈希全部一致。Cloudflare Workers 构建及 GitHub 的 build-and-test 均已通过。
