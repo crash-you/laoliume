@@ -33,6 +33,7 @@ description: "隔离验证：只新增 Markdown 即可发布，分享图回退�
 seoTitle: "夹具发布测试文章"
 seoDescription: "隔离验证新增文章即可发布、分享图回退默认图、重定向自动生成，且显式 noindex 策略不被误判。"
 date: 2026-09-10
+sameDayOrder: 1
 slug: "${FIX_VALID}"
 published: true
 ---
@@ -98,6 +99,10 @@ try {
   const html = readDist(`${FIX_VALID}/index.html`);
   check(html.includes('property="og:image" content="https://www.laoliu.me/og/default.png"'), '新文章 og:image 回退默认图');
   check(html.includes(`rel="canonical" href="https://www.laoliu.me/${FIX_VALID}/"`), '新文章 canonical 正确');
+  const home = readDist('index.html');
+  const ranked = home.indexOf(`href="/${FIX_VALID}/"`);
+  const unranked = home.indexOf(`href="/${FIX_NOINDEX}/"`);
+  check(ranked >= 0 && ranked < unranked, '同日文章遵循指定的先后顺序');
 
   // 3. 进入 sitemap 与 RSS（合法文章）；noindex 排除
   const sitemap = readDist('sitemap.xml');

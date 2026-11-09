@@ -10,7 +10,13 @@ export function postSlug(post: Post): string {
 /** 所有已发布文章，按发布时间倒序 */
 export async function getPublishedPosts(): Promise<Post[]> {
   const posts = await getCollection('posts', ({ data }) => data.published);
-  return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  return posts.sort((a, b) => {
+    const dateOrder = b.data.date.getTime() - a.data.date.getTime();
+    if (dateOrder) return dateOrder;
+    const orderA = a.data.sameDayOrder ?? Number.MAX_SAFE_INTEGER;
+    const orderB = b.data.sameDayOrder ?? Number.MAX_SAFE_INTEGER;
+    return orderA - orderB || postSlug(a).localeCompare(postSlug(b), 'en');
+  });
 }
 
 /** 格式化为 2026.09.03 */

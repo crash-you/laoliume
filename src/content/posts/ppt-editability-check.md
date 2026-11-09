@@ -2,6 +2,7 @@
 title: "图片转成 PPT 后还是改不了？用自制样例检查文字、形状和流程图，保存重开再验收"
 description: "PPTX 能打开，不代表里面的文字和图形能继续修改。用两页自制截图、三份对照文件和浏览器检查工具，先看每页结构，再实际改标题、移动节点、保存重开，讲清可编辑范围与限制。"
 date: "2026-10-30"
+sameDayOrder: 1
 slug: "ppt-editability-check"
 image: "/images/ppt-editability-check/comparison.png"
 imageAlt: "季度项目复盘表和内容交付流程图的原始截图，与重建后的 PowerPoint 页面并排对照。"

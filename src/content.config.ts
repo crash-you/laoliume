@@ -20,6 +20,8 @@ const posts = defineCollection({
     noindex: z.boolean().default(false),
     /** 发布时间 */
     date: z.coerce.date(),
+    /** 同一天可指定展示顺序，数值小的在前；未指定的按 slug 排在其后。 */
+    sameDayOrder: z.number().int().positive().optional(),
     /** 更新时间，可选；与发布日期不同才展示 */
     updated: z.coerce.date().optional(),
     /** 自定义 URL slug，可选；不填则用文件名 */
