@@ -163,3 +163,17 @@
 本地验收：在隔离副本执行 `npm ci`、`npm run seo:check`，48 篇正式文章，0 个警告。逐篇核对标题、原发表日期、正文图片顺序、首页、RSS 和 sitemap；178 张图片均可解码，所有图片及 MP4 与源文件逐字节一致（合计 31,600,975 字节）。
 
 正式站验收的内容提交为 `cad2c6d94f4f4e9e609e82876629fa067658a402`。运行 `node scripts/seo-smoke.mjs --base-url https://www.laoliu.me --canonical-origin https://www.laoliu.me --env production --expected-commit cad2c6d94f4f4e9e609e82876629fa067658a402`，108 项通过，0 项失败、0 项未验证。另从正式站读取 10 篇完整正文，核对原日期、首页、RSS、sitemap、图片顺序和视频控件，并下载全部 179 个媒体文件，与知识库来源逐字节比对通过。
+
+## 2026-11-09 16:58（北京时间）搜索可达性复查
+
+用 HTTPS GET 读取正式域名，将首页文章链接和 sitemap 的 `loc` 与本地 48 篇公开文章的 slug 对照，再逐个访问差集中的规范网址。响应头的 `CF-Ray` 后缀均为 `LAX`。
+
+| 检查项 | 实测结果 |
+| --- | --- |
+| 首页、sitemap 和补录文章 | 此节点首页列出 38 篇，HTML 构建标记为 `86f3a22`。站点地图列出 41 个网址，含首页、工具、服务及 38 篇文章。比本地少的 10 篇逐一 GET 均为 404，响应头均为 `CF-Cache-Status: HIT`。此结果与上方同日新版验收记录有差异，原因待核。 |
+| 爬虫规则 | GET `/robots.txt` 返回 200，包含正确的 Sitemap 声明。Cloudflare 托管区块为 `Baiduspider` 指定 `Disallow: /`。若以百度为目标渠道，这项检查未通过。 |
+| 规范网址与错误状态 | 抽查 `https://laoliu.me/codex-deepseek/` 首跳为 301，目标是 www 同路径。`https://www.laoliu.me/codex-buy` 首跳为 308，补尾斜杠后为 200。随机不存在路径返回 404。 |
+
+复查时可从两个不同网络运行 `curl -sSi https://www.laoliu.me/codex-selected-model-at-capacity/`，核对状态码、节点后缀和 HTML 的 `build-commit`，再读取 `/sitemap.xml` 核对公开网址。验收条件为此批 10 篇在两个网络均返回 200，首页和站点地图能找到全部 48 篇。搜索引擎实际收录情况需另查站长平台。
+
+排查结果：GitHub 的 Cloudflare Workers Builds 记录（北京时间）显示，48 篇版本 `cad2c6d` 于 16:25 成功，后继提交 `4712253` 于 16:29 成功。只有 38 篇的旧提交 `86f3a22` 于 16:51 才完成一次构建，随后正式站 GET 返回的正是这个旧版本。GitHub 的 main 仍在 `4712253`，10 篇原稿与原路径完整。公开记录能核实版本发布次序倒置，未说明旧任务因何延迟。[旧提交的构建记录](https://api.github.com/repos/crash-you/laoliume/commits/86f3a22/check-runs?filter=all) · [新提交的构建记录](https://api.github.com/repos/crash-you/laoliume/commits/4712253/check-runs)
