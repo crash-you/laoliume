@@ -183,3 +183,9 @@
 通过原 Git 发布流程重新部署 `7b19046`。洛杉矶节点核验全部 48 个原文章地址的 HTTP 200、规范网址与构建标记，首页恢复 48 个入口，站点地图恢复 51 个网址。另从德国 Falkenstein 发起独立 HTTPS GET，缺失的 10 篇全部返回 200 且带有 `7b19046` 构建标记。
 
 在项目内隔离副本运行 `npm ci`、`npm test`、`npm run test:fixture`、`npm run seo:check`，全部通过，构建产物含 48 篇原文章及办公专题。用本地 Wrangler 和独立浏览器在 390px、1440px 两种宽度从首页进入专题，逐篇走通 7 篇教程及面包屑回链、截图重建到验收工具、Excel 到订单案例、两个 ZIP 下载及配图加载。专题无尾斜杠入口单跳 308。Wrangler 的生产上传前检查在隔离环境中对旧 main 提交退出 1，对当前 main 提交 dry-run 退出 0。
+
+正式站版本 `d1a0e36948ea5f137cc40a747877fd625aa4fd48` 已在洛杉矶和德国节点返回办公专题。洛杉矶逐一核对 48 个文章原网址、HTTP 200、原规范地址和提交标记，全部通过。首页含专题入口，sitemap 共 52 个网址，德国另核对 PPT 重建和订单案例的版本一致。运行 `node scripts/seo-smoke.mjs --base-url https://www.laoliu.me --canonical-origin https://www.laoliu.me --env production --expected-commit d1a0e36948ea5f137cc40a747877fd625aa4fd48`。首次结果为 108 项通过、1 项未通过，唯一未通过项为 Cloudflare 前置的百度禁抓规则；来源文件中百度已允许。Googlebot、Bingbot 对公开页面的规则检查通过。
+
+站长确认优先开放百度后，已关闭 laoliu.me 的 Cloudflare Bot Preference Sync。源站托管爬虫声明，保留 `ai-train=no` 与原先其余爬虫的限制；关闭同步会取消该功能对纯训练爬虫的自动边缘拦截。洛杉矶和德国节点重新 GET `/robots.txt`，均为 200，内容与源文件一致，只有一组 Baiduspider 规则，结果为 `Allow: /`。以同一参数重跑正式站 smoke，**109 项通过，0 项失败，0 项未验证**。
+
+在独立浏览器会话读回 Cloudflare Worker `laoliume` 的生产部署命令为 `node scripts/verify-production-head.mjs && npx wrangler deploy`。旧提交缺少该脚本时也会停在上传之前。预览版本命令仍使用 `npx wrangler versions upload`。
