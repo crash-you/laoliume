@@ -153,6 +153,23 @@ a {
   color: var(--accent);
 }
 
+.guide-link {
+  display: block;
+  width: fit-content;
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-underline-offset: 4px;
+}
+
+.guide-link:hover,
+.guide-link:focus-visible {
+  color: var(--text);
+  text-decoration-color: currentColor;
+}
+
 .brand-footer {
   margin: 64px 0 0;
   font-size: 13px;
@@ -164,33 +181,6 @@ a {
 
 .post-list {
   min-width: 0;
-}
-
-.home-topic {
-  margin: 0 0 32px;
-  padding: 4px 0 8px 18px;
-  border-left: 3px solid var(--accent);
-}
-
-.home-topic a {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 12px;
-  font-size: 21px;
-}
-
-.home-topic p {
-  margin: 5px 0 0;
-  font-size: 15px;
-  color: var(--text-soft);
-}
-
-.archive-heading {
-  margin: 0;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  font-size: 15px;
-  color: var(--muted);
 }
 
 .post-item {
@@ -373,7 +363,7 @@ a {
   color: var(--text-soft);
 }
 
-.office-crumb a:hover, .home-topic a:hover {
+.office-crumb a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
 }

@@ -189,3 +189,9 @@
 站长确认优先开放百度后，已关闭 laoliu.me 的 Cloudflare Bot Preference Sync。源站托管爬虫声明，保留 `ai-train=no` 与原先其余爬虫的限制；关闭同步会取消该功能对纯训练爬虫的自动边缘拦截。洛杉矶和德国节点重新 GET `/robots.txt`，均为 200，内容与源文件一致，只有一组 Baiduspider 规则，结果为 `Allow: /`。以同一参数重跑正式站 smoke，**109 项通过，0 项失败，0 项未验证**。
 
 在独立浏览器会话读回 Cloudflare Worker `laoliume` 的生产部署命令为 `node scripts/verify-production-head.mjs && npx wrangler deploy`。旧提交缺少该脚本时也会停在上传之前。预览版本命令仍使用 `npx wrangler versions upload`。
+
+## 2026-11-09 首页极简排版验收
+
+在项目的隔离副本运行 `npm run seo:check`，通过，0 个警告。将构建产物与改版前正式站的 HTML 和 sitemap 逐项比较：48 个文章链接及其顺序完全相同，52 个 sitemap 地址也完全相同。
+
+以本地 HTTP 服务提供构建产物，用 Chrome 在 1440×900、390×844、320×568 三种视口检查首页。桌面最新标题与作者名位于同一行；两种手机宽度的第一篇标题均完整出现在首屏。三个视口均无横向溢出，教程链接默认带下划线，Tab 键可聚焦且焦点可见。用桌面键盘和手机尺寸点击分别从首页进入专题，再进入 PPT 和 Excel 教程，均到达原规范网址。专题保留 7 篇教程。本轮本地验收无未通过项。
