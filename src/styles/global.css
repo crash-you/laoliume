@@ -166,6 +166,33 @@ a {
   min-width: 0;
 }
 
+.home-topic {
+  margin: 0 0 32px;
+  padding: 4px 0 8px 18px;
+  border-left: 3px solid var(--accent);
+}
+
+.home-topic a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 21px;
+}
+
+.home-topic p {
+  margin: 5px 0 0;
+  font-size: 15px;
+  color: var(--text-soft);
+}
+
+.archive-heading {
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 15px;
+  color: var(--muted);
+}
+
 .post-item {
   padding: 38px 0;
   border-bottom: 1px solid var(--border);
@@ -335,6 +362,20 @@ a {
 
 .article-topbar .back-home:hover {
   color: var(--accent);
+}
+
+.office-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-right: 12px;
+  color: var(--text-soft);
+}
+
+.office-crumb a:hover, .home-topic a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .article-topbar .x-link {

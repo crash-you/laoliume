@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { officeRoutes, officeTopicName, officeTopicPath } from '../../lib/ai-office';
+import { getPublishedPosts, postSlug } from '../../lib/posts';
+import { absoluteUrl, postPath } from '../../lib/url';
+import { SITE_CONFIG } from '../../site.config';
+
+const title = `${officeTopicName}：可编辑 PPT、Excel 整理与两表核对 - ${SITE_CONFIG.name}`;
+const description = '从文字资料或截图制作可编辑 PPT，用自制样例检查文件，也可以用 Excel 整理工作簿、核对订单与多条售后。附免费 PPT 检查器、示例文件、源 CSV 与核查报告。';
+const publishedSlugs = new Set((await getPublishedPosts()).map(postSlug));
+const canonical = absoluteUrl(officeTopicPath);
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': canonical,
+    url: canonical,
+    name: officeTopicName,
+    description,
+    inLanguage: 'zh-CN',
+    isPartOf: { '@id': absoluteUrl('/#website') },
+    breadcrumb: { '@id': canonical + '#breadcrumb' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': canonical + '#breadcrumb',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: '首页', item: absoluteUrl('/') },
+      { '@type': 'ListItem', position: 2, name: officeTopicName, item: canonical },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath={officeTopicPath} jsonLd={jsonLd}>
+  <main class="topic">
+    <nav class="crumbs" aria-label="面包屑">
+      <a href="/">{SITE_CONFIG.name}首页</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{officeTopicName}</span>
+    </nav>
+
+    <header>
+      <h1>{officeTopicName}</h1>
+      <p>手里有一张改不了字的幻灯片，或是两张对不上的表？按你要处理的文件选教程，跟着样例核对自己的结果。</p>
+      <nav class="jump-links" aria-label="本页内容">
+        {officeRoutes.map((route) => <a href={'#' + route.id}>{route.name}</a>)}
+      </nav>
+    </header>
+
+    {officeRoutes.map((route) => (
+      <section id={route.id} aria-labelledby={route.id + '-title'}>
+        <h2 id={route.id + '-title'}>{route.name}</h2>
+        <p class="intro">{route.intro}</p>
+        <div class="route-body">
+          <ul class="articles">
+            {route.articles.filter((article) => publishedSlugs.has(article.slug)).map((article) => (
+              <li>
+                <a href={postPath(article.slug)}>{article.label}</a>
+                <p>{article.detail}</p>
+              </li>
+            ))}
+          </ul>
+          <div class="example">
+            <figure>
+              <img src={route.image.src} width={route.image.width}
+                height={route.image.height} alt={route.image.alt} loading="lazy" decoding="async" />
+              <figcaption>{route.image.caption}</figcaption>
+            </figure>
+            <ul class="resources">
+              {route.resources.map((resource) => <li><a href={resource.href}>{resource.label}</a></li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+    ))}
+  </main>
+</BaseLayout>
+
+<style>
+  .topic { max-width: 1000px; margin: 0 auto; padding: 42px 32px 72px; }
+  .crumbs, .jump-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
+  .crumbs { font-size: 14px; color: var(--muted); }
+  .topic a { text-decoration: underline; text-underline-offset: 0.22em; text-decoration-color: #b99a40; }
+  .topic a:hover { text-decoration-color: currentColor; }
+  header { margin: 44px 0 32px; }
+  h1, h2, p, figure, ul { margin: 0; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.3; }
+  header p { max-width: 40em; margin: 16px 0; color: var(--text-soft); }
+  .jump-links { column-gap: 26px; font-size: 15px; font-weight: 600; }
+  section { padding: 30px 0; border-top: 1px solid var(--border); scroll-margin-top: 16px; }
+  h2 { font-size: clamp(1.45rem, 3vw, 1.8rem); line-height: 1.4; }
+  .intro { margin: 8px 0 24px; color: var(--text-soft); }
+  .route-body { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 38px; }
+  ul { padding: 0; list-style: none; }
+  .articles li + li { margin-top: 18px; }
+  .articles a { font-weight: 650; }
+  .articles p, figcaption { color: var(--muted); line-height: 1.65; }
+  .articles p { margin-top: 3px; font-size: 15px; }
+  figure img { width: 100%; height: auto; display: block; border: 1px solid var(--border); }
+  figcaption { margin-top: 8px; font-size: 13px; }
+  .resources { margin-top: 14px; font-size: 15px; }
+  .resources li + li { margin-top: 4px; }
+  @media (max-width: 680px) {
+    .topic { padding: 24px 20px 48px; }
+    header { margin: 28px 0; }
+    .route-body { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+    .example { max-width: 28rem; }
+  }
+</style>

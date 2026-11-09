@@ -177,3 +177,9 @@
 复查时可从两个不同网络运行 `curl -sSi https://www.laoliu.me/codex-selected-model-at-capacity/`，核对状态码、节点后缀和 HTML 的 `build-commit`，再读取 `/sitemap.xml` 核对公开网址。验收条件为此批 10 篇在两个网络均返回 200，首页和站点地图能找到全部 48 篇。搜索引擎实际收录情况需另查站长平台。
 
 排查结果：GitHub 的 Cloudflare Workers Builds 记录（北京时间）显示，48 篇版本 `cad2c6d` 于 16:25 成功，后继提交 `4712253` 于 16:29 成功。只有 38 篇的旧提交 `86f3a22` 于 16:51 才完成一次构建，随后正式站 GET 返回的正是这个旧版本。GitHub 的 main 仍在 `4712253`，10 篇原稿与原路径完整。公开记录能核实版本发布次序倒置，未说明旧任务因何延迟。[旧提交的构建记录](https://api.github.com/repos/crash-you/laoliume/commits/86f3a22/check-runs?filter=all) · [新提交的构建记录](https://api.github.com/repos/crash-you/laoliume/commits/4712253/check-runs)
+
+## 2026-11-09 文章恢复与办公专题验收
+
+通过原 Git 发布流程重新部署 `7b19046`。洛杉矶节点核验全部 48 个原文章地址的 HTTP 200、规范网址与构建标记，首页恢复 48 个入口，站点地图恢复 51 个网址。另从德国 Falkenstein 发起独立 HTTPS GET，缺失的 10 篇全部返回 200 且带有 `7b19046` 构建标记。
+
+在项目内隔离副本运行 `npm ci`、`npm test`、`npm run test:fixture`、`npm run seo:check`，全部通过，构建产物含 48 篇原文章及办公专题。用本地 Wrangler 和独立浏览器在 390px、1440px 两种宽度从首页进入专题，逐篇走通 7 篇教程及面包屑回链、截图重建到验收工具、Excel 到订单案例、两个 ZIP 下载及配图加载。专题无尾斜杠入口单跳 308。Wrangler 的生产上传前检查在隔离环境中对旧 main 提交退出 1，对当前 main 提交 dry-run 退出 0。

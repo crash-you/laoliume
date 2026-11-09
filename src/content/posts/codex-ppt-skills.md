@@ -134,6 +134,8 @@ https://github.com/hugohe3/ppt-master/tree/main/skills/ppt-master
 
 ![PPT 元素编辑页面，可修改页面内元素标签](/images/codex-ppt-skills/image-7.png)
 
+拿到导出的 PPTX 后，可以照着[检查 PPT 文字和图形能否单独修改的步骤](/ppt-editability-check/)改个标题、挪个节点，再保存重开。
+
 ## 第二个：slide-maker
 
 第二个，我觉得科研党可以重点看一下。

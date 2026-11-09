@@ -20,6 +20,8 @@ import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { XMLParser, XMLValidator } from 'fast-xml-parser';
+import { checkSearchCrawlers, parseRobots } from './robots-policy.mjs';
+export { parseRobots };
 import { extractProseParts, metaTag, titleTag, linkRel } from './html-prose.mjs';
 import { SITEMAP_STATIC_PATHS } from '../src/lib/sitemap-pages.mjs';
 
@@ -162,65 +164,6 @@ export function effectiveNoindex(html, headers) {
     if (sources[key]?.set.has('noindex')) return { noindex: true, source: key };
   }
   return { noindex: false, source: null };
-}
-
-/* ---------- robots.txt 分组评估 ---------- */
-
-/**
- * 按 User-agent 分组解析 robots.txt，评估主流搜索爬虫是否被允许抓取。
- * 不用「文件里有 Allow:/」证明允许——按最长匹配规则评估。
- * 返回 { groups: [{agents, rules}], sitemaps: [], allowsCrawler(ua) }
- */
-export function parseRobots(txt) {
-  const lines = String(txt || '')
-    .split(/\r?\n/)
-    .map((l) => l.replace(/#.*$/, '').trim())
-    .filter(Boolean);
-  const groups = [];
-  let current = null;
-  const sitemaps = [];
-  for (const line of lines) {
-    const m = line.match(/^(user-agent|sitemap|disallow|allow|crawl-delay)\s*:\s*(.*)$/i);
-    if (!m) continue;
-    const key = m[1].toLowerCase();
-    const value = m[2].trim();
-    if (key === 'user-agent') {
-      if (!current || current.rules.length > 0 || current.agents.length === 0) {
-        current = { agents: [], rules: [] };
-        groups.push(current);
-      }
-      current.agents.push(value.toLowerCase());
-    } else if (key === 'sitemap') {
-      sitemaps.push(value);
-    } else if (current) {
-      current.rules.push({ type: key, path: value });
-    }
-  }
-  // 评估某 UA 是否允许抓取某路径（最长匹配；Disallow 优先于 Allow 同长度）
-  function allowsCrawler(ua, path = '/') {
-    const uaLower = ua.toLowerCase();
-    let best = null; // { type, len, group }
-    for (const g of groups) {
-      const matches = g.agents.some(
-        (a) => a === '*' || a === uaLower || uaLower.includes(a) || a.includes(uaLower)
-      );
-      if (!matches) continue;
-      for (const r of g.rules) {
-        if (path.startsWith(r.path)) {
-          const len = r.path.length;
-          if (!best || len > best.len || (len === best.len && r.type === 'disallow')) {
-            best = { type: r.type, len, group: g };
-          }
-        }
-      }
-    }
-    if (!best) return { allowed: true, reason: '无匹配规则，默认允许' };
-    return {
-      allowed: best.type === 'allow',
-      reason: `匹配 ${best.type}: ${best.path || '/'}（组: ${best.group.agents.join(', ')}）`,
-    };
-  }
-  return { groups, sitemaps, allowsCrawler };
 }
 
 /* ---------- 主流程 ---------- */
@@ -369,11 +312,10 @@ export async function runSmoke({ baseUrl, canonicalOrigin, env, slugs, getArticl
     else if (r.status !== 200) record('robots.txt', '失败', `HTTP ${r.status}`);
     else {
       const parsed = parseRobots(r.body);
-      const issues = [];
-      // 主流搜索爬虫必须允许抓取
-      for (const ua of ['Googlebot', 'Bingbot']) {
-        const verdict = parsed.allowsCrawler(ua);
-        if (!verdict.allowed) issues.push(`${ua} 被禁抓取（${verdict.reason}）`);
+      const paths = ['/', ...SITEMAP_STATIC_PATHS, ...slugs.map((slug) => `/${slug}/`), '/sitemap.xml'];
+      const issues = checkSearchCrawlers(parsed, paths);
+      if (!/^text\/plain(?:;|$)/i.test(r.headers['content-type'] ?? '')) {
+        issues.push('robots.txt Content-Type 应为 text/plain');
       }
       // Sitemap 声明（发现/配置一致性要求，不宣称缺这行就无法收录）
       if (!parsed.sitemaps.some((s) => s === PROD + '/sitemap.xml')) {
@@ -384,7 +326,7 @@ export async function runSmoke({ baseUrl, canonicalOrigin, env, slugs, getArticl
       if (issues.length) record('robots.txt', '失败', issues.join('；'));
       else {
         const aiNote = aiCrawlers.length ? `；AI 爬虫被禁: ${aiCrawlers.join(', ')}（站长策略，不判失败）` : '';
-        record('robots.txt', '已通过', `200 + 搜索爬虫允许 + Sitemap 声明${aiNote}`);
+        record('robots.txt', '已通过', `200 + Googlebot/Bingbot/Baiduspider 可抓取公开页面 + Sitemap 声明${aiNote}`);
       }
     }
   }

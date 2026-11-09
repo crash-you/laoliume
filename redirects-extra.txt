@@ -1,1 +1,2 @@
 /tools/ppt-check /tools/ppt-check/ 308
+/topics/ai-office /topics/ai-office/ 308

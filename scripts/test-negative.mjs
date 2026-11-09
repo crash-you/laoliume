@@ -398,6 +398,22 @@ console.log('# 8b. AI 训练爬虫被禁但 Googlebot/Bingbot 正常 → 搜索�
   check(/AI 爬虫被禁/.test(r?.detail || ''), '报告中记录 AI 爬虫策略', r?.detail || '');
 }
 
+console.log('# 8c. 前置百度禁抓不能被源站后置 Allow 抵消；单篇文章禁抓也必须发现');
+{
+  const text = [
+    'User-agent: Baiduspider', 'Disallow: /post1/', '',
+    'User-agent: Baiduspider', 'Allow: /', '', ROBOTS,
+  ].join('\n');
+  const srv = startServer({
+    '/robots.txt': (req, res) => res.writeHead(200, { 'content-type': 'text/plain' }).end(text),
+  });
+  await listen(srv);
+  const res = await smokeOn(srv);
+  srv.close();
+  const r = res.results.find((x) => x.name === 'robots.txt');
+  check(r?.status === '失败' && r.detail.includes('Baiduspider 禁抓 /post1/'), '百度文章路径禁抓判失败', r?.detail);
+}
+
 /* ---------- 9. noindex 故障（HTML meta / HTTP 头 / Googlebot 专用） ---------- */
 console.log('# 9a. 生产页仅 HTTP 头 noindex → 失败');
 {
@@ -526,6 +542,22 @@ console.log('# 12. robots 解析器：分组与等价指令');
   check(p1.allowsCrawler('Googlebot').allowed, '通配组允许 Googlebot');
   check(!p1.allowsCrawler('Googlebot', '/private/x').allowed, '私有路径被禁');
   check(p1.sitemaps.includes('https://x/s.xml'), 'sitemap 行解析');
+
+  const grouped = parseRobots([
+    'User-agent: *', 'Disallow: /', '',
+    'User-agent: Googlebot', 'Disallow: /public/', '',
+    'User-agent: Googlebot', 'Allow: /public/', '',
+    'User-agent: Googlebot-Image', 'Disallow: /', '',
+    'User-agent: Bingbot', 'Disallow:', 'Disallow: /*.pdf$', '',
+    'User-agent: Baiduspider', 'Disallow: /', '',
+    'User-agent: Baiduspider', 'Allow: /',
+  ].join('\n'));
+  check(grouped.allowsCrawler('Googlebot', '/public/').allowed, 'Googlebot 合并专用组，等长允许');
+  check(grouped.allowsCrawler('Googlebot').allowed, 'Googlebot 专用组不继承 * 或 Googlebot-Image');
+  check(grouped.allowsCrawler('Bingbot', '/guide.pdf/').allowed, '空 Disallow 忽略，终点锚定精确匹配');
+  check(!grouped.allowsCrawler('Bingbot', '/guide.pdf').allowed, '通配符能匹配指定后缀');
+  check(!grouped.allowsCrawler('Baiduspider').allowed, '百度先禁后允仍禁，符合前置托管段的线上情形');
+  check(!grouped.allowsCrawler('GPTBot').allowed, '无专用组继续采用通配组');
 
   // nofollow 不等于 noindex
   const html = '<meta name="robots" content="nofollow">';

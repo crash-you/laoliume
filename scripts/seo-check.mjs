@@ -18,6 +18,7 @@ import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
+import { checkSearchCrawlers, parseRobots } from './robots-policy.mjs';
 import { XMLValidator, XMLParser } from 'fast-xml-parser';
 import { extractProse, extractProseHtml, metaTag, linkRel, titleTag } from './html-prose.mjs';
 import { SITEMAP_STATIC_PATHS } from '../src/lib/sitemap-pages.mjs';
@@ -459,10 +460,12 @@ else {
 const robotsPath = join(DIST, 'robots.txt');
 if (!existsSync(robotsPath)) fail('缺少 robots.txt');
 else {
-  const t = readFileSync(robotsPath, 'utf-8');
-  if (/Disallow:\s*\/\s*$/m.test(t) && !/Allow:\s*\//.test(t)) fail('robots.txt 疑似全站禁止抓取');
-  if (!t.includes(`${DOMAIN}/sitemap.xml`)) fail('robots.txt 未声明正确 sitemap 地址');
-  pass('robots.txt：允许抓取且 sitemap 地址正确');
+  const robots = parseRobots(readFileSync(robotsPath, 'utf-8'));
+  const paths = ['/', ...SITEMAP_STATIC_PATHS, ...indexable.map((p) => `/${p.slug}/`), '/sitemap.xml'];
+  const issues = checkSearchCrawlers(robots, paths);
+  if (!robots.sitemaps.includes(`${DOMAIN}/sitemap.xml`)) issues.push('未声明正确 sitemap 地址');
+  if (issues.length) fail('robots.txt：' + issues.join('；'));
+  else pass('robots.txt：Googlebot/Bingbot/Baiduspider 可抓取公开页面且 sitemap 地址正确');
 }
 
 /* ---------- 10. _redirects 覆盖（自动生成） ---------- */

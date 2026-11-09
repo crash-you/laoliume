@@ -18,7 +18,7 @@ published: true
 
 如果还没看过上一期，想知道是什么的，可以先看一下上一期内容
 
-[Codex长期记忆怎么做？我用31轮实验，搭了一套跨对话、跨模型的项目记忆系统](https://mp.weixin.qq.com/s/lji3zWDmPp8ClY49PLGgfA)
+[Codex长期记忆怎么做？我用31轮实验，搭了一套跨对话、跨模型的项目记忆系统](/codex-long-term-memory/)
 
 GitHub 开源地址：
 

@@ -12,6 +12,7 @@ import {
   type Post,
 } from '../lib/posts';
 import { postPath, canonicalPostUrl, absoluteUrl } from '../lib/url';
+import { officeArticleSlugs, officeTopicName, officeTopicPath } from '../lib/ai-office';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -103,7 +104,13 @@ const year = new Date().getFullYear();
 
     <main class="article-main">
       <div class="article-topbar">
-        <a class="back-home" href="/">{SITE_CONFIG.displayName}</a>
+        {officeArticleSlugs.has(slug) ? (
+          <nav class="office-crumb" aria-label="面包屑">
+            <a href="/">首页</a>
+            <span aria-hidden="true">/</span>
+            <a href={officeTopicPath}>{officeTopicName}</a>
+          </nav>
+        ) : <a class="back-home" href="/">{SITE_CONFIG.displayName}</a>}
         <a class="x-link" href={SITE_CONFIG.xUrl} target="_blank" rel="noopener noreferrer">
           X{SITE_CONFIG.xHandle ? ' / ' + SITE_CONFIG.xHandle : ''}
         </a>
